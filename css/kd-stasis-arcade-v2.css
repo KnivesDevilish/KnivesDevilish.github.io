@@ -114,3 +114,6 @@
 .kd2-gba-frame iframe{display:block;width:100%;height:clamp(560px,78vw,760px);border:0;background:#070a07}
 .kd2-gba-note{margin:10px 0 0;color:#84917a;font-size:.62rem;line-height:1.55}
 @media(max-width:600px){.kd2-gba-frame iframe{height:680px}}
+
+/* RETRO RELAY DIRECTORY / INDIVIDUAL CODE CLUES */
+.kd2-retro-directory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.kd2-retro-directory article{min-width:0;padding:12px;border:1px solid rgba(181,201,74,.25);background:rgba(0,0,0,.22)}.kd2-retro-directory article>small{color:#b5c94a;font:600 .55rem monospace;letter-spacing:.1em}.kd2-retro-directory h6{margin:9px 0 6px;color:#e2edca;font-size:.72rem;letter-spacing:.06em}.kd2-retro-directory p{min-height:58px;margin:0 0 10px;color:#9eaa91;font-size:.63rem;line-height:1.55}.kd2-retro-directory article>span{color:#788574;font-size:.52rem;letter-spacing:.07em}@media(max-width:650px){.kd2-retro-directory{grid-template-columns:1fr}.kd2-retro-directory p{min-height:0}}
