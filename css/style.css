@@ -882,3 +882,84 @@ h1 {
     }
 }
 
+
+/* ==========================================
+   KNIVESDEVILISH - SYSTEM STATUS INTERFACE
+   ========================================== */
+
+.system-status {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+
+    width: 100%;
+    margin: 1.5rem 0 0.5rem;
+    padding: 1rem;
+
+    background: rgba(5, 12, 18, 0.9);
+    border: 1px solid rgba(199, 240, 0, 0.25);
+    border-left: 3px solid var(--cyber-red);
+
+    box-shadow:
+        inset 0 0 20px rgba(199, 240, 0, 0.025),
+        0 0 15px rgba(199, 240, 0, 0.04);
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+
+    min-width: 0;
+    padding: 0.4rem 0.65rem;
+
+    border-left: 1px solid rgba(199, 240, 0, 0.2);
+}
+
+.status-label {
+    color: var(--cyber-muted);
+    font-family: monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.status-value {
+    color: #FFFFFF;
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.status-value.online {
+    color: var(--cyber-lime);
+}
+
+.status-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.3rem;
+
+    background: var(--cyber-lime);
+    border-radius: 50%;
+
+    box-shadow: 0 0 8px var(--cyber-lime);
+}
+
+/* Mobile interface */
+@media (max-width: 600px) {
+    .system-status {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+    }
+
+    .status-item {
+        padding: 0.5rem 0.7rem;
+    }
+}
+
