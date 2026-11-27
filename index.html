@@ -1,223 +1,460 @@
 <!DOCTYPE html>
+<html lang="en" class="theme-dark">
 
-<!--
-  To change the theme, change the class on the html tag below to one of:
-  - theme-auto: Automatically switches based on user's system preferences
-  - theme-light: Forces light theme
-  - theme-dark: Forces dark theme
--->
-
-<html class="theme-dark" lang="en"> <!-- Update `class="theme-auto"` with your preference -->
-
-  <head>
-    <meta charset="utf-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Page Title - Change this to your name/brand (50-60 characters recommended) -->
     <title>奈依茲・悪魔的 | (Naizu Akumateki) — Official Website</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico"> <!-- Update this with your own favicon -->
 
-    <!-- Meta Description - Write a description (150-160 characters recommended) -->
-    <meta name="description" content="KnivesDevilish — 3DCG, content creation, game development and open source projects.">
-
-    <!-- Canonical URL - Helps prevent duplicate content issues -->
-    <link rel="canonical" href="https://knivesdevilish.github.io">
-
-    <!-- Author Information -->
+    <meta name="description" content="KnivesDevilish — Personal website, social networks, creative work, gaming and open source projects.">
     <meta name="author" content="KnivesDevilish">
+    <meta name="theme-color" content="#080900">
 
-    <!-- Browser UI Color - Matches the default light/dark theme backgrounds -->
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+    <link rel="canonical" href="https://knivesdevilish.github.io">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
-    <!-- Social Sharing (Open Graph & Twitter) - Uncomment and fill in to control how your page
-         looks when shared on social platforms and in chat apps.
-         og:url and og:image must be full absolute URLs. -->
-    <!--
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Your Name">
-    <meta property="og:description" content="A short description of your page.">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta property="og:image" content="https://yourwebsite.com/images/avatar@2x.png">
-    <meta name="twitter:card" content="summary">
-    -->
-
-    <!-- Font Preloads - Lets the browser fetch fonts in parallel with the stylesheets -->
-    <link rel="preload" href="fonts/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
-
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=2">
-    <link rel="stylesheet" href="css/brands.css">
-
-    <!-- LittleLink Extended Stylesheet (Optional) -->
-    <!-- <link rel="stylesheet" href="css/brands-extended.css"> -->
-    <!-- Learn more at https://github.com/sethcottle/littlelink-extended.
-         Remove comments if you've added LittleLink Extended dependencies -->
-
-  </head>
+    <link rel="stylesheet" href="css/knives-dashboard.css?v=1">
+</head>
 
 <body>
 
-    <div class="container">
-        <div class="column">
-          <main>
+<div class="site-shell">
 
-            <!--
-              By default, the Avatar is rounded. Use the following:
-              - avatar--rounded: Automatically rounds the image
-              - avatar--soft: Slightly rounds the image
-              - avatar--none: Removes any rounding
+    <!-- TOP TELEMETRY -->
+    <div class="topbar">
+        <div class="topbar-brand">
+            <span class="brand-mark"></span>
+            KNIVESDEVILISH
+            <span class="separator">//</span>
+            PERSONAL UPLINK
+        </div>
 
-              Be sure to replace the src with your own image path and update the alt text
-            -->
-            <img class="avatar avatar--rounded" src="images/avatar.png" srcset="images/avatar@2x.png 2x" alt="KnivesDevilish" width="128" height="128" fetchpriority="high">
+        <div class="topbar-meta">
+            <span>SYS.404</span>
+            <span>NETWORK ACTIVE</span>
+            <span class="topbar-indicator">●</span>
+        </div>
+    </div>
 
-            
-<!-- SYSTEM STATUS PANEL -->
-<div class="system-status" role="group" aria-label="System information">
 
-    <div class="status-item">
-        <span class="status-label">SYSTEM STATUS</span>
-        <span class="status-value online">
-            <span class="status-dot"></span> ONLINE
+    <!-- PROFILE / HUD -->
+    <header class="hero-panel">
+
+        <div class="hero-grid">
+
+            <div class="avatar-column">
+
+                <div class="avatar-frame">
+
+                    <span class="corner corner-tl"></span>
+                    <span class="corner corner-tr"></span>
+                    <span class="corner corner-bl"></span>
+                    <span class="corner corner-br"></span>
+
+                    <img
+                        src="images/avatar.png"
+                        srcset="images/avatar@2x.png 2x"
+                        alt="KnivesDevilish"
+                        width="160"
+                        height="160"
+                    >
+
+                    <div class="avatar-scan"></div>
+
+                </div>
+
+                <span class="avatar-caption">
+                    OPERATOR ID // KD-404
+                </span>
+
+            </div>
+
+
+            <div class="hero-info">
+
+                <div class="network-label">
+                    <span class="signal-dot"></span>
+                    NETWORK NODE
+                </div>
+
+                <div class="network-name">
+                    Naizu_Akumateki.404
+                </div>
+
+                <div class="hero-divider"></div>
+
+                <div class="system-grid">
+
+                    <div class="system-cell">
+                        <span>SYSTEM STATUS</span>
+                        <strong class="online-text">
+                            <i class="status-dot"></i> ONLINE
+                        </strong>
+                    </div>
+
+                    <div class="system-cell">
+                        <span>USER</span>
+                        <strong>KNIVESDEVILISH</strong>
+                    </div>
+
+                    <div class="system-cell">
+                        <span>ACCESS LEVEL</span>
+                        <strong>PUBLIC</strong>
+                    </div>
+
+                </div>
+
+                <div class="hero-message">
+                    PERSONAL NETWORK DIRECTORY
+                    <span>// SELECT AN ACCESS POINT</span>
+                </div>
+
+            </div>
+
+
+            <!-- DECORATIVE JAPANESE INTERFACE -->
+            <div class="hero-aside" aria-hidden="true">
+
+                <span class="hero-kanji">電脳</span>
+
+                <span class="hero-aside-text">
+                    CYBER<br>
+                    NETWORK<br>
+                    ACCESS
+                </span>
+
+                <span class="hero-number">404</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-bottom">
+
+            <span>INFORMATION NETWORK // 情報網</span>
+
+            <span>
+                CONNECTION STABLE
+                <b>●</b>
+                PUBLIC ACCESS
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- DIRECTORY HEADER -->
+    <div class="directory-heading">
+
+        <div>
+            <span class="directory-index">01</span>
+            ACCESS POINTS
+        </div>
+
+        <span class="directory-description">
+            DIGITAL DIRECTORY // 06 MODULES
         </span>
+
     </div>
 
-    <div class="status-item">
-        <span class="status-label">USER</span>
-        <span class="status-value">KNIVESDEVILISH</span>
-    </div>
 
-    <div class="status-item">
-        <span class="status-label">ACCESS LEVEL</span>
-        <span class="status-value">PUBLIC</span>
-    </div>
+    <!-- MAIN DASHBOARD -->
+    <main class="dashboard-grid">
+
+
+        <!-- SOCIAL NETWORKS -->
+        <section class="dashboard-panel">
+
+            <div class="panel-head">
+                <div>
+                    <span class="panel-index">01</span>
+                    <h2>SOCIAL NETWORKS</h2>
+                </div>
+
+                <span class="panel-kanji" aria-hidden="true">通信</span>
+            </div>
+
+            <div class="panel-links">
+
+                <a class="access-link" href="https://x.com/Naizu_Akumateki" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/x.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>X / TWITTER</strong>
+                        <small>@Naizu_Akumateki</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+                <a class="access-link" href="https://bsky.app/profile/knivesdevilish.bsky.social" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/bluesky.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>BLUESKY</strong>
+                        <small>Social network</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+                <a class="access-link" href="https://discord.com/invite/nKCxxCzm3X" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/discord.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>DISCORD</strong>
+                        <small>Community access</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+            </div>
+
+            <div class="panel-foot">
+                <span>03 CONNECTIONS</span>
+                <span>通信 ESTABLISHED</span>
+            </div>
+
+        </section>
+
+
+        <!-- CONTENT CHANNELS -->
+        <section class="dashboard-panel">
+
+            <div class="panel-head">
+                <div>
+                    <span class="panel-index">02</span>
+                    <h2>CONTENT CHANNELS</h2>
+                </div>
+
+                <span class="panel-kanji" aria-hidden="true">配信</span>
+            </div>
+
+            <div class="panel-links panel-links-grid">
+
+                <a class="access-link" href="https://www.youtube.com/@Naizu_Akumateki.404" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/youtube.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>YOUTUBE</strong>
+                        <small>Main channel</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+                <a class="access-link" href="https://www.youtube.com/@Naizu_Seiy%C5%AB" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/youtube.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>VOICE ACTING</strong>
+                        <small>YouTube channel</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+                <a class="access-link" href="https://www.twitch.tv/knivesdevilish" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/twitch.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>TWITCH</strong>
+                        <small>Live streaming</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+                <a class="access-link" href="https://kick.com/knivesdevilish" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/kick.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>KICK</strong>
+                        <small>Live streaming</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+            </div>
+
+            <div class="panel-foot">
+                <span>04 CHANNELS</span>
+                <span>MEDIA UPLINK</span>
+            </div>
+
+        </section>
+
+
+        <!-- PROJECTS -->
+        <section class="dashboard-panel">
+
+            <div class="panel-head">
+                <div>
+                    <span class="panel-index">03</span>
+                    <h2>PROJECT DATABASE</h2>
+                </div>
+
+                <span class="panel-kanji" aria-hidden="true">開発</span>
+            </div>
+
+            <div class="panel-links">
+
+                <a class="access-link" href="https://www.youtube.com/@KnivesTheHedgehog" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/youtube.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>KNIVES THE HEDGEHOG</strong>
+                        <small>Original creative project</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+                <a class="access-link" href="https://www.youtube.com/@SR-Source" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/youtube.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>SONIC RIDERS: SOURCE</strong>
+                        <small>Project channel</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+            </div>
+
+            <div class="panel-foot">
+                <span>02 PROJECTS</span>
+                <span>開発 ARCHIVE</span>
+            </div>
+
+        </section>
+
+
+        <!-- OPEN SOURCE -->
+        <section class="dashboard-panel">
+
+            <div class="panel-head">
+                <div>
+                    <span class="panel-index">04</span>
+                    <h2>OPEN SOURCE</h2>
+                </div>
+
+                <span class="panel-kanji" aria-hidden="true">共有</span>
+            </div>
+
+            <div class="panel-links">
+
+                <a class="access-link" href="https://github.com/KnivesDevilish" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/github.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>GITHUB</strong>
+                        <small>Repositories & development</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+            </div>
+
+            <div class="panel-foot">
+                <span>OSS NETWORK</span>
+                <span>共有 ACTIVE</span>
+            </div>
+
+        </section>
+
+
+        <!-- SUPPORT -->
+        <section class="dashboard-panel">
+
+            <div class="panel-head">
+                <div>
+                    <span class="panel-index">05</span>
+                    <h2>SUPPORT THE WORK</h2>
+                </div>
+
+                <span class="panel-kanji" aria-hidden="true">支援</span>
+            </div>
+
+            <div class="panel-links">
+
+                <a class="access-link" href="https://www.patreon.com/cw/KnivesDevilish" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon">
+                        <img src="images/icons/patreon.svg" alt="">
+                    </span>
+                    <span class="link-copy">
+                        <strong>PATREON</strong>
+                        <small>Support my work</small>
+                    </span>
+                    <span class="link-arrow">↗</span>
+                </a>
+
+            </div>
+
+            <div class="panel-foot">
+                <span>CREATOR SUPPORT</span>
+                <span>支援 ONLINE</span>
+            </div>
+
+        </section>
+
+
+        <!-- GAMING IDENTITIES -->
+        <section class="dashboard-panel">
+
+            <div class="panel-head">
+                <div>
+                    <span class="panel-index">06</span>
+                    <h2>GAMING IDENTITIES</h2>
+                </div>
+
+                <span class="panel-kanji" aria-hidden="true">遊戯</span>
+            </div>
+
+            <div class="player-grid">
+
+                <div class="player-card">
+                    <span class="player-label">GAME PROFILE / 01</span>
+                    <strong>ZENLESS ZONE ZERO</strong>
+                    <span class="player-id">PLAYER // KnivesDevilish</span>
+                </div>
+
+                <div class="player-card">
+                    <span class="player-label">GAME PROFILE / 02</span>
+                    <strong>ARKNIGHTS: ENDFIELD</strong>
+                    <span class="player-id">PLAYER // KnivesDevilish</span>
+                </div>
+
+            </div>
+
+            <div class="panel-foot">
+                <span>PLAYER IDENTITIES</span>
+                <span>遊戯 REGISTERED</span>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <span class="footer-brand">KNIVESDEVILISH</span>
+        <span>//</span>
+        <span>PERSONAL LINK HUB</span>
+        <span class="footer-copy">© 2026</span>
+        <span class="footer-kanji" aria-hidden="true">電脳接続</span>
+    </footer>
 
 </div>
 
-
-            
-<!-- SOCIAL NETWORKS -->
-<section class="link-section">
-    <h2 class="link-section-title">01 // SOCIAL NETWORKS</h2>
-    <nav class="button-stack" aria-label="Social networks">
-
-        <a class="button button-x" href="https://x.com/Naizu_Akumateki" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/x.svg" alt="">Follow on X
-        </a>
-
-        <a class="button button-bluesky" href="https://bsky.app/profile/knivesdevilish.bsky.social" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/bluesky.svg" alt="">Bluesky
-        </a>
-
-        <a class="button button-discord" href="https://discord.com/invite/nKCxxCzm3X" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/discord.svg" alt="">Join Discord
-        </a>
-
-    </nav>
-</section>
-
-<!-- CONTENT AND CHANNELS -->
-<section class="link-section">
-    <h2 class="link-section-title">02 // CONTENT & CHANNELS</h2>
-    <nav class="button-stack" aria-label="Content channels">
-
-        <a class="button button-yt" href="https://www.youtube.com/@Naizu_Akumateki.404" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/youtube.svg" alt="">YouTube // Main Channel
-        </a>
-
-        <a class="button button-yt" href="https://www.youtube.com/@Naizu_Seiy%C5%AB" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/youtube.svg" alt="">YouTube // Voice Acting
-        </a>
-
-        <a class="button button-twitch" href="https://www.twitch.tv/knivesdevilish" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/twitch.svg" alt="">Twitch // Live Streaming
-        </a>
-
-        <a class="button button-kick" href="https://kick.com/knivesdevilish" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/kick.svg" alt="">Kick // Live Streaming
-        </a>
-
-    </nav>
-</section>
-
-<!-- PROJECTS -->
-<section class="link-section">
-    <h2 class="link-section-title">03 // PROJECTS</h2>
-    <nav class="button-stack" aria-label="Projects">
-
-        <a class="button button-yt" href="https://www.youtube.com/@KnivesTheHedgehog" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/youtube.svg" alt="">Knives The Hedgehog
-        </a>
-
-        <a class="button button-yt" href="https://www.youtube.com/@SR-Source" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/youtube.svg" alt="">Sonic Riders: Source
-        </a>
-
-    </nav>
-</section>
-
-<!-- OPEN SOURCE -->
-<section class="link-section">
-    <h2 class="link-section-title">04 // OPEN SOURCE</h2>
-    <nav class="button-stack" aria-label="Development">
-
-        <a class="button button-github" href="https://github.com/KnivesDevilish" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/github.svg" alt="">GitHub // Development
-        </a>
-
-    </nav>
-</section>
-
-<!-- SUPPORT -->
-<section class="link-section">
-    <h2 class="link-section-title">05 // SUPPORT</h2>
-    <nav class="button-stack" aria-label="Support">
-
-        <a class="button button-patreon" href="https://www.patreon.com/cw/KnivesDevilish" target="_blank" rel="noopener">
-            <img class="icon" src="images/icons/patreon.svg" alt="">Support on Patreon
-        </a>
-
-    </nav>
-</section>
-
-<!-- GAMING IDENTITIES -->
-<section class="link-section">
-    <h2 class="link-section-title">06 // GAMING IDENTITIES</h2>
-
-    <div class="gaming-identities">
-
-        <div class="gaming-id-card">
-            <span class="gaming-game">ZENLESS ZONE ZERO</span>
-            <span class="gaming-player">PLAYER // KnivesDevilish</span>
-        </div>
-
-        <div class="gaming-id-card">
-            <span class="gaming-game">ARKNIGHTS: ENDFIELD</span>
-            <span class="gaming-player">PLAYER // KnivesDevilish</span>
-        </div>
-
-    </div>
-</section>
-
-      </main>
-
-      <!-- Feel free to add your own footer information, including updating `privacy.html` to reflect how your LittleLink fork is set up -->
-      
-<footer class="site-footer">
-    <span class="footer-brand">KNIVESDEVILISH</span>
-    <span class="footer-divider">//</span>
-    <span>PERSONAL LINK HUB</span>
-    <span class="footer-copy">© 2026</span>
-</footer>
-
-
-    </div>
-  </div>
-
 </body>
-
 </html>
