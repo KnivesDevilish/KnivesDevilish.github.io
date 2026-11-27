@@ -19,7 +19,7 @@ root.innerHTML=
 '<footer class="kd2-foot"><span id="kd2-tip">← → MOVE · ↑ ROTATE · ↓ SOFT DROP · SPACE HARD DROP</span><span>RECORDS // THIS DEVICE</span></footer></main></div>';
 shell.insertBefore(root,footer);
 const $=s=>root.querySelector(s),cabinet=$('#kd2-cabinet');
-const best=key=>Math.max(0,Number(safeGet('kd404-v2-'+key,'0'))||0);
+const best=key=>Math.max(0,Number(safeGet('kd404-v2-'+key,key==='tetris'?safeGet('kd404-v2-bloodlock','0'):'0'))||0);
 function safeGet(k,f){try{return localStorage.getItem(k)??f;}catch(e){return f;}}
 function safeSet(k,v){try{localStorage.setItem(k,String(v));}catch(e){}}
 const fmt=n=>Math.max(0,Math.floor(n)).toLocaleString('en-US');
@@ -38,7 +38,7 @@ function choose(id){
 root.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.game)));
 
 function tetris(){
- cabinet.innerHTML='<div class="kd2-game-grid"><div class="kd2-stage kd2-tetris-stage"><div class="kd2-label"><span>TETRIS GRID // 10 × 20</span><b id="bl-state">STANDBY</b></div><canvas id="bl-board" width="300" height="600" tabindex="0" aria-label="Bloodlock puzzle board"></canvas><div class="kd2-label"><span>LINES CLEARED</span><b id="bl-level">LEVEL 01</b></div></div><aside class="kd2-info"><div class="kd2-stat"><small>SCORE</small><strong id="bl-score">0</strong></div><div class="kd2-stat"><small>RECORD</small><strong id="bl-best">'+fmt(best('tetris'))+'</strong></div><div class="kd2-next"><small>NEXT PIECE</small><canvas id="bl-next" width="120" height="90"></canvas></div><button class="kd2-primary" id="bl-start">START TETRIS</button><div class="kd2-controls"><button data-bl="left">◀</button><button data-bl="rotate">ROTATE</button><button data-bl="right">▶</button><button data-bl="down">▼</button><button data-bl="drop">HARD DROP</button></div><p class="kd2-help">← → MOVE · ↑ ROTATE · ↓ SOFT DROP · SPACE HARD DROP</p></aside></div>';
+ cabinet.innerHTML='<div class="kd2-game-grid"><div class="kd2-stage kd2-tetris-stage"><div class="kd2-label"><span>TETRIS GRID // 10 × 20</span><b id="bl-state">STANDBY</b></div><canvas id="bl-board" width="300" height="600" tabindex="0" aria-label="Tetris game board"></canvas><div class="kd2-label"><span>LINES CLEARED</span><b id="bl-level">LEVEL 01</b></div></div><aside class="kd2-info"><div class="kd2-stat"><small>SCORE</small><strong id="bl-score">0</strong></div><div class="kd2-stat"><small>RECORD</small><strong id="bl-best">'+fmt(best('tetris'))+'</strong></div><div class="kd2-next"><small>NEXT PIECE</small><canvas id="bl-next" width="120" height="90"></canvas></div><button class="kd2-primary" id="bl-start">START TETRIS</button><div class="kd2-controls"><button data-bl="left">◀</button><button data-bl="rotate">ROTATE</button><button data-bl="right">▶</button><button data-bl="down">▼</button><button data-bl="drop">HARD DROP</button></div><p class="kd2-help">← → MOVE · ↑ ROTATE · ↓ SOFT DROP · SPACE HARD DROP</p></aside></div>';
  const c=$('#bl-board'),x=c.getContext('2d'),nc=$('#bl-next'),nx=nc.getContext('2d'),score=$('#bl-score'),record=$('#bl-best'),state=$('#bl-state'),level=$('#bl-level'),start=$('#bl-start');
  const W=10,H=20,S=30,shapes=[[[1,1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[1,1],[1,1]],[[0,1,1],[1,1,0]],[[0,1,0],[1,1,1]],[[1,1,0],[0,1,1]]],colors=['#a8c66c','#c85c66','#839ba9','#d6c66f','#72ad90','#a78cbd','#c47b62'];
  let board,piece,next,points=0,lines=0,active=false,ended=false,raf=0,last=0,acc=0,interval=.8;
@@ -62,7 +62,7 @@ function tetris(){
   let n=0;for(let y=H-1;y>=0;y--)if(board[y].every(Boolean)){board.splice(y,1);board.unshift(Array(W).fill(null));n++;y++;}
   if(n){lines+=n;const levelNo=Math.floor(lines/10)+1;points+=([0,40,100,300,1200][n]||n*300)*levelNo;update();}
   piece=next;piece.x=3;piece.y=0;next=make();nextDraw();
-  if(hit(piece.m,piece.x,piece.y)){active=false;ended=true;state.textContent='CORE BREACH';start.textContent='RESTART CORE';}
+  if(hit(piece.m,piece.x,piece.y)){active=false;ended=true;state.textContent='GAME OVER';start.textContent='PLAY AGAIN';}
  }
  function descend(){if(hit(piece.m,piece.x,piece.y+1))lock();else piece.y++;}
  function action(a){
@@ -75,7 +75,7 @@ function tetris(){
   draw();
  }
  function frame(t){if(!active)return;if(!last)last=t;acc+=Math.min(.05,(t-last)/1000);last=t;while(acc>=interval&&active){descend();acc-=interval;}draw();if(active)raf=requestAnimationFrame(frame);}
- function begin(){cancelAnimationFrame(raf);board=Array.from({length:H},()=>Array(W).fill(null));piece=make();next=make();piece.x=3;points=0;lines=0;interval=.7;last=0;acc=0;active=true;ended=false;state.textContent='LEVEL 01 // ACTIVE';start.textContent='RESTART TETRIS';update();nextDraw();draw();c.focus();raf=requestAnimationFrame(frame);}
+ function begin(){cancelAnimationFrame(raf);board=Array.from({length:H},()=>Array(W).fill(null));piece=make();next=make();piece.x=3;points=0;lines=0;interval=.8;last=0;acc=0;active=true;ended=false;state.textContent='LEVEL 01 // ACTIVE';start.textContent='RESTART TETRIS';update();nextDraw();draw();c.focus();raf=requestAnimationFrame(frame);}
  start.addEventListener('click',begin);cabinet.querySelectorAll('[data-bl]').forEach(b=>b.addEventListener('click',()=>action(b.dataset.bl)));
  c.addEventListener('keydown',e=>{let map={ArrowLeft:'left',ArrowRight:'right',ArrowDown:'down',ArrowUp:'rotate',' ':'drop'};if(map[e.key]){e.preventDefault();action(map[e.key]);}});
  board=Array.from({length:H},()=>Array(W).fill(null));next=make();nextDraw();draw();
