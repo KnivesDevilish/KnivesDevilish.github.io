@@ -15,8 +15,6 @@
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    document.body.prepend(canvas);
-
     // Japanese characters and digital symbols.
     const glyphs = Array.from(
         '日月火水木金土山川空雨風光闇零壱弐参四五六七八九十百千龍電機能魔神影刀夢夜天心星黒白猫鬼悪帝界カキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワ0123456789'
@@ -52,6 +50,10 @@
         canvas.style.height = `${height}px`;
 
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        // Set text state only on resize, not on every animation frame.
+        ctx.font = `${fontSize}px monospace`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
         ctx.clearRect(0, 0, width, height);
 
         const columns = Math.ceil(width / gap);
@@ -81,10 +83,6 @@
         ctx.fillStyle = 'rgba(0, 0, 0, 0.045)';
         ctx.fillRect(0, 0, width, height);
         ctx.globalCompositeOperation = 'source-over';
-
-        ctx.font = `${fontSize}px "Noto Sans Mono", "Noto Sans JP", monospace`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'top';
 
         drops.forEach((drop, index) => {
             if (Math.random() < 0.18) drop.char = randomGlyph();
@@ -130,16 +128,28 @@
         }
     });
 
-    // Wait until CSS and fallback fonts are settled before drawing canvas text.
-    // This avoids font-loading layout synchronization during initial rendering.
+    // Matrix Rain is decorative: initialize it after the main page load and
+    // when the browser is idle, so it cannot compete with the hero/LCP image.
+    let initialized = false;
     const initialize = () => {
+        if (initialized) return;
+        initialized = true;
         resize();
+        document.body.prepend(canvas);
         startAnimation();
     };
 
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(initialize, initialize);
+    const scheduleInitialize = () => {
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(initialize, { timeout: 1800 });
+        } else {
+            window.setTimeout(initialize, 500);
+        }
+    };
+
+    if (document.readyState === 'complete') {
+        scheduleInitialize();
     } else {
-        initialize();
+        window.addEventListener('load', scheduleInitialize, { once: true });
     }
 })();
