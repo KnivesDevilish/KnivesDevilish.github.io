@@ -15,7 +15,7 @@
     '<article class="kd-mini-card kd-tetris-card">' +
       '<header class="kd-mini-head"><div><small>01 // RECREATION MODULE</small><h2>TETRIS</h2><p>Clear lines, raise your level and keep the board alive.</p></div><span class="kd-mini-status">● READY</span></header>' +
       '<div class="kd-tetris-layout">' +
-        '<div class="kd-tetris-stage"><div class="kd-mini-label"><span>GAME GRID // 10 × 20</span><b id="kdt-state">STANDBY</b></div><canvas id="kdt-board" width="240" height="480" tabindex="0" aria-label="Tetris game board"></canvas><div class="kd-mini-label"><span>LINES CLEARED</span><b id="kdt-lines">0</b></div></div>' +
+        '<div class="kd-tetris-stage"><div class="kd-mini-label"><span>GAME GRID // 10 × 20</span><b id="kdt-state">STANDBY</b></div><div class="kd-tetris-board-wrap"><canvas id="kdt-board" width="240" height="480" tabindex="0" aria-label="Tetris game board"></canvas><div id="kdt-overlay" class="kd-tetris-overlay"><strong id="kdt-overlay-title">TETRIS READY</strong><span id="kdt-overlay-hint">INITIALIZE TO BEGIN</span></div></div><div class="kd-mini-label"><span>LINES CLEARED</span><b id="kdt-lines">0</b></div></div>' +
         '<aside class="kd-tetris-info">' +
           '<div class="kd-mini-stat"><small>SCORE</small><strong id="kdt-score">0</strong></div>' +
           '<div class="kd-mini-stat"><small>RECORD</small><strong id="kdt-best">0</strong></div>' +
@@ -64,6 +64,9 @@
   const linesNode = $('#kdt-lines');
   const stateNode = $('#kdt-state');
   const startButton = $('#kdt-start');
+  const gameOverlay = $('#kdt-overlay');
+  const overlayTitle = $('#kdt-overlay-title');
+  const overlayHint = $('#kdt-overlay-hint');
   const cols = 10, rows = 20, cell = 24;
   const shapes = [
     [[1,1,1,1]],
@@ -147,18 +150,7 @@
     if (current) current.matrix.forEach((row, y) => row.forEach((value, x) => {
       if (value && current.y + y >= 0) drawCell(ctx, current.x + x, current.y + y, cell, current.color);
     }));
-    if (!active) {
-      ctx.fillStyle = 'rgba(3,7,5,.84)';
-      ctx.fillRect(10, 196, 220, 88);
-      ctx.textAlign = 'center';
-      ctx.fillStyle = '#e0e9c7';
-      ctx.font = 'bold 14px monospace';
-      ctx.fillText(gameOver ? 'GAME OVER' : 'TETRIS READY', 120, 231);
-      ctx.fillStyle = '#9aa68f';
-      ctx.font = '10px monospace';
-      ctx.fillText(gameOver ? 'RESTART TO TRY AGAIN' : 'INITIALIZE TO BEGIN', 120, 253);
-      ctx.textAlign = 'left';
-    }
+
   }
 
   function updateStats() {
@@ -179,6 +171,9 @@
     gameOver = true;
     stateNode.textContent = 'GAME OVER';
     startButton.textContent = 'PLAY AGAIN';
+    overlayTitle.textContent = 'GAME OVER';
+    overlayHint.textContent = 'RESTART TO TRY AGAIN';
+    gameOverlay.hidden = false;
     drawBoard();
   }
 
@@ -272,6 +267,7 @@
     gameOver = false;
     stateNode.textContent = 'ACTIVE // LEVEL 01';
     startButton.textContent = 'RESTART TETRIS';
+    gameOverlay.hidden = true;
     updateStats();
     drawNext();
     drawBoard();
