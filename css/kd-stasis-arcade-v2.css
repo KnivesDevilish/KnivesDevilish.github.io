@@ -106,3 +106,28 @@
 .kd2-momentum-details>b{color:#b5c94a;font:600 .62rem monospace;letter-spacing:.1em}
 .kd2-momentum-details p{color:#9eaa91;font-size:.76rem;line-height:1.6}
 .kd2-momentum-details .kd2-secret-launch{margin-top:14px}
+
+
+/* KNIVES ADVANCE // ORIGINAL MOMENTUM PLATFORMER */
+.kd2-ka-shell{display:grid;gap:12px;min-width:0}
+.kd2-ka-hud{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.kd2-ka-hud>div{display:grid;gap:5px;min-width:0;padding:9px 10px;background:#090e0c;border:1px solid rgba(181,201,74,.22)}
+.kd2-ka-hud small{color:#788574;font-size:.52rem;letter-spacing:.12em}
+.kd2-ka-hud strong{color:#e4edcf;font-size:.83rem;letter-spacing:.05em;white-space:nowrap}
+.kd2-ka-hud>div:nth-child(2) strong{color:#f0d477}
+.kd2-ka-hud>div:nth-child(3) strong{color:#d88d9a}
+.kd2-ka-screen{overflow:hidden;border:1px solid rgba(181,201,74,.25);background:#080d11}
+.kd2-ka-screen canvas{display:block;width:100%;height:auto;aspect-ratio:16/9;image-rendering:pixelated;touch-action:none;outline:none}
+.kd2-ka-screen canvas:focus-visible{outline:2px solid #b5c94a;outline-offset:-3px}
+.kd2-ka-caption{display:flex;justify-content:space-between;gap:10px;padding:8px 11px;background:#0c120f;border-top:1px solid rgba(181,201,74,.17);color:#a8b992;font-size:.55rem;letter-spacing:.09em}
+.kd2-ka-caption span:last-child{color:#b5c94a;text-align:right}
+.kd2-ka-actions{display:flex;align-items:center;gap:12px}
+.kd2-ka-actions .kd2-primary{width:auto;min-width:180px}
+.kd2-ka-actions>span{color:#85917c;font-size:.55rem;letter-spacing:.07em;line-height:1.5}
+.kd2-ka-touch{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.kd2-ka-touch>div{display:flex;gap:7px}
+.kd2-ka-touch button{min-width:62px;min-height:47px;padding:8px 13px;border-color:rgba(181,201,74,.45);background:#111a12;color:#d7e5b5;touch-action:none;user-select:none;-webkit-user-select:none}
+.kd2-ka-touch button.is-held{color:#10150d;background:#b5c94a}
+.kd2-ka-help{margin:0;color:#75816f;font-size:.55rem;letter-spacing:.04em;line-height:1.6}
+@media(max-width:650px){.kd2-ka-hud{grid-template-columns:repeat(3,minmax(0,1fr))}.kd2-ka-hud>div{padding:7px}.kd2-ka-hud strong{font-size:.73rem}.kd2-ka-actions{align-items:flex-start;flex-direction:column}.kd2-ka-actions .kd2-primary{width:100%}.kd2-ka-caption{font-size:.48rem}.kd2-ka-touch{padding-top:3px}.kd2-ka-touch button{min-width:54px;min-height:50px}}
+@media(max-width:390px){.kd2-ka-hud{grid-template-columns:repeat(2,minmax(0,1fr))}.kd2-ka-touch button{min-width:48px;padding:7px}.kd2-ka-help{font-size:.5rem}}
