@@ -253,16 +253,58 @@ function nightshift(){
 }
 
 function archive(){
- cabinet.innerHTML='<div class="kd2-archive"><article><small>RESTRICTED ARCHIVE // K-404</small><h4>SUBJECT FILE: KNIVES</h4><p>The medical record is encrypted. Enter an authorization phrase to access the report or reveal a legacy game relay.</p><form id="ar-form"><label for="ar-code">AUTHORIZATION CODE / PHRASE</label><div><input id="ar-code" type="password" maxlength="20" inputmode="text" autocomplete="off" placeholder="ENTER ACCESS PHRASE"><button class="kd2-primary" type="submit">DECRYPT FILE</button></div></form><p id="ar-message" aria-live="polite">FILE LOCKED // AUTHORIZATION REQUIRED</p><section id="ar-file" hidden><h5>STASIS CITY // MEDICAL & CONTAINMENT RECORD</h5><dl><dt>SUBJECT</dt><dd>KNIVES</dd><dt>SPECIES</dt><dd>HEDGEHOG / LYNX HYBRID</dd><dt>LOCATION</dt><dd>STASIS CITY</dd><dt>MEDICAL STATUS</dt><dd>TERMINAL CONDITION</dd><dt>EXPERIMENT</dt><dd>DEMONIC BLOOD INFUSION</dd><dt>INTERNAL ENTITY</dt><dd>VISCERAL DEMON // ACTIVE</dd><dt>FAMILY CONTACT</dt><dd>KURAMI // SISTER</dd><dt>CONTAINMENT</dt><dd>UNSTABLE</dd></dl><p class="kd2-kurami">INCOMING MESSAGE // KURAMI: “Knives... if you can hear this, stay with me. Do not let it take control.”</p></section><section id="ar-sonic" class="kd2-secret-portal" hidden><div class="kd2-secret-head"><small>UNREGISTERED SIGNAL // LEGACY GAME RELAY</small><h5>STASIS RETRO TERMINAL // THREE SYSTEMS</h5><p>Select a retro system, then load a compatible game file from your device. Three systems are available.</p></div><div class="kd2-gba-frame"><iframe src="games/gba-player.html" title="STASIS Retro multi-system emulator" loading="lazy" allow="fullscreen; gamepad"></iframe></div><p class="kd2-gba-note">LOCAL FILE POLICY // Select your own legally obtained ROM. Game and BIOS files are read in your browser; STASIS CITY does not host game files.</p><button type="button" class="kd2-secret-lock" id="ar-lock">LOCK RETRO TERMINAL</button></section></article><article><small>NETWORK EVENT // INCOMING</small><h4>TRANSMIT A SIGNAL</h4><p>Send a pulse into the Stasis City network. Some replies may not be from the system.</p><button class="kd2-primary" id="ar-signal">TRANSMIT SIGNAL</button><p id="ar-output" class="kd2-output" aria-live="polite">AWAITING INPUT...</p></article></div>';
+ cabinet.innerHTML = `<div class="kd2-archive">
+  <article>
+   <small>RESTRICTED ARCHIVE // K-404</small>
+   <h4>SUBJECT FILE: KNIVES</h4>
+   <p>The medical record is encrypted. Enter an authorization phrase to access the report or discover the legacy game relays.</p>
+   <form id="ar-form"><label for="ar-code">AUTHORIZATION CODE / PHRASE</label><div><input id="ar-code" type="password" maxlength="20" inputmode="text" autocomplete="off" placeholder="ENTER ACCESS PHRASE"><button class="kd2-primary" type="submit">DECRYPT FILE</button></div></form>
+   <p id="ar-message" aria-live="polite">FILE LOCKED // AUTHORIZATION REQUIRED</p>
+   <section id="ar-file" hidden><h5>STASIS CITY // MEDICAL &amp; CONTAINMENT RECORD</h5><dl><dt>SUBJECT</dt><dd>KNIVES</dd><dt>SPECIES</dt><dd>HEDGEHOG / LYNX HYBRID</dd><dt>LOCATION</dt><dd>STASIS CITY</dd><dt>MEDICAL STATUS</dt><dd>TERMINAL CONDITION</dd><dt>EXPERIMENT</dt><dd>DEMONIC BLOOD INFUSION</dd><dt>INTERNAL ENTITY</dt><dd>VISCERAL DEMON // ACTIVE</dd><dt>FAMILY CONTACT</dt><dd>KURAMI // SISTER</dd><dt>CONTAINMENT</dt><dd>UNSTABLE</dd></dl><p class="kd2-kurami">INCOMING MESSAGE // KURAMI: “Knives... if you can hear this, stay with me. Do not let it take control.”</p></section>
+   <section id="ar-sonic" class="kd2-secret-portal" hidden>
+    <div class="kd2-secret-head"><small>UNREGISTERED SIGNAL // LEGACY GAME RELAY</small><h5 id="ar-retro-title">STASIS RETRO TERMINAL</h5><p id="ar-retro-note">Three independent console relays detected. Each one requires its own access phrase.</p></div>
+    <div id="ar-retro-directory" class="kd2-retro-directory" hidden>
+     <article><small>HANDHELD RELAY // 01</small><h6>GAME BOY ADVANCE</h6><p>A blue blur entered the handheld era. Look to the three Advance adventures.</p><span>ACCESS STATUS // ENCRYPTED</span></article>
+     <article><small>16-BIT RELAY // 02</small><h6>SUPER NINTENDO</h6><p>A red headband, a quarter-circle motion, and one iconic fighting-game shout.</p><span>ACCESS STATUS // ENCRYPTED</span></article>
+     <article><small>16-BIT RELAY // 03</small><h6>SEGA MEGA DRIVE</h6><p>Remember the boast about what the Genesis did that the competition did not.</p><span>ACCESS STATUS // ENCRYPTED</span></article>
+    </div>
+    <div class="kd2-gba-frame" id="ar-console-stage" hidden><iframe id="ar-console-frame" src="about:blank" title="STASIS Retro console emulator" loading="lazy" allow="fullscreen; gamepad"></iframe></div>
+    <p class="kd2-gba-note">LOCAL FILE POLICY // Load a legally obtained game file from your device. The game remains in your browser; STASIS CITY does not host game files or BIOS files.</p>
+    <button type="button" class="kd2-secret-lock" id="ar-lock">LOCK RETRO TERMINAL</button>
+   </section>
+  </article>
+  <article><small>NETWORK EVENT // INCOMING</small><h4>TRANSMIT A SIGNAL</h4><p>Send a pulse into the Stasis City network. Some replies may not be from the system.</p><button class="kd2-primary" id="ar-signal">TRANSMIT SIGNAL</button><p id="ar-output" class="kd2-output" aria-live="polite">AWAITING INPUT...</p></article>
+ </div>`;
  const form=$('#ar-form'),input=$('#ar-code'),file=$('#ar-file'),portal=$('#ar-sonic'),message=$('#ar-message');
+ const directory=$('#ar-retro-directory'),stage=$('#ar-console-stage'),frame=$('#ar-console-frame'),title=$('#ar-retro-title'),note=$('#ar-retro-note');
+ const relays={
+  SONICADVANCE:{system:'gba',name:'GAME BOY ADVANCE',reference:'REFERENCE // SONIC ADVANCE TRILOGY. GBA RELAY AUTHENTICATED.'},
+  HADOUKEN:{system:'snes',name:'SUPER NINTENDO',reference:'REFERENCE // STREET FIGHTER II. SPECIAL MOVE SIGNAL ACCEPTED.'},
+  GENESISDOES:{system:'segaMD',name:'SEGA MEGA DRIVE',reference:'REFERENCE // GENESIS DOES WHAT NINTENDON’T. 16-BIT RELAY AUTHENTICATED.'}
+ };
  form.addEventListener('submit',e=>{
-  e.preventDefault();const code=input.value.trim(),isFile=code==='404',isSonic=code==="Who'sSEGA?";
-  file.hidden=!isFile;portal.hidden=!isSonic;
-  message.textContent=isFile?'ACCESS GRANTED // FILE DECRYPTED':isSonic?'LEGACY RELAY UNLOCKED // WHO’S SEGA?':'ACCESS DENIED // INVALID CODE';
-  message.classList.toggle('success',isFile||isSonic);
-  if(isSonic)portal.scrollIntoView({behavior:'smooth',block:'nearest'});
+  e.preventDefault();
+  const raw=input.value.trim(),code=raw.toUpperCase(),isFile=code==='404',isMaster=raw.toLowerCase()==="who'ssega?",relay=relays[code];
+  file.hidden=!isFile;
+  portal.hidden=!(isMaster||relay);
+  if(isMaster){
+   directory.hidden=false;stage.hidden=true;frame.src='about:blank';
+   title.textContent='STASIS RETRO TERMINAL // ACCESS MAP';
+   note.textContent='MASTER SIGNAL ACCEPTED. Three console relays are encrypted separately. Solve each reference to open its system.';
+  }else if(relay){
+   directory.hidden=true;stage.hidden=false;
+   title.textContent=relay.name+' // SECURE RELAY';
+   note.textContent=relay.reference;
+   frame.src='games/gba-player.html?system='+encodeURIComponent(relay.system);
+  }
+  message.textContent=isFile?'ACCESS GRANTED // FILE DECRYPTED':isMaster?'MASTER RELAY UNLOCKED // THREE SIGNALS DETECTED':relay?'ACCESS GRANTED // '+relay.name+' UNLOCKED':'ACCESS DENIED // INVALID CODE';
+  message.classList.toggle('success',isFile||isMaster||!!relay);
+  if(isMaster||relay)portal.scrollIntoView({behavior:'smooth',block:'nearest'});
  });
- $('#ar-lock').addEventListener('click',()=>{portal.hidden=true;input.value='';message.textContent='LEGACY PORTAL LOCKED';message.classList.remove('success');});
+ $('#ar-lock').addEventListener('click',()=>{
+  portal.hidden=true;frame.src='about:blank';input.value='';
+  message.textContent='LEGACY PORTAL LOCKED';message.classList.remove('success');
+ });
  const msgs=['STASIS CITY RELAY: signal received. Keep moving, operator.','UNKNOWN CHANNEL: something is repeating your heartbeat.','KURAMI // encrypted ping detected. Origin cannot be verified.','CONTAINMENT NOTICE: do not answer the voice inside the core.','VISCERAL ENTITY: [TRANSMISSION CORRUPTED] ...LET ME OUT...','ARCHIVE FRAGMENT: Knives was not supposed to survive the procedure.'];
  $('#ar-signal').addEventListener('click',()=>$('#ar-output').textContent='> '+msgs[Math.random()*msgs.length|0]);
 }
