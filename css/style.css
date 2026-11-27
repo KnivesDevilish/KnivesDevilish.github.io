@@ -670,3 +670,90 @@ h1 {
     text-shadow: none !important;
 }
 
+
+/* ==========================================
+   KNIVESDEVILISH - LINK DIRECTORY
+   ========================================== */
+
+.link-section {
+    margin: 2.5rem 0 0;
+    text-align: left;
+}
+
+.link-section-title {
+    position: relative;
+    margin: 0 0 1.2rem;
+    padding-bottom: 0.65rem;
+
+    color: var(--cyber-lime);
+    font-family: monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-align: left;
+
+    border-bottom: 1px solid rgba(199, 240, 0, 0.25);
+}
+
+.link-section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 3.5rem;
+    height: 2px;
+    background: var(--cyber-red);
+}
+
+.link-section .button-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.link-section .button-stack .button {
+    width: min(100%, 22rem);
+}
+
+/* Gaming identity cards */
+
+.gaming-identities {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.gaming-id-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    padding: 1rem;
+    background: rgba(5, 12, 18, 0.85);
+
+    border: 1px solid rgba(199, 240, 0, 0.2);
+    border-left: 3px solid var(--cyber-lime);
+}
+
+.gaming-game {
+    color: #FFFFFF;
+    font-family: monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.gaming-player {
+    color: var(--cyber-lime);
+    font-family: monospace;
+    font-size: 0.7rem;
+}
+
+@media (max-width: 400px) {
+    .gaming-identities {
+        grid-template-columns: 1fr;
+    }
+}
+
