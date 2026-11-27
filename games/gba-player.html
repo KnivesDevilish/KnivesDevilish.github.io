@@ -52,7 +52,7 @@ button:hover{background:#b5c94a;color:#10150d}
 <p class="status" id="status" role="status" aria-live="polite">SYSTEM STANDBY // AWAITING CARTRIDGE</p>
 <div id="game"></div>
 <div class="actions"><button id="eject" type="button">EJECT & SELECT ANOTHER SYSTEM</button></div>
-<p class="warning">CONTROLS: ARROWS + Z / X / ENTER / SHIFT, OR USE THE EMULATOR'S ON-SCREEN GAMEPAD. N64, DS AND PS1 PERFORMANCE DEPENDS ON YOUR DEVICE. ARCADE TITLES require compatible FBNeo ROM ZIP sets; some titles need additional system files. No game ROMs, BIOS files or Flash games are hosted by STASIS CITY.</p>
+<p class="warning">CONTROLS: ARROWS + Z / X / ENTER / SHIFT, OR USE THE EMULATOR'S ON-SCREEN GAMEPAD. N64, DS AND PS1 PERFORMANCE DEPENDS ON YOUR DEVICE. ARCADE TITLES require compatible FBNeo ROM ZIP sets; some titles need additional system files. No game ROMs or BIOS files are hosted by STASIS CITY.</p>
 </section></main>
 <script>
 (() => {
@@ -79,7 +79,7 @@ button:hover{background:#b5c94a;color:#10150d}
   if(!file.size){showStatus('EMPTY FILE // CARTRIDGE READ ERROR',true);return;}
   setup.style.display='none';game.style.display='block';eject.style.display='inline-flex';launch.disabled=true;
   showStatus('INITIALIZING '+cfg.name+' // '+file.name);
-  window.EJS_player='#game';window.EJS_core=cfg.core;window.EJS_biosUrl=biosFile||'';window.EJS_gameUrl=file;window.EJS_gameName=file.name.replace(/\.[^.]+$/,'');
+  window.EJS_player='#game';window.EJS_core=cfg.core;window.EJS_biosUrl=biosFile?URL.createObjectURL(biosFile):'';window.EJS_gameUrl=file;window.EJS_gameName=file.name.replace(/\.[^.]+$/,'');
   window.EJS_pathtodata='https://cdn.emulatorjs.org/stable/data/';window.EJS_startOnLoaded=true;window.EJS_color='#b5c94a';window.EJS_threads=false;
   window.EJS_ready=()=>showStatus('CORE READY // '+cfg.name+' // '+file.name);
   const loader=document.createElement('script');loader.src='https://cdn.emulatorjs.org/stable/data/loader.js';loader.async=true;
