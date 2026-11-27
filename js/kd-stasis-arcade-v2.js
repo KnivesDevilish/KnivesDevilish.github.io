@@ -280,8 +280,14 @@ function pacman(){
  const c=$('#pm-board'),g=c.getContext('2d'),state=$('#pm-state'),scoreNode=$('#pm-score'),bestNode=$('#pm-best'),livesNode=$('#pm-lives'),levelNode=$('#pm-level'),start=$('#pm-start');
  let map=[],pellets=0,player=null,ghosts=[],score=0,lives=3,level=1,active=false,ended=false,raf=0,last=0,clock=0,frightUntil=0,keys={},queuedDir='left',mouth=0,invuln=0,ghostCombo=0;
  const copyMap=()=>layout.map(r=>r.split(''));
- const open=(x,y)=>{const tx=Math.round(x),ty=Math.round(y);return ty>=0&&ty<H&&tx>=0&&tx<W&&map[ty][tx]!=='#';};
- function centerActor(a){const tx=Math.round(a.x),ty=Math.round(a.y);if(Math.abs(a.x-tx)<.09&&Math.abs(a.y-ty)<.09){a.x=tx;a.y=ty;return true;}return false;}
+ const open=(x,y)=>{const tx=Math.round(x),ty=Math.round(y);if(ty===10&&(x<0||x>=W))return true;return ty>=0&&ty<H&&tx>=0&&tx<W&&map[ty][tx]!=='#';};
+ function centerActor(a){
+  const tx=Math.round(a.x),ty=Math.round(a.y),dx=tx-a.x,dy=ty-a.y,d=a.dir&&dirs[a.dir];
+  if(Math.abs(dx)>.13||Math.abs(dy)>.13)return false;
+  if(d&&d.x&&dx&&Math.sign(dx)!==d.x)return false;
+  if(d&&d.y&&dy&&Math.sign(dy)!==d.y)return false;
+  a.x=tx;a.y=ty;return true;
+ }
  function resetActors(){
   player={x:9,y:15,dir:'left',speed:5.25};
   ghosts=[
