@@ -2,46 +2,91 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080b08">
-<title>STASIS CITY // GBA TERMINAL</title>
+<title>STASIS CITY // RETRO TERMINAL</title>
 <style>
 :root{color-scheme:dark;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#080b08;color:#e2e9d5}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:16px;background:radial-gradient(ellipse at 50% 0,rgba(181,201,74,.08),transparent 55%),#080b08}.shell{max-width:960px;margin:0 auto}
-.kicker{color:#b5c94a;font-size:10px;letter-spacing:.16em}h1{margin:8px 0 6px;color:#edf1e7;font-size:clamp(20px,4vw,30px);letter-spacing:.1em}.intro{margin:0 0 16px;color:#92a087;font:12px/1.65 ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:16px;background:radial-gradient(ellipse at 50% 0,rgba(181,201,74,.08),transparent 55%),#080b08}
+.shell{max-width:960px;margin:0 auto}
+.kicker{color:#b5c94a;font-size:10px;letter-spacing:.16em}
+h1{margin:8px 0 6px;color:#edf1e7;font-size:clamp(20px,4vw,30px);letter-spacing:.1em}
+.intro{margin:0 0 16px;color:#92a087;font:12px/1.65 ui-monospace,monospace}
 .slot{padding:18px;border:1px solid rgba(181,201,74,.25);border-top:2px solid #879d50;background:linear-gradient(145deg,rgba(181,201,74,.06),transparent 55%),#0c110d}
-.pick{display:grid;justify-items:center;gap:12px;padding:24px 14px;border:1px dashed rgba(181,201,74,.38);background:rgba(0,0,0,.22);text-align:center}
-.cartridge{width:66px;height:78px;position:relative;border:2px solid #a7bd70;border-radius:5px 5px 10px 10px;background:#1c2a1c;box-shadow:inset 0 -9px 0 rgba(0,0,0,.25)}
-.cartridge:before{content:"";position:absolute;left:10px;right:10px;top:-8px;height:9px;border:2px solid #a7bd70;border-bottom:0;border-radius:4px 4px 0 0;background:#263522}.cartridge:after{content:"GBA";position:absolute;left:0;right:0;top:31px;color:#c8d9a0;font-size:13px;font-weight:bold;letter-spacing:.1em}
-label,button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:1px solid #8ba153;background:rgba(181,201,74,.1);color:#e0edbd;font:700 11px ui-monospace,monospace;letter-spacing:.08em;cursor:pointer}
-label:hover,button:hover{background:#b5c94a;color:#10150d}input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
-.hint,.status{margin:0;color:#87947d;font-size:10px;line-height:1.65}.status{min-height:18px;margin-top:12px;color:#b5c94a}
-#game{display:none;width:100%;height:min(68vh,650px);min-height:440px;margin-top:14px;background:#000}#eject{display:none;margin-top:12px}
+.form-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.field{display:grid;gap:7px;min-width:0}
+.field>span{color:#b5c94a;font-size:10px;letter-spacing:.12em}
+select{width:100%;min-height:44px;padding:10px;color:#e4edcf;background:#080d09;border:1px solid rgba(181,201,74,.4);font:12px ui-monospace,monospace}
+input[type=file]{width:100%;min-height:42px;padding:8px;color:#aab79a;background:#080d09;border:1px solid rgba(181,201,74,.25);font:11px ui-monospace,monospace}
+.hint,.status{margin:0;color:#87947d;font-size:10px;line-height:1.65}
+.system-note{min-height:34px;margin-top:10px;padding:9px 10px;border-left:2px solid #879d50;background:rgba(181,201,74,.045);color:#93a186;font-size:10px;line-height:1.6}
+#bios-field{display:none;margin-top:12px}
+.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
+button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:1px solid #8ba153;background:rgba(181,201,74,.1);color:#e0edbd;font:700 11px ui-monospace,monospace;letter-spacing:.08em;cursor:pointer}
+button:hover{background:#b5c94a;color:#10150d}
+#game{display:none;width:100%;height:min(68vh,650px);min-height:440px;margin-top:14px;background:#000}
+#eject{display:none}
+.status{min-height:18px;margin-top:12px;color:#b5c94a}
 .warning{margin-top:14px;padding-top:12px;border-top:1px solid rgba(181,201,74,.16);color:#788574;font-size:10px;line-height:1.6}
-@media(max-width:600px){body{padding:10px}.slot{padding:11px}#game{min-height:500px;height:65vh}}
+@media(max-width:600px){body{padding:10px}.slot{padding:11px}.form-grid{grid-template-columns:1fr}#game{min-height:500px;height:65vh}.actions{align-items:stretch;flex-direction:column}.actions button{width:100%}}
 </style></head>
 <body><main class="shell">
-<header><span class="kicker">KD-404 // UNREGISTERED HARDWARE</span><h1>GAME BOY ADVANCE</h1><p class="intro">GBA CORE // mGBA<br>INSERT A CARTRIDGE TO INITIALIZE THE LEGACY SYSTEM.</p></header>
+<header><span class="kicker">KD-404 // UNREGISTERED HARDWARE</span><h1>STASIS RETRO TERMINAL</h1><p class="intro">MULTI-SYSTEM EMULATION // SEVEN LEGACY PLATFORMS<br>SELECT A SYSTEM, INSERT A LOCAL CARTRIDGE, INITIALIZE.</p></header>
 <section class="slot">
-<div class="pick" id="picker"><div class="cartridge" aria-hidden="true"></div><strong>CARTRIDGE SLOT // EMPTY</strong><label for="rom">SELECT .GBA FILE</label><input id="rom" type="file" accept=".gba,application/octet-stream"><p class="hint">Choose a Game Boy Advance ROM stored on your own device. Nothing is uploaded to this website.</p></div>
-<p class="status" id="status" role="status" aria-live="polite">SYSTEM STANDBY // AWAITING CARTRIDGE</p><div id="game"></div><button id="eject" type="button">EJECT CARTRIDGE</button>
-<p class="warning">BIOS: OPTIONAL // CONTROLS: ARROW KEYS + Z / X / ENTER / SHIFT, OR USE THE EMULATOR'S ON-SCREEN GAMEPAD. EmulatorJS is provided by its respective project via its stable CDN.</p>
+<div id="setup">
+ <div class="form-grid">
+  <label class="field"><span>01 // SELECT SYSTEM</span><select id="system">
+   <option value="gba">Nintendo Game Boy Advance</option>
+   <option value="nds">Nintendo DS</option>
+   <option value="snes">Super Nintendo / SNES</option>
+   <option value="n64">Nintendo 64</option>
+   <option value="psx">Sony PlayStation</option>
+   <option value="segaMD">SEGA Mega Drive / Genesis</option>
+   <option value="arcade">Arcade / FBNeo</option>
+  </select></label>
+  <label class="field"><span>02 // SELECT GAME FILE</span><input id="rom" type="file" accept=".gba"><small class="hint" id="file-hint">Compatible format: .gba</small></label>
+ </div>
+ <div class="system-note" id="system-note" aria-live="polite">mGBA CORE // GBA cartridge image (.gba).</div>
+ <label class="field" id="bios-field"><span>OPTIONAL // PLAYSTATION BIOS</span><input id="bios" type="file" accept=".bin,.rom"><small class="hint">Only select a BIOS file you are legally entitled to use. Some PS1 games may need one for compatibility.</small></label>
+ <div class="actions"><button id="launch" type="button">INITIALIZE SYSTEM</button><span class="hint">The selected game stays local to your browser. It is not uploaded to this website.</span></div>
+</div>
+<p class="status" id="status" role="status" aria-live="polite">SYSTEM STANDBY // AWAITING CARTRIDGE</p>
+<div id="game"></div>
+<div class="actions"><button id="eject" type="button">EJECT & SELECT ANOTHER SYSTEM</button></div>
+<p class="warning">CONTROLS: ARROWS + Z / X / ENTER / SHIFT, OR USE THE EMULATOR'S ON-SCREEN GAMEPAD. N64, DS AND PS1 PERFORMANCE DEPENDS ON YOUR DEVICE. ARCADE TITLES require compatible FBNeo ROM ZIP sets; some titles need additional system files. No game ROMs, BIOS files or Flash games are hosted by STASIS CITY.</p>
 </section></main>
 <script>
 (() => {
  'use strict';
- const input=document.getElementById('rom'),picker=document.getElementById('picker'),game=document.getElementById('game'),status=document.getElementById('status'),eject=document.getElementById('eject');
+ const $=id=>document.getElementById(id);
+ const system=$('system'),rom=$('rom'),bios=$('bios'),biosField=$('bios-field'),hint=$('file-hint'),note=$('system-note'),status=$('status'),setup=$('setup'),game=$('game'),launch=$('launch'),eject=$('eject');
+ const systems={
+  gba:{name:'GAME BOY ADVANCE',core:'gba',ext:['gba'],accept:'.gba',detail:'mGBA CORE // GBA cartridge image (.gba). BIOS is optional for most titles.'},
+  nds:{name:'NINTENDO DS',core:'nds',ext:['nds'],accept:'.nds',detail:'MELONDS CORE // Nintendo DS game image (.nds). Dual-screen layout and touch input vary by title and device.'},
+  snes:{name:'SUPER NINTENDO',core:'snes',ext:['sfc','smc'],accept:'.sfc,.smc',detail:'SNES9X CORE // Super Nintendo image (.sfc, .smc).'},
+  n64:{name:'NINTENDO 64',core:'n64',ext:['z64','n64','v64'],accept:'.z64,.n64,.v64',detail:'MUPEN64PLUS NEXT CORE // N64 image (.z64, .n64, .v64). 3D performance depends heavily on device hardware.'},
+  psx:{name:'PLAYSTATION',core:'psx',ext:['chd','pbp','iso','bin','img'],accept:'.chd,.pbp,.iso,.bin,.img',detail:'PCSX-REARMED CORE // Prefer single-file .chd, .pbp or .iso images. Multi-file .cue sets are not supported by this single-file picker.'},
+  segaMD:{name:'SEGA MEGA DRIVE',core:'segaMD',ext:['md','gen','smd','bin'],accept:'.md,.gen,.smd,.bin',detail:'GENESIS PLUS GX CORE // Mega Drive / Genesis cartridge image (.md, .gen, .smd, .bin).'},
+  arcade:{name:'ARCADE',core:'arcade',ext:['zip'],accept:'.zip',detail:'FBNEO CORE // Choose a compatible arcade ROM set as a .zip file. Keep each game in its original supported set; some games require a matching BIOS ZIP.'}
+ };
  function showStatus(message,error=false){status.textContent=message;status.style.color=error?'#df8c96':'#b5c94a';}
- input.addEventListener('change',()=>{
-  const file=input.files&&input.files[0];if(!file)return;
-  if(!/\.gba$/i.test(file.name)){showStatus('INVALID CARTRIDGE // SELECT A .GBA FILE',true);input.value='';return;}
-  if(!file.size){showStatus('EMPTY FILE // CARTRIDGE READ ERROR',true);input.value='';return;}
-  picker.style.display='none';game.style.display='block';eject.style.display='inline-flex';showStatus('READING CARTRIDGE // '+file.name);
-  window.EJS_player='#game';window.EJS_core='gba';window.EJS_biosUrl='';window.EJS_gameUrl=URL.createObjectURL(file);window.EJS_gameName=file.name.replace(/\.gba$/i,'');
-  window.EJS_pathtodata='https://cdn.emulatorjs.org/stable/data/';window.EJS_startOnLoaded=true;window.EJS_color='#b5c94a';
+ function updateSystem(){const cfg=systems[system.value];rom.value='';rom.accept=cfg.accept;hint.textContent='Compatible format: '+cfg.ext.map(x=>'.'+x).join(', ');note.textContent=cfg.detail;biosField.style.display=system.value==='psx'?'grid':'none';}
+ system.addEventListener('change',updateSystem);
+ launch.addEventListener('click',()=>{
+  const cfg=systems[system.value],file=rom.files&&rom.files[0],biosFile=bios.files&&bios.files[0];
+  if(!file){showStatus('NO GAME FILE SELECTED // INSERT A CARTRIDGE',true);return;}
+  const ext=file.name.split('.').pop().toLowerCase();
+  if(!cfg.ext.includes(ext)){showStatus('FORMAT MISMATCH // '+cfg.ext.map(x=>'.'+x).join(' / '),true);return;}
+  if(!file.size){showStatus('EMPTY FILE // CARTRIDGE READ ERROR',true);return;}
+  setup.style.display='none';game.style.display='block';eject.style.display='inline-flex';launch.disabled=true;
+  showStatus('INITIALIZING '+cfg.name+' // '+file.name);
+  window.EJS_player='#game';window.EJS_core=cfg.core;window.EJS_biosUrl=biosFile||'';window.EJS_gameUrl=file;window.EJS_gameName=file.name.replace(/\.[^.]+$/,'');
+  window.EJS_pathtodata='https://cdn.emulatorjs.org/stable/data/';window.EJS_startOnLoaded=true;window.EJS_color='#b5c94a';window.EJS_threads=false;
+  window.EJS_ready=()=>showStatus('CORE READY // '+cfg.name+' // '+file.name);
   const loader=document.createElement('script');loader.src='https://cdn.emulatorjs.org/stable/data/loader.js';loader.async=true;
   loader.onerror=()=>showStatus('EMULATOR LOAD FAILED // CHECK THE CONNECTION AND TRY AGAIN',true);
-  loader.onload=()=>showStatus('EMULATOR CORE INITIALIZED // '+file.name);
   document.body.appendChild(loader);
  });
  eject.addEventListener('click',()=>location.reload());
+ updateSystem();
 })();
 </script></body></html>
