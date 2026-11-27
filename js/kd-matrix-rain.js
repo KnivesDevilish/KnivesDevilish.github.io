@@ -30,19 +30,19 @@
     let lastFrame = 0;
     let animationId = 0;
 
-    const frameInterval = 50;
+    const frameInterval = 66; // ~15 FPS instead of 20 FPS
 
     const randomGlyph = () =>
         glyphs[Math.floor(Math.random() * glyphs.length)];
 
     function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1); // avoid high-DPI overdraw
 
         width = window.innerWidth;
         height = window.innerHeight;
 
         fontSize = width < 600 ? 14 : 16;
-        gap = width < 600 ? 15 : 18;
+        gap = width < 600 ? 22 : 28; // fewer glyph columns to reduce canvas work
 
         canvas.width = Math.round(width * dpr);
         canvas.height = Math.round(height * dpr);
@@ -65,7 +65,7 @@
     }
 
     function animate(timestamp) {
-        if (document.hidden) return;
+        if (document.hidden) { animationId = 0; return; }
 
         if (timestamp - lastFrame >= frameInterval) {
             const delta = lastFrame
