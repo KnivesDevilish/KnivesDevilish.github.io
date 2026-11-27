@@ -1531,3 +1531,106 @@ body::after {
     background-position: center, center, right center !important;
 }
 
+
+/* ==========================================
+   INTERACTIVE CYBERPUNK CARD EFFECTS
+   ========================================== */
+
+.dashboard-card {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+}
+
+/* Subtle scan line */
+.dashboard-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 55%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #B5C94A,
+        transparent
+    );
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(181, 201, 74, 0.65);
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.35),
+        0 0 14px rgba(181, 201, 74, 0.08);
+}
+
+.dashboard-card:hover::after {
+    opacity: 1;
+    animation: card-scan 1.1s ease-in-out;
+}
+
+@keyframes card-scan {
+    from {
+        left: -55%;
+    }
+    to {
+        left: 110%;
+    }
+}
+
+/* Interactive links */
+.dashboard-card a {
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.dashboard-card a:hover {
+    color: #B5C94A;
+    transform: translateX(3px);
+}
+
+/* Keyboard navigation */
+.dashboard-card a:focus-visible {
+    outline: 2px solid #B5C94A;
+    outline-offset: 4px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .dashboard-card,
+    .dashboard-card a {
+        transition: none;
+    }
+
+    .dashboard-card:hover {
+        transform: none;
+    }
+
+    .dashboard-card:hover::after {
+        animation: none;
+    }
+}
+
+
+/* PLATFORM ICON COLORS - FORCE HOVER RESTORATION */
+.link-icon img {
+    filter: grayscale(1) brightness(0) invert(1) !important;
+    transition: filter 0.2s ease;
+}
+
+.access-link:hover .link-icon img,
+.access-link:focus-visible .link-icon img {
+    filter: none !important;
+}
+
