@@ -21,7 +21,7 @@ root.innerHTML =
 '<button type="button" data-game="breaker" aria-pressed="false"><b>04</b><span><strong>DEMON BREAKER</strong><small>ACTION / ENDLESS WAVES</small>›</span></button>'+'<button type="button" data-game="duel" aria-pressed="false"><b>07</b><span><strong>STASIS DUEL</strong><small>FIGHTING / CPU</small>›</span></button>'+'<button type="button" data-game="breach" aria-pressed="false"><b>08</b><span><strong>STASIS BREACH</strong><small>TACTICAL SHOOTER / BOTS</small>›</span></button>'+
 '<button type="button" data-game="racer" aria-pressed="false"><b>05</b><span><strong>NEON TRAFFIC</strong><small>DRIVING / DODGE</small></span>›</button>'+
 '<button type="button" data-game="night" aria-pressed="false"><b>06</b><span><strong>STASIS NIGHT SHIFT</strong><small>HORROR / SURVIVAL</small></span>›</button>'+
-'<button type="button" data-game="archive" aria-pressed="false"><b>09</b><span><strong>CLASSIFIED ARCHIVE</strong><small>INTEL / UNKNOWN SIGNAL</small></span>›</button>'+
+'<button type="button" data-game="knives" aria-pressed="false"><b>10</b><span><strong>KNIVES ADVANCE</strong><small>PLATFORMER / MOMENTUM</small></span>›</button>'+'<button type="button" data-game="archive" aria-pressed="false"><b>09</b><span><strong>CLASSIFIED ARCHIVE</strong><small>INTEL / UNKNOWN SIGNAL</small></span>›</button>'+
 '<div class="kd2-nav-foot">OPERATOR // KD-404<br>INPUT // KEYBOARD & TOUCH</div></nav>'+
 '<main class="kd2-main"><header class="kd2-game-head"><div><small id="kd2-type">PUZZLE / CONTAINMENT</small><h3 id="kd2-title">BLOODLOCK</h3><p id="kd2-desc">Arrange the unstable fragments. Clear rows to stabilize the core.</p></div><span>BUILD 02.05<br>STASIS CITY LAB</span></header>'+
 '<div id="kd2-cabinet" class="kd2-cabinet"></div>'+
@@ -45,7 +45,8 @@ const info = {
  breach:['TACTICAL SHOOTER / BOTS','STASIS BREACH','Clear hostile units room by room. Use cover, aim with the mouse, manage ammunition and survive escalating rounds.','WASD MOVE · MOUSE AIM · CLICK FIRE · R RELOAD · TOUCH CONTROLS ON MOBILE'],
  racer:['DRIVING / TRAFFIC SURVIVAL','NEON TRAFFIC','Read the curves, dodge traffic and keep your run clean through the neon expressway.','A / D OR ← → STEER · HOLD DRIFT TO SLIDE'],
  night:['HORROR / NIGHT SURVIVAL','STASIS NIGHT SHIFT','Monitor the abandoned Stasis facility. Track the entities, manage power and survive until 6 AM.','CAMERAS · DOORS · LIGHTS · POWER MANAGEMENT'],
- archive:['INTEL / UNKNOWN SIGNAL','CLASSIFIED ARCHIVE','Recover a restricted file and listen to transmissions from Stasis City.','RESTRICTED ACCESS // CODE 404']
+ archive:['INTEL / UNKNOWN SIGNAL','CLASSIFIED ARCHIVE','Recover a restricted file and listen to transmissions from Stasis City.','RESTRICTED ACCESS // CODE 404'],
+  knives:['PLATFORMER / MOMENTUM','KNIVES ADVANCE','Build speed, ride the terrain, roll through threats and recover the signal shards across the Stasis Outskirts.','A / D OR ← → MOVE · SPACE JUMP · HOLD ↓ ROLL · X BURST']
 };
 function choose(id){
  stop(); stop=()=>{};
@@ -60,6 +61,7 @@ function choose(id){
  if(id==='racer') racer();
  if(id==='night') nightshift();
  if(id==='archive') archive();
+  if(id==='knives') knivesAdvance();
 }
 root.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.game)));
 
@@ -457,5 +459,74 @@ function breach(){
  resetPlayer();draw();stop=()=>{active=false;cancelAnimationFrame(raf);raf=0;keys={};touchFire=false;mouse.down=false;};
 }
 
-choose('bloodlock');
+
+function knivesAdvance(){
+ const W=960,H=540,END=6700;
+ cabinet.innerHTML='<section class="kd2-ka-shell"><div class="kd2-ka-hud"><div><small>SCORE</small><strong id="ka-score">000000</strong></div><div><small>SHARDS</small><strong id="ka-rings">00</strong></div><div><small>VITALITY</small><strong id="ka-lives">♥ ♥ ♥</strong></div><div><small>ZONE TIME</small><strong id="ka-time">00:00</strong></div><div><small>MOMENTUM</small><strong id="ka-speed">0 KM/H</strong></div></div><div class="kd2-ka-screen"><canvas id="ka-game" width="960" height="540" tabindex="0" aria-label="Knives Advance platform game"></canvas><div class="kd2-ka-caption"><span id="ka-zone">ZONE 01 // STASIS OUTSKIRTS</span><span id="ka-status">SIGNAL STABLE</span></div></div><div class="kd2-ka-actions"><button type="button" class="kd2-primary" id="ka-start">ENTER ZONE</button><span>COLLECT SHARDS · BUILD MOMENTUM · REACH THE GATE</span></div><div class="kd2-ka-touch"><div><button type="button" data-ka="left">◀</button><button type="button" data-ka="right">▶</button></div><div><button type="button" data-ka="roll">ROLL</button><button type="button" data-ka="jump">JUMP</button></div></div><p class="kd2-ka-help">MOVE: A / D OR ← → · JUMP: SPACE / W / ↑ · HOLD ↓ TO ROLL · X TO BURST · TOUCH CONTROLS AVAILABLE</p></section>';
+ const c=$('#ka-game'),g=c.getContext('2d'),start=$('#ka-start'),scoreEl=$('#ka-score'),ringsEl=$('#ka-rings'),livesEl=$('#ka-lives'),timeEl=$('#ka-time'),speedEl=$('#ka-speed'),statusEl=$('#ka-status');
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ const ground=x=>{let y=421+Math.sin(x*.0041)*12+Math.sin(x*.0017)*17;if(x>620&&x<1320)y-=105*Math.sin((x-620)/700*Math.PI);if(x>1830&&x<2480)y+=58*Math.sin((x-1830)/650*Math.PI);if(x>3260&&x<4020)y-=84*Math.sin((x-3260)/760*Math.PI);if(x>4780&&x<5410)y+=48*Math.sin((x-4780)/630*Math.PI);if(x>5650&&x<6250)y-=48*Math.sin((x-5650)/600*Math.PI);return clamp(y,285,475);};
+ const platforms=[{x:1510,y:278,w:190},{x:2670,y:306,w:170},{x:4370,y:270,w:210},{x:5550,y:300,w:180}],spikes=[{x:1030,w:96},{x:2180,w:110},{x:3820,w:100},{x:5060,w:110},{x:6130,w:100}],springs=[1130,3520,5700],seeds=[1450,2940,4580,5920];
+ const keys={left:false,right:false,down:false,jump:false};let shards=[],enemies=[],particles=[],p,raf=0,last=0,time=0,cam=0,score=0,count=0,lives=3,checkpoint=80,checkpointed=false,active=false,won=false,dead=false,jumpTap=false,dashTap=false;
+ function player(x){return{x,y:ground(x)-40,w:34,h:40,vx:0,vy:0,dir:1,grounded:true,rolling:false,roll:0,invuln:0,coyote:.1};}
+ function setup(){shards=[];for(let x=260;x<END-180;x+=92){if(spikes.some(s=>x>s.x-65&&x<s.x+s.w+55))continue;let t=(x%552)/552;shards.push({x,y:ground(x)-60-Math.sin(t*Math.PI)*42,taken:false});}for(const base of [760,1730,2820,3450,4490,5350,6280])for(let i=0;i<6;i++){let x=base+i*34;shards.push({x,y:ground(x)-95-Math.sin(i/5*Math.PI)*62,taken:false});}enemies=seeds.map((x,i)=>({x,home:x,dir:i%2?1:-1,y:ground(x)-31,dead:false}));particles=[];}
+ function hud(){scoreEl.textContent=String(score).padStart(6,'0');ringsEl.textContent=String(count).padStart(2,'0');livesEl.textContent=lives?'♥ '.repeat(lives).trim():'—';timeEl.textContent=String(Math.floor(time/60)).padStart(2,'0')+':'+String(Math.floor(time%60)).padStart(2,'0');speedEl.textContent=Math.round(Math.abs(p.vx)*.31)+' KM/H';}
+ function burst(x,y,color,n=8){for(let i=0;i<n;i++){let a=Math.random()*Math.PI*2,v=45+Math.random()*180;particles.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:.4+Math.random()*.4,color});}}
+ function reset(){score=0;count=0;lives=3;time=0;cam=0;checkpoint=80;checkpointed=false;won=false;dead=false;p=player(80);setup();$('#ka-zone').textContent='ZONE 01 // STASIS OUTSKIRTS';statusEl.textContent='SIGNAL STABLE';hud();}
+ function hurt(){if(p.invuln>0||won||dead)return;burst(p.x+17,p.y+20,'#ff7a88',12);if(count>=10)count-=10;else if(count)count=0;else lives--;p.invuln=1.35;p.vx=-p.dir*270;p.vy=-340;p.grounded=false;if(lives<=0){lives=0;dead=true;active=false;start.textContent='RETRY ZONE';statusEl.textContent='OPERATOR DOWN';draw();}else statusEl.textContent='IMPACT // STABILIZING';hud();}
+ function update(dt){
+  time+=dt;p.invuln=Math.max(0,p.invuln-dt);let old=p.y,input=(keys.right?1:0)-(keys.left?1:0);
+  if(input){p.dir=input;p.vx+=input*(p.grounded?1850:920)*dt;}else p.vx*=Math.max(0,1-(p.grounded?2.3:.45)*dt);
+  if(p.grounded)p.vx+=(ground(p.x+12)-ground(p.x-12))/24*610*dt;
+  p.rolling=(keys.down&&p.grounded&&Math.abs(p.vx)>115)||p.roll>0;if(p.roll>0)p.roll=Math.max(0,p.roll-dt);
+  if(dashTap&&p.grounded){p.vx=p.dir*720;p.roll=.62;p.rolling=true;burst(p.x+17,p.y+p.h,'#b5c94a',7);}dashTap=false;p.vx=clamp(p.vx,-(p.rolling?740:570),p.rolling?740:570);
+  if(jumpTap&&(p.grounded||p.coyote>0)){p.vy=-670;p.grounded=false;p.coyote=0;p.rolling=false;}jumpTap=false;if(keys.jump&&p.vy<0)p.vy-=230*dt;
+  p.vy+=1660*dt;p.x=clamp(p.x+p.vx*dt,0,END+100);p.y+=p.vy*dt;p.grounded=false;
+  if(p.y+p.h>=ground(p.x)&&p.vy>=0&&p.x<END+20){p.y=ground(p.x)-p.h;p.vy=0;p.grounded=true;}
+  for(const q of platforms)if(p.vy>=0&&old+p.h<=q.y+5&&p.y+p.h>=q.y&&p.x+p.w>q.x&&p.x<q.x+q.w){p.y=q.y-p.h;p.vy=0;p.grounded=true;}
+  p.coyote=p.grounded ? .1 : Math.max(0,p.coyote-dt);
+  for(const x of springs)if(Math.abs(p.x+17-x)<23&&p.grounded){p.vy=-900;p.grounded=false;p.roll=.45;burst(x,ground(x)-10,'#c7e77d',12);}
+  for(const r of shards)if(!r.taken){let dx=r.x-(p.x+17),dy=r.y-(p.y+20);if(dx*dx+dy*dy<34*34){r.taken=true;count++;score+=25;burst(r.x,r.y,'#f5d76e',4);}}
+  for(const s of spikes)if(p.x+p.w>s.x&&p.x<s.x+s.w&&p.y+p.h>ground(s.x+s.w/2)-34)hurt();
+  for(const e of enemies)if(!e.dead){e.x+=e.dir*48*dt;if(e.x<e.home-48||e.x>e.home+48)e.dir*=-1;e.y=ground(e.x)-31;if(p.x+p.w>e.x-22&&p.x<e.x+22&&p.y+p.h>e.y+3&&p.y<e.y+31){if(p.vy>100||p.rolling){e.dead=true;p.vy=-425;p.grounded=false;score+=150;burst(e.x,e.y,'#b5c94a',14);}else hurt();}}
+  if(!checkpointed&&p.x>3220){checkpointed=true;checkpoint=3260;$('#ka-zone').textContent='CHECKPOINT // MID-SECTOR';statusEl.textContent='CHECKPOINT SYNCHRONIZED';score+=500;}
+  if(p.x>END){won=true;active=false;score+=count*50;statusEl.textContent='ZONE CLEARED';start.textContent='PLAY AGAIN';draw();}
+  if(p.y>H+180){hurt();if(!dead){p.x=checkpoint;p.y=ground(checkpoint)-p.h;p.vy=0;}}
+  particles.forEach(a=>{a.x+=a.vx*dt;a.y+=a.vy*dt;a.vy+=420*dt;a.life-=dt;});particles=particles.filter(a=>a.life>0);
+  cam+=(clamp(p.x-330,0,END-W+250)-cam)*Math.min(1,dt*5);if(Math.abs(p.vx)>45&&p.grounded&&Math.random()<dt*12)burst(p.x+17,p.y+p.h-2,'#778c51',1);hud();
+ }
+ function drawPlayer(){
+  if(p.invuln>0&&Math.floor(p.invuln*12)%2===0)return;g.save();g.translate(p.x-cam+17,p.y+20);if(p.rolling||!p.grounded)g.rotate(time*8*p.dir);g.scale(p.dir,1);
+  const spr=['....GGG.....','...GGGGG....','..GGGBBGG...','.GGGBBBBGG..','..GBBWWBBG..','...GBBBRBBG.','....BBBBRRR.','....BBBBB...','...BB.BB.....','..BB...BB....','.BB.....BB...','BB..........'],pal={G:'#b5c94a',B:'#263544',W:'#eff4dc',R:'#a94d61'};
+  spr.forEach((row,y)=>Array.from(row).forEach((ch,x)=>{if(pal[ch]){g.fillStyle=pal[ch];g.fillRect(-18+x*3,-18+y*3,3,3);}}));g.fillStyle='#151b22';g.fillRect(7,-4,3,3);g.fillStyle='#e9efcf';g.fillRect(8,-4,2,2);g.restore();
+ }
+ function draw(){
+  g.imageSmoothingEnabled=false;let sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#101c2b');sky.addColorStop(.58,'#29404b');sky.addColorStop(1,'#9b765b');g.fillStyle=sky;g.fillRect(0,0,W,H);
+  for(let i=0;i<42;i++){let x=((i*173-cam*.16)%(W+40)+W+40)%(W+40),y=34+(i*47)%190;g.fillStyle=i%3?'rgba(224,239,194,.22)':'rgba(245,218,153,.45)';g.fillRect(x,y,2,2);}
+  for(let i=0;i<18;i++){let x=i*190-cam*.28;if(x<-180||x>W+20)continue;let h=70+i*53%125;g.fillStyle=i%2?'#23343b':'#1b2b35';g.fillRect(x,H-112-h,82,h);g.fillStyle='rgba(181,201,74,.23)';for(let y=H-102-h;y<H-120;y+=19)g.fillRect(x+13,y,5,7);}
+  g.beginPath();g.moveTo(0,H);for(let x=Math.floor(cam/20)*20;x<cam+W+30;x+=20)g.lineTo(x-cam,ground(x));g.lineTo(W,H);g.closePath();g.fillStyle='#17261f';g.fill();
+  g.beginPath();for(let x=Math.floor(cam/20)*20;x<cam+W+30;x+=20){if(x===Math.floor(cam/20)*20)g.moveTo(x-cam,ground(x));else g.lineTo(x-cam,ground(x));}g.strokeStyle='#91a85e';g.lineWidth=4;g.stroke();
+  for(let x=Math.floor(cam/54)*54;x<cam+W+54;x+=54){g.fillStyle='rgba(181,201,74,.18)';g.fillRect(x-cam,ground(x)+18,25,3);}
+  platforms.forEach(q=>{let x=q.x-cam;if(x+q.w<0||x>W)return;g.fillStyle='#384c3b';g.fillRect(x,q.y,q.w,12);g.fillStyle='#afc96a';g.fillRect(x,q.y,q.w,4);});
+  spikes.forEach(s=>{let x=s.x-cam;if(x+s.w<0||x>W)return;g.fillStyle='#d5d8c4';for(let xx=0;xx<s.w;xx+=24){g.beginPath();g.moveTo(x+xx,ground(s.x+xx));g.lineTo(x+xx+12,ground(s.x+xx)-28);g.lineTo(x+xx+24,ground(s.x+xx));g.closePath();g.fill();}});
+  springs.forEach(x=>{let sx=x-cam,y=ground(x)-10;if(sx<-30||sx>W+30)return;g.fillStyle='#a94d61';g.fillRect(sx-13,y,26,9);g.strokeStyle='#e3c27e';g.lineWidth=3;g.beginPath();g.moveTo(sx-8,y);g.lineTo(sx-4,y-8);g.lineTo(sx,y);g.lineTo(sx+4,y-8);g.lineTo(sx+8,y);g.stroke();});
+  shards.forEach(r=>{if(r.taken)return;let x=r.x-cam;if(x<-20||x>W+20)return;g.strokeStyle='#f4d46c';g.lineWidth=3;g.beginPath();g.ellipse(x,r.y,6,10,Math.sin(time*4+r.x)*.18,0,Math.PI*2);g.stroke();});
+  enemies.forEach(e=>{if(e.dead)return;let x=e.x-cam;if(x<-35||x>W+35)return;g.fillStyle='#5c293d';g.fillRect(x-15,e.y+9,30,22);g.fillStyle='#bd5969';g.fillRect(x-19,e.y+3,38,11);g.fillStyle='#f4dcaa';g.fillRect(x-8,e.y+7,5,4);g.fillRect(x+5,e.y+7,5,4);});
+  particles.forEach(a=>{g.globalAlpha=clamp(a.life*2,0,1);g.fillStyle=a.color;g.fillRect(a.x-cam,a.y,4,4);});g.globalAlpha=1;
+  if(p){g.fillStyle='rgba(0,0,0,.22)';g.beginPath();g.ellipse(p.x-cam+17,ground(p.x)+4,p.rolling?17:13,4,0,0,Math.PI*2);g.fill();drawPlayer();}
+  let gx=END-cam;if(gx>-55&&gx<W+55){g.fillStyle='#b5c94a';g.fillRect(gx,ground(END)-112,9,112);g.fillStyle='#e4e9c5';g.fillRect(gx-22,ground(END)-112,54,28);g.fillStyle='#1b2922';g.font='bold 13px monospace';g.fillText('GO',gx-14,ground(END)-93);}
+  if(!active){g.fillStyle='rgba(4,8,12,.72)';g.fillRect(0,0,W,H);g.textAlign='center';g.fillStyle='#b5c94a';g.font='bold 18px monospace';g.fillText(won?'ZONE 01 // CLEARED':dead?'SIGNAL LOST // OPERATOR DOWN':'KNIVES ADVANCE',W/2,H/2-34);g.fillStyle='#f0f2de';g.font='bold 38px monospace';g.fillText(won?'STASIS OUTSKIRTS':dead?'RUN TERMINATED':'',W/2,H/2+10);g.fillStyle='#bdc7ae';g.font='14px monospace';g.fillText(won?'GATE REACHED // SCORE '+String(score).padStart(6,'0'):dead?'NO VITALITY REMAINING':'A NEW SIGNAL IS WAITING',W/2,H/2+48);g.textAlign='left';}
+ }
+ function frame(ts){if(!active)return;if(!last)last=ts;let dt=Math.min(.033,(ts-last)/1000);last=ts;update(dt);draw();if(active)raf=requestAnimationFrame(frame);}
+ function begin(){cancelAnimationFrame(raf);raf=0;reset();active=true;start.textContent='RESTART ZONE';c.focus();last=0;draw();raf=requestAnimationFrame(frame);}
+ function keyDown(e){if(!active)return;let k=e.key.toLowerCase();if(['arrowleft','arrowright','arrowdown','arrowup',' ','w','a','s','d','x','z'].includes(k))e.preventDefault();if(k==='a'||k==='arrowleft')keys.left=true;if(k==='d'||k==='arrowright')keys.right=true;if(k==='s'||k==='arrowdown')keys.down=true;if(k===' '||k==='w'||k==='arrowup'){if(!keys.jump)jumpTap=true;keys.jump=true;}if((k==='x'||k==='z')&&!e.repeat)dashTap=true;}
+ function keyUp(e){let k=e.key.toLowerCase();if(k==='a'||k==='arrowleft')keys.left=false;if(k==='d'||k==='arrowright')keys.right=false;if(k==='s'||k==='arrowdown')keys.down=false;if(k===' '||k==='w'||k==='arrowup')keys.jump=false;}
+ function release(){keys.left=keys.right=keys.down=keys.jump=false;}
+ window.addEventListener('keydown',keyDown);window.addEventListener('keyup',keyUp);window.addEventListener('blur',release);c.addEventListener('pointerdown',()=>c.focus());
+ cabinet.querySelectorAll('[data-ka]').forEach(b=>{let a=b.dataset.ka;const down=e=>{e.preventDefault();b.classList.add('is-held');if(a==='left')keys.left=true;if(a==='right')keys.right=true;if(a==='roll')keys.down=true;if(a==='jump'){if(!keys.jump)jumpTap=true;keys.jump=true;}},up=()=>{b.classList.remove('is-held');if(a==='left')keys.left=false;if(a==='right')keys.right=false;if(a==='roll')keys.down=false;if(a==='jump')keys.jump=false;};b.addEventListener('pointerdown',down);['pointerup','pointercancel','pointerleave','lostpointercapture'].forEach(t=>b.addEventListener(t,up));});
+ start.addEventListener('click',begin);reset();draw();
+ stop=()=>{active=false;cancelAnimationFrame(raf);raf=0;release();window.removeEventListener('keydown',keyDown);window.removeEventListener('keyup',keyUp);window.removeEventListener('blur',release);};
+}
+
+ choose('bloodlock');
 })();
