@@ -111,7 +111,7 @@ function pinball(){
   ball.vy+=1550*dt;ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;
   if(ball.x<28){ball.x=28;ball.vx=Math.abs(ball.vx)*.8;}if(ball.x>392){ball.x=392;ball.vx=-Math.abs(ball.vx)*.8;}if(ball.y<25){ball.y=25;ball.vy=Math.abs(ball.vy)*.8;}
   bumpers.forEach(b=>{let dx=ball.x-b.x,dy=ball.y-b.y,d=Math.hypot(dx,dy),m=R+b.r;if(d<m&&d>0){let nx=dx/d,ny=dy/d;ball.x=b.x+nx*(m+.5);ball.y=b.y+ny*(m+.5);let dot=ball.vx*nx+ball.vy*ny;if(dot<0){ball.vx-=2*dot*nx;ball.vy-=2*dot*ny;}ball.vx+=nx*140;ball.vy+=ny*140;save(25);}});
-  fl flips.forEach(segment);
+  flips.forEach(segment);
   if(ball.y>710){lives--;life.textContent=String(lives);if(lives<=0){active=false;ended=true;state.textContent='TABLE SHUTDOWN';start.textContent='RESTART TABLE';}else{resetBall();state.textContent='BALL RECOVERED';}}
  }
  function draw(){
