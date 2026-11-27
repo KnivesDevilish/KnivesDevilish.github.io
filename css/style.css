@@ -997,3 +997,125 @@ h1 {
     color: var(--cyber-lime);
 }
 
+
+/* ==========================================
+   KNIVESDEVILISH - CYBERPUNK MICRO-INTERACTIONS
+   ========================================== */
+
+/* Subtle moving scanlines */
+@keyframes cyber-scan {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 8px;
+    }
+}
+
+/* Online indicator */
+@keyframes status-pulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 5px var(--cyber-lime);
+    }
+    50% {
+        opacity: 0.55;
+        box-shadow: 0 0 14px var(--cyber-lime);
+    }
+}
+
+/* Red warning accent */
+@keyframes red-glow {
+    0%, 100% {
+        box-shadow: 0 0 3px rgba(255, 48, 79, 0.15);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 48, 79, 0.4);
+    }
+}
+
+/* Scanline animation */
+body::before {
+    animation: cyber-scan 8s linear infinite;
+}
+
+/* Online indicator animation */
+.status-dot {
+    animation: status-pulse 2.5s ease-in-out infinite;
+}
+
+/* Dashboard panel interactions */
+.link-section {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 200ms ease,
+        border-color 200ms ease,
+        box-shadow 200ms ease;
+}
+
+.link-section:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(199, 240, 0, 0.65);
+
+    box-shadow:
+        0 0 18px rgba(199, 240, 0, 0.12),
+        0 0 8px rgba(255, 48, 79, 0.06);
+}
+
+/* Subtle red corner accent */
+.link-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 24px;
+    height: 2px;
+
+    background: var(--cyber-red);
+    opacity: 0.8;
+
+    animation: red-glow 4s ease-in-out infinite;
+}
+
+/* Button interaction */
+.link-section .button {
+    transition:
+        transform 180ms ease,
+        filter 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease;
+}
+
+.link-section .button:hover {
+    transform: translateY(-3px) scale(1.015);
+
+    filter: brightness(1.12);
+
+    box-shadow:
+        0 0 14px rgba(199, 240, 0, 0.2),
+        0 0 8px rgba(255, 48, 79, 0.1);
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    .status-dot,
+    .link-section::before {
+        animation: none !important;
+    }
+
+    .link-section,
+    .link-section .button {
+        transition: none !important;
+    }
+
+    .link-section:hover,
+    .link-section .button:hover {
+        transform: none !important;
+    }
+}
+
