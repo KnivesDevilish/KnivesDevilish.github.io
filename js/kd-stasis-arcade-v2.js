@@ -19,6 +19,8 @@ root.innerHTML =
 '<button type="button" data-game="pinball" aria-pressed="false"><b>02</b><span><strong>VISCERAL PINBALL</strong><small>ARCADE / PHYSICS</small>›</button>'+
 '<button type="button" data-game="run" aria-pressed="false"><b>03</b><span><strong>STASIS RUN</strong><small>RUNNER / SURVIVAL</small>›</button>'+
 '<button type="button" data-game="breaker" aria-pressed="false"><b>04</b><span><strong>DEMON BREAKER</strong><small>ACTION / BOSS HUNT</small>›</span></button>'+
+'<button type="button" data-game="racer" aria-pressed="false"><b>05</b><span><strong>NEON TRAFFIC</strong><small>DRIVING / DODGE</small></span>›</button>'+
+'<button type="button" data-game="night" aria-pressed="false"><b>06</b><span><strong>STASIS NIGHT SHIFT</strong><small>HORROR / SURVIVAL</small></span>›</button>'+
 '<button type="button" data-game="archive" aria-pressed="false"><b>05</b><span><strong>CLASSIFIED ARCHIVE</strong><small>INTEL / UNKNOWN SIGNAL</small></span>›</button>'+
 '<div class="kd2-nav-foot">OPERATOR // KD-404<br>INPUT // KEYBOARD & TOUCH</div></nav>'+
 '<main class="kd2-main"><header class="kd2-game-head"><div><small id="kd2-type">PUZZLE / CONTAINMENT</small><h3 id="kd2-title">BLOODLOCK</h3><p id="kd2-desc">Arrange the unstable fragments. Clear rows to stabilize the core.</p></div><span>BUILD 02.04<br>STASIS CITY LAB</span></header>'+
@@ -38,7 +40,9 @@ const info = {
  bloodlock:['PUZZLE / CONTAINMENT','BLOODLOCK','Arrange the unstable fragments. Clear rows to stabilize the core.','ARROWS MOVE · UP ROTATE · SPACE HARD DROP'],
  pinball:['ARCADE / PHYSICS','VISCERAL PINBALL','Keep the core in play. Hit the living bumpers and work the flippers.','SPACE LAUNCH · A / D OR HOLD THE FLIPPER BUTTONS'],
  run:['RUNNER / SURVIVAL','STASIS RUN','Escape the quarantine district. Jump, dodge and collect stabilizers.','SPACE / ↑ / TAP TO JUMP · AVOID DEBRIS'],
- breaker:['ACTION / BOSS HUNT','DEMON BREAKER','Fight through the containment unit with Knives’ visceral energy cannon.','A / D MOVE · SPACE JUMP · X / J FIRE'],
+ breaker:['ACTION / ENDLESS WAVES','DEMON BREAKER','Survive randomized enemy waves. Every fourth wave brings a new boss variant.','A / D MOVE · SPACE JUMP · X / J FIRE'],
+ racer:['DRIVING / TRAFFIC SURVIVAL','NEON TRAFFIC','Read the curves, dodge traffic and keep your run clean through the neon expressway.','A / D OR ← → STEER · HOLD DRIFT TO SLIDE'],
+ night:['HORROR / NIGHT SURVIVAL','STASIS NIGHT SHIFT','Monitor the abandoned Stasis facility. Track the entities, manage power and survive until 6 AM.','CAMERAS · DOORS · LIGHTS · POWER MANAGEMENT'],
  archive:['INTEL / UNKNOWN SIGNAL','CLASSIFIED ARCHIVE','Recover a restricted file and listen to transmissions from Stasis City.','RESTRICTED ACCESS // CODE 404']
 };
 function choose(id){
@@ -49,6 +53,8 @@ function choose(id){
  if(id==='pinball') pinball();
  if(id==='run') runner();
  if(id==='breaker') breaker();
+ if(id==='racer') racer();
+ if(id==='night') nightshift();
  if(id==='archive') archive();
 }
 root.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.game)));
