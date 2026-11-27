@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080b08">
+<title>STASIS CITY // GBA TERMINAL</title>
+<style>
+:root{color-scheme:dark;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#080b08;color:#e2e9d5}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:16px;background:radial-gradient(ellipse at 50% 0,rgba(181,201,74,.08),transparent 55%),#080b08}.shell{max-width:960px;margin:0 auto}
+.kicker{color:#b5c94a;font-size:10px;letter-spacing:.16em}h1{margin:8px 0 6px;color:#edf1e7;font-size:clamp(20px,4vw,30px);letter-spacing:.1em}.intro{margin:0 0 16px;color:#92a087;font:12px/1.65 ui-monospace,monospace}
+.slot{padding:18px;border:1px solid rgba(181,201,74,.25);border-top:2px solid #879d50;background:linear-gradient(145deg,rgba(181,201,74,.06),transparent 55%),#0c110d}
+.pick{display:grid;justify-items:center;gap:12px;padding:24px 14px;border:1px dashed rgba(181,201,74,.38);background:rgba(0,0,0,.22);text-align:center}
+.cartridge{width:66px;height:78px;position:relative;border:2px solid #a7bd70;border-radius:5px 5px 10px 10px;background:#1c2a1c;box-shadow:inset 0 -9px 0 rgba(0,0,0,.25)}
+.cartridge:before{content:"";position:absolute;left:10px;right:10px;top:-8px;height:9px;border:2px solid #a7bd70;border-bottom:0;border-radius:4px 4px 0 0;background:#263522}.cartridge:after{content:"GBA";position:absolute;left:0;right:0;top:31px;color:#c8d9a0;font-size:13px;font-weight:bold;letter-spacing:.1em}
+label,button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:1px solid #8ba153;background:rgba(181,201,74,.1);color:#e0edbd;font:700 11px ui-monospace,monospace;letter-spacing:.08em;cursor:pointer}
+label:hover,button:hover{background:#b5c94a;color:#10150d}input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.hint,.status{margin:0;color:#87947d;font-size:10px;line-height:1.65}.status{min-height:18px;margin-top:12px;color:#b5c94a}
+#game{display:none;width:100%;height:min(68vh,650px);min-height:440px;margin-top:14px;background:#000}#eject{display:none;margin-top:12px}
+.warning{margin-top:14px;padding-top:12px;border-top:1px solid rgba(181,201,74,.16);color:#788574;font-size:10px;line-height:1.6}
+@media(max-width:600px){body{padding:10px}.slot{padding:11px}#game{min-height:500px;height:65vh}}
+</style></head>
+<body><main class="shell">
+<header><span class="kicker">KD-404 // UNREGISTERED HARDWARE</span><h1>GAME BOY ADVANCE</h1><p class="intro">GBA CORE // mGBA<br>INSERT A CARTRIDGE TO INITIALIZE THE LEGACY SYSTEM.</p></header>
+<section class="slot">
+<div class="pick" id="picker"><div class="cartridge" aria-hidden="true"></div><strong>CARTRIDGE SLOT // EMPTY</strong><label for="rom">SELECT .GBA FILE</label><input id="rom" type="file" accept=".gba,application/octet-stream"><p class="hint">Choose a Game Boy Advance ROM stored on your own device. Nothing is uploaded to this website.</p></div>
+<p class="status" id="status" role="status" aria-live="polite">SYSTEM STANDBY // AWAITING CARTRIDGE</p><div id="game"></div><button id="eject" type="button">EJECT CARTRIDGE</button>
+<p class="warning">BIOS: OPTIONAL // CONTROLS: ARROW KEYS + Z / X / ENTER / SHIFT, OR USE THE EMULATOR'S ON-SCREEN GAMEPAD. EmulatorJS is provided by its respective project via its stable CDN.</p>
+</section></main>
+<script>
+(() => {
+ 'use strict';
+ const input=document.getElementById('rom'),picker=document.getElementById('picker'),game=document.getElementById('game'),status=document.getElementById('status'),eject=document.getElementById('eject');
+ function showStatus(message,error=false){status.textContent=message;status.style.color=error?'#df8c96':'#b5c94a';}
+ input.addEventListener('change',()=>{
+  const file=input.files&&input.files[0];if(!file)return;
+  if(!/\.gba$/i.test(file.name)){showStatus('INVALID CARTRIDGE // SELECT A .GBA FILE',true);input.value='';return;}
+  if(!file.size){showStatus('EMPTY FILE // CARTRIDGE READ ERROR',true);input.value='';return;}
+  picker.style.display='none';game.style.display='block';eject.style.display='inline-flex';showStatus('READING CARTRIDGE // '+file.name);
+  window.EJS_player='#game';window.EJS_core='gba';window.EJS_biosUrl='';window.EJS_gameUrl=file;window.EJS_gameName=file.name.replace(/\.gba$/i,'');
+  window.EJS_pathtodata='https://cdn.emulatorjs.org/stable/data/';window.EJS_startOnLoaded=true;window.EJS_color='#b5c94a';
+  const loader=document.createElement('script');loader.src='https://cdn.emulatorjs.org/stable/data/loader.js';loader.async=true;
+  loader.onerror=()=>showStatus('EMULATOR LOAD FAILED // CHECK THE CONNECTION AND TRY AGAIN',true);
+  loader.onload=()=>showStatus('EMULATOR CORE INITIALIZED // '+file.name);
+  document.body.appendChild(loader);
+ });
+ eject.addEventListener('click',()=>location.reload());
+})();
+</script></body></html>
