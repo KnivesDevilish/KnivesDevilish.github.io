@@ -28,6 +28,7 @@ button:hover{background:#b5c94a;color:#10150d}
 .status{min-height:18px;margin-top:12px;color:#b5c94a}
 .warning{margin-top:14px;padding-top:12px;border-top:1px solid rgba(181,201,74,.16);color:#788574;font-size:10px;line-height:1.6}
 @media(max-width:600px){body{padding:10px}.slot{padding:11px}.form-grid{grid-template-columns:1fr}#game{min-height:500px;height:65vh}.actions{align-items:stretch;flex-direction:column}.actions button{width:100%}}
+.arcade-mode{padding:8px;background:#070a08}.arcade-mode .shell{max-width:none}.arcade-mode header{display:none}.arcade-mode .slot{padding:10px}.arcade-mode #game{height:min(68vh,590px);min-height:400px}.arcade-mode .warning{margin-bottom:0}
 </style></head>
 <body><main class="shell">
 <header><span class="kicker">KD-404 // UNREGISTERED HARDWARE</span><h1>STASIS RETRO TERMINAL</h1><p class="intro">MULTI-SYSTEM EMULATION // THREE LEGACY PLATFORMS<br>SELECT A SYSTEM, INSERT A LOCAL CARTRIDGE, INITIALIZE.</p></header>
@@ -72,14 +73,25 @@ button:hover{background:#b5c94a;color:#10150d}
   showStatus('INITIALIZING '+cfg.name+' // '+file.name);
   window.EJS_player='#game';window.EJS_core=cfg.core;window.EJS_gameUrl=file;window.EJS_gameName=file.name.replace(/\.[^.]+$/,'');
   window.EJS_pathtodata='https://cdn.emulatorjs.org/stable/data/';window.EJS_startOnLoaded=true;window.EJS_color='#b5c94a';window.EJS_threads=false;
-  window.EJS_ready=()=>showStatus('CORE READY // '+cfg.name+' // '+file.name);
+  window.EJS_ready=()=>{
+    showStatus('CORE READY // '+cfg.name+' // '+file.name);
+    if(!window.__kdRetroPlaytimeTimer){
+     window.__kdRetroPlaytimeTimer=window.setInterval(()=>{
+      if(document.visibilityState==='visible' && window.parent!==window){
+       window.parent.postMessage({type:'kd-stasis-retro-playtime',system:system.value,seconds:10},window.location.origin);
+      }
+     },10000);
+    }
+   };
   const loader=document.createElement('script');loader.src='https://cdn.emulatorjs.org/stable/data/loader.js';loader.async=true;
   loader.onerror=()=>showStatus('EMULATOR LOAD FAILED // CHECK THE CONNECTION AND TRY AGAIN',true);
   document.body.appendChild(loader);
  });
  eject.addEventListener('click',()=>location.reload());
  const requestedSystem=new URLSearchParams(window.location.search).get('system');
- if(requestedSystem && systems[requestedSystem]){
+ const arcadeMode=new URLSearchParams(window.location.search).get('arcade')==='1';
+  if(arcadeMode)document.body.classList.add('arcade-mode');
+  if(requestedSystem && systems[requestedSystem]){
   system.value=requestedSystem;
   const systemField=system.closest('label');
   if(systemField)systemField.hidden=true;
