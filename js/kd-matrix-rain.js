@@ -130,6 +130,16 @@
         }
     });
 
-    resize();
-    startAnimation();
+    // Wait until CSS and fallback fonts are settled before drawing canvas text.
+    // This avoids font-loading layout synchronization during initial rendering.
+    const initialize = () => {
+        resize();
+        startAnimation();
+    };
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(initialize, initialize);
+    } else {
+        initialize();
+    }
 })();
