@@ -28,9 +28,10 @@
     let fontSize = 18;
     let gap = 30;
     let lastFrame = 0;
-    let animationId = 0;
+    let animationTimer = 0;
 
-    const frameInterval = 66; // ~15 FPS instead of 20 FPS
+    // A timer avoids running a requestAnimationFrame callback 60 times per second.
+    const frameInterval = 125; // 8 FPS
 
     const randomGlyph = () =>
         glyphs[Math.floor(Math.random() * glyphs.length)];
@@ -42,7 +43,7 @@
         height = window.innerHeight;
 
         fontSize = width < 600 ? 14 : 16;
-        gap = width < 600 ? 22 : 28; // fewer glyph columns to reduce canvas work
+        gap = width < 600 ? 32 : 40; // fewer columns and less canvas text rendering
 
         canvas.width = Math.round(width * dpr);
         canvas.height = Math.round(height * dpr);
@@ -64,66 +65,58 @@
         }));
     }
 
-    function animate(timestamp) {
-        if (document.hidden) { animationId = 0; return; }
-
-        if (timestamp - lastFrame >= frameInterval) {
-            const delta = lastFrame
-                ? Math.min((timestamp - lastFrame) / frameInterval, 2)
-                : 1;
-
-            lastFrame = timestamp;
-
-            // Fade existing characters without darkening the webpage.
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.045)';
-            ctx.fillRect(0, 0, width, height);
-
-            ctx.globalCompositeOperation = 'source-over';
-
-            ctx.font = `${fontSize}px "Noto Sans Mono", "Noto Sans JP", monospace`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-
-            drops.forEach((drop, index) => {
-                if (Math.random() < 0.18) {
-                    drop.char = randomGlyph();
-                }
-
-                const x = index * gap + gap / 2;
-
-                // White, translucent characters.
-                ctx.fillStyle = drop.color;
-                ctx.globalAlpha = drop.alpha;
-                ctx.fillText(drop.char, x, drop.y);
-                ctx.globalAlpha = 1;
-
-                drop.y += drop.speed * delta;
-
-                // Restart each stream after it leaves the screen.
-                if (drop.y > height + 30) {
-                    drop.y = -Math.random() * height * 0.35;
-                    drop.speed = 1.6 + Math.random() * 2.0;
-                    drop.alpha = 0.10 + Math.random() * 0.12;
-                    drop.color = ['#B5C94A', '#86A88F', '#627D70'][Math.floor(Math.random() * 3)];
-                }
-            });
+    function animate() {
+        if (document.hidden) {
+            animationTimer = 0;
+            return;
         }
 
-        animationId = requestAnimationFrame(animate);
+        const now = performance.now();
+        const delta = lastFrame
+            ? Math.min((now - lastFrame) / frameInterval, 2)
+            : 1;
+        lastFrame = now;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.045)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'source-over';
+
+        ctx.font = `${fontSize}px "Noto Sans Mono", "Noto Sans JP", monospace`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+
+        drops.forEach((drop, index) => {
+            if (Math.random() < 0.18) drop.char = randomGlyph();
+            const x = index * gap + gap / 2;
+            ctx.fillStyle = drop.color;
+            ctx.globalAlpha = drop.alpha;
+            ctx.fillText(drop.char, x, drop.y);
+            ctx.globalAlpha = 1;
+            drop.y += drop.speed * delta;
+
+            if (drop.y > height + 30) {
+                drop.y = -Math.random() * height * 0.35;
+                drop.speed = 1.6 + Math.random() * 2.0;
+                drop.alpha = 0.10 + Math.random() * 0.12;
+                drop.color = ['#B5C94A', '#86A88F', '#627D70'][Math.floor(Math.random() * 3)];
+            }
+        });
+
+        animationTimer = window.setTimeout(animate, frameInterval);
     }
 
     function startAnimation() {
-        if (!animationId && !document.hidden) {
+        if (!animationTimer && !document.hidden) {
             lastFrame = 0;
-            animationId = requestAnimationFrame(animate);
+            animationTimer = window.setTimeout(animate, 0);
         }
     }
 
     function stopAnimation() {
-        if (animationId) {
-            cancelAnimationFrame(animationId);
-            animationId = 0;
+        if (animationTimer) {
+            window.clearTimeout(animationTimer);
+            animationTimer = 0;
         }
     }
 
