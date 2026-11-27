@@ -324,3 +324,349 @@ ul li {
 	font-weight:800;
 	src:url('../fonts/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-800.woff2') format('woff2');
 }
+
+/* ==========================================
+   NAIZU AKUMATEKI - CYBERPUNK / TECH NOIR
+   ========================================== */
+
+:root {
+    --cyber-cyan: #00e5ff;
+    --cyber-orange: #ff8a00;
+    --cyber-bg: #080d14;
+    --cyber-panel: #101b27;
+    --cyber-text: #e6f1f5;
+    --cyber-muted: #91a4b2;
+}
+
+/* Background */
+:root.theme-dark body {
+    background:
+        radial-gradient(ellipse at 50% 0%, #142b3b 0%, transparent 55%),
+        linear-gradient(145deg, #080d14, #05080d);
+    color: var(--cyber-text);
+    min-height: 100vh;
+}
+
+/* Scanlines */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.10;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 229, 255, 0.16) 4px
+    );
+}
+
+/* Digital grid */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.12;
+    background-image:
+        linear-gradient(rgba(0, 229, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.12) 1px, transparent 1px);
+    background-size: 45px 45px;
+    mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+}
+
+/* Main panel */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 42rem;
+    width: 92%;
+    margin: 6vh auto 0;
+    padding: 2.5rem clamp(1rem, 5vw, 3rem);
+    box-sizing: border-box;
+    background: rgba(16, 27, 39, 0.88);
+    border: 1px solid rgba(0, 229, 255, 0.28);
+    border-top: 2px solid var(--cyber-cyan);
+    box-shadow:
+        0 0 35px rgba(0, 229, 255, 0.08),
+        inset 0 0 30px rgba(0, 229, 255, 0.025);
+}
+
+/* Small interface label */
+.column main::before {
+    content: "NETWORK NODE // NAIZU-AKUMATEKI";
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--cyber-cyan);
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+}
+
+/* Avatar */
+.avatar.avatar--rounded {
+    border-radius: 12px;
+    border: 2px solid var(--cyber-cyan);
+    box-shadow:
+        0 0 12px rgba(0, 229, 255, 0.35),
+        0 0 30px rgba(0, 229, 255, 0.12);
+}
+
+/* Name */
+h1 {
+    font-family: "Noto Sans Mono CJK JP", "Noto Sans JP",
+                 "Liberation Mono", monospace;
+    font-size: clamp(1.7rem, 5vw, 3rem);
+    letter-spacing: -0.04em;
+    background: linear-gradient(
+        100deg,
+        #00e5ff 0%,
+        #e6f1f5 55%,
+        #ff8a00 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 229, 255, 0.12);
+}
+
+/* Description */
+.container p {
+    color: var(--cyber-muted);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    letter-spacing: 0.025em;
+    font-family: "Liberation Mono", monospace;
+}
+
+/* Buttons */
+.button-stack .button {
+    width: min(100%, 22rem);
+    min-height: 3.4rem;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    box-shadow: inset 0 0 12px rgba(0, 229, 255, 0.035);
+    transition: transform 180ms ease,
+                box-shadow 180ms ease,
+                filter 180ms ease;
+    letter-spacing: 0.025em;
+}
+
+/* Hover */
+.button-stack .button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.15);
+    box-shadow:
+        0 0 12px rgba(0, 229, 255, 0.2),
+        inset 0 0 12px rgba(0, 229, 255, 0.08);
+}
+
+/* Keyboard accessibility */
+.button-stack .button:focus-visible {
+    outline: 2px solid var(--cyber-orange);
+    outline-offset: 4px;
+}
+
+/* Footer */
+footer {
+    color: var(--cyber-muted);
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+    .container {
+        width: 94%;
+        margin-top: 3vh;
+        padding: 2rem 1rem;
+    }
+
+    .column main::before {
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+    }
+
+    .container p {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* ==========================================
+   NAIZU AKUMATEKI - CYBERPUNK TOXIC THEME
+   Ghost in the Shell x Edgerunners
+   ========================================== */
+
+:root {
+    --cyber-lime: #C7F000;
+    --cyber-red: #FF304F;
+    --cyber-bg: #080D14;
+    --cyber-panel: #101820;
+    --cyber-text: #E6F1F5;
+    --cyber-muted: #91A4B2;
+    --cyber-cyan: var(--cyber-lime);
+    --cyber-orange: var(--cyber-red);
+}
+
+/* BACKGROUND */
+:root.theme-dark body {
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(199, 240, 0, 0.09),
+            transparent 55%
+        ),
+        radial-gradient(
+            ellipse at 100% 100%,
+            rgba(255, 48, 79, 0.07),
+            transparent 45%
+        ),
+        var(--cyber-bg);
+    color: var(--cyber-text);
+    min-height: 100vh;
+}
+
+/* SCANLINES */
+body::before {
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(199, 240, 0, 0.13) 4px
+    );
+}
+
+/* DIGITAL GRID */
+body::after {
+    background-image:
+        linear-gradient(
+            rgba(199, 240, 0, 0.10) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(199, 240, 0, 0.10) 1px,
+            transparent 1px
+        );
+}
+
+/* MAIN PANEL */
+.container {
+    background: rgba(16, 24, 32, 0.92);
+    border: 1px solid rgba(199, 240, 0, 0.28);
+    border-top: 2px solid var(--cyber-lime);
+
+    box-shadow:
+        0 0 35px rgba(199, 240, 0, 0.08),
+        0 0 25px rgba(255, 48, 79, 0.05),
+        inset 0 0 30px rgba(199, 240, 0, 0.025);
+}
+
+/* INTERFACE LABEL */
+.column main::before {
+    color: var(--cyber-lime);
+    text-shadow: 0 0 10px rgba(199, 240, 0, 0.4);
+}
+
+/* AVATAR */
+.avatar.avatar--rounded {
+    border: 2px solid var(--cyber-lime);
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 12px rgba(199, 240, 0, 0.35),
+        0 0 25px rgba(255, 48, 79, 0.12);
+}
+
+/* NAME */
+h1 {
+    background: linear-gradient(
+        100deg,
+        var(--cyber-lime) 0%,
+        #E6F1F5 50%,
+        var(--cyber-red) 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* DESCRIPTION */
+.container p {
+    color: var(--cyber-muted);
+}
+
+/* BUTTONS */
+.button-stack .button {
+    border: 1px solid rgba(199, 240, 0, 0.35);
+    border-radius: 3px;
+
+    box-shadow:
+        inset 0 0 12px rgba(199, 240, 0, 0.04);
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+}
+
+/* BUTTON HOVER */
+.button-stack .button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.15);
+
+    box-shadow:
+        0 0 12px rgba(199, 240, 0, 0.25),
+        0 0 20px rgba(255, 48, 79, 0.15);
+}
+
+/* KEYBOARD FOCUS */
+.button-stack .button:focus-visible {
+    outline: 2px solid var(--cyber-red);
+    outline-offset: 4px;
+}
+
+/* FOOTER */
+footer {
+    color: var(--cyber-muted);
+}
+
+/* MOBILE */
+@media (max-width: 550px) {
+    .container {
+        width: 94%;
+        margin-top: 3vh;
+        padding: 2rem 1rem;
+    }
+}
+
+
+/* NAIZU - WHITE TYPOGRAPHY */
+
+h1 {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+}
+
+
+/* NAIZU - WHITE TYPOGRAPHY */
+
+h1 {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+}
+
