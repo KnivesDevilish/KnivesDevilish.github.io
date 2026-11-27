@@ -1345,3 +1345,189 @@ body::after {
     }
 }
 
+
+/* ==========================================
+   KNIVESDEVILISH // PROFILE COVER
+   ========================================== */
+
+.hero-panel {
+    padding: 0;
+    overflow: hidden;
+}
+
+.hero-panel::before {
+    display: none;
+}
+
+/* 1500 x 500 cover image */
+
+.cover-banner {
+    position: relative;
+    width: 100%;
+    height: clamp(150px, 22vw, 290px);
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(8, 9, 12, 0.62),
+            rgba(8, 9, 12, 0.12) 50%,
+            rgba(8, 9, 12, 0.48)
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(8, 9, 12, 0.08),
+            rgba(8, 9, 12, 0.45)
+        ),
+        url("../images/profile-banner.jpg");
+
+    background-position: center;
+    background-size: cover;
+
+    border-bottom: 1px solid rgba(181, 201, 74, 0.35);
+}
+
+/* Technical overlay */
+
+.cover-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 4px,
+            rgba(255, 255, 255, 0.035) 5px
+        );
+
+    pointer-events: none;
+}
+
+/* Banner identification */
+
+.cover-banner::after {
+    content: "VISUAL UPLINK // KD-404";
+    position: absolute;
+    right: 18px;
+    bottom: 14px;
+
+    padding: 7px 11px;
+
+    color: #E8E9ED;
+    background: rgba(8, 9, 12, 0.72);
+
+    border-right: 2px solid var(--acid);
+
+    font-family: monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+}
+
+/* Profile content below the banner */
+
+.hero-grid {
+    padding: clamp(22px, 3vw, 46px);
+}
+
+.hero-bottom {
+    margin: 0;
+    padding: 14px clamp(22px, 3vw, 46px);
+    background: rgba(0, 0, 0, 0.18);
+}
+
+/* Steam profile */
+
+.steam-access {
+    margin-top: 12px;
+}
+
+/* Mobile banner */
+
+@media (max-width: 720px) {
+    .cover-banner {
+        height: 145px;
+    }
+
+    .hero-grid {
+        padding: 22px;
+    }
+
+    .hero-bottom {
+        padding: 13px 22px;
+    }
+}
+
+@media (max-width: 470px) {
+    .cover-banner {
+        height: 125px;
+    }
+
+    .cover-banner::after {
+        font-size: 0.5rem;
+        right: 9px;
+        bottom: 9px;
+    }
+}
+
+
+/* PROFILE BANNER - FULL IMAGE, NO CROP */
+
+.cover-banner {
+    width: 100%;
+    height: auto !important;
+    aspect-ratio: 3 / 1;
+
+    background-size: contain !important;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-color: #08090C;
+}
+
+@media (max-width: 720px) {
+    .cover-banner {
+        height: auto !important;
+        aspect-ratio: 3 / 1;
+    }
+}
+
+
+/* BANNER FIX: KEEP FRAME SIZE, REMOVE IMAGE ZOOM */
+
+.cover-banner {
+    height: clamp(150px, 22vw, 290px) !important;
+    aspect-ratio: auto !important;
+
+    background-size:
+        100% 100%,
+        100% 100%,
+        contain !important;
+
+    background-position: center, center, center;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-color: #08090C;
+}
+
+/* Tablet */
+@media (max-width: 720px) {
+    .cover-banner {
+        height: 145px !important;
+        aspect-ratio: auto !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 470px) {
+    .cover-banner {
+        height: 125px !important;
+    }
+}
+
+
+/* Banner image aligned to the right */
+.cover-banner {
+    background-position: center, center, right center !important;
+}
+
