@@ -1119,3 +1119,99 @@ body::before {
     }
 }
 
+
+/* ==========================================
+   KNIVESDEVILISH - QUICK NAVIGATION
+   ========================================== */
+
+.quick-nav {
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+
+    width: 100%;
+    margin: 1rem 0 1.5rem;
+    padding: 1rem;
+
+    background: rgba(5, 12, 18, 0.9);
+    border: 1px solid rgba(199, 240, 0, 0.22);
+    border-left: 3px solid var(--cyber-red);
+}
+
+.quick-nav a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.65rem 0.85rem;
+
+    color: #FFFFFF !important;
+    background: rgba(16, 27, 39, 0.8);
+
+    border: 1px solid rgba(199, 240, 0, 0.25);
+
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+
+    text-decoration: none;
+
+    transition:
+        color 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.quick-nav a::before {
+    content: "+";
+    color: var(--cyber-red);
+    margin-right: 0.4rem;
+}
+
+.quick-nav a:hover {
+    color: var(--cyber-lime) !important;
+    border-color: var(--cyber-lime);
+
+    background: rgba(199, 240, 0, 0.06);
+
+    box-shadow:
+        0 0 12px rgba(199, 240, 0, 0.12);
+}
+
+.link-section[id] {
+    scroll-margin-top: 1.5rem;
+}
+
+/* Mobile navigation */
+@media (max-width: 600px) {
+    .quick-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    .quick-nav a {
+        width: 100%;
+        font-size: 0.68rem;
+        padding: 0.7rem 0.3rem;
+    }
+}
+
+/* Smooth navigation */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Accessibility */
+.quick-nav a:focus-visible {
+    outline: 2px solid var(--cyber-red);
+    outline-offset: 3px;
+}
+

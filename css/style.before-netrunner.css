@@ -1,0 +1,1217 @@
+/*
+* LittleLink
+* https://littlelink.io
+* Free to use under the MIT license
+* http://www.opensource.org/licenses/mit-license.php
+*/
+
+/* Grid
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .container {
+	position:relative;
+	width:100%;
+	max-width:37.5rem;     				/* 600px */
+    text-align:center;
+	margin:0 auto;
+	padding:var(--spacing-xl) var(--spacing-m) 0 var(--spacing-m);
+	box-sizing:border-box;
+}
+.container-left {
+	position:relative;
+	width:100%;
+	max-width:37.5rem;
+	text-align:left;
+	margin:0 auto;
+	padding:0 1.25rem;
+	box-sizing:border-box;
+}
+.container-left p {
+	margin-bottom: 1rem;  				/* 16px space between paragraphs */
+  }
+.column {
+	width:100%;
+	box-sizing:border-box;
+}
+/* For devices larger than 400px */
+  @media (min-width:25rem) {            /* 400px */
+    .container {
+	width:85%;
+}
+}/* For devices larger than 550px */
+  @media (min-width:34.375rem) {        /* 550px */
+    .container {
+	width:80%;
+}
+}
+
+/* Base Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  body {
+	margin:0;
+	padding:0;
+	background-color:#ffffff;
+	color:#1a1a1a;
+	font-family:"Open Sans",system-ui;
+    font-weight:400;
+	line-height:1.6;
+}
+
+/* Base Typography Settings
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Base size - 16px browser default */
+:root {
+  font-size:16px;           /* Using a 1.25 modular scale for typography */
+  --scale-0:1rem;           /* 16px */
+  --scale-1:1.25rem;        /* 20px */
+  --scale-2:1.563rem;       /* 25px */
+  --scale-3:1.953rem;       /* 31px */
+  --scale-4:2.441rem;       /* 39px */
+  --scale-5:3.052rem;       /* 49px */
+
+  /* Spacing units */
+  --spacing-xs:0.5rem;      /* 8px */
+  --spacing-s:1rem;         /* 16px */
+  --spacing-m:1.5rem;       /* 24px */
+  --spacing-l:2rem;         /* 32px */
+  --spacing-xl:3rem;        /* 48px */
+  --spacing-xxl:4rem;       /* 64px */
+}
+
+/* Avatar */
+.avatar {
+	width: 8rem;             /* 128px */
+	height: 8rem;
+	border-radius: 50%;
+	object-fit: cover;
+	background-position: center;
+	margin-bottom: var(--spacing-l);
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+  }
+
+/* Typography Scale */
+h1 {
+	margin:0 0 var(--spacing-m) 0;
+	font-size:var(--scale-5);           /* ~49px */
+  	font-weight:800;
+	line-height:1.1;
+	letter-spacing:-0.02em;
+	word-wrap:break-word;
+	overflow-wrap:break-word;
+	hyphens:auto;           /* Delete this to remove automatic hyphen on line break */
+}
+body {
+	font-size:var(--scale-1);           /* 20px */
+  	line-height:1.6;
+}
+.container p {
+	margin:0 0 var(--spacing-xl) 0;
+	font-size:var(--scale-1);
+	line-height:1.6;
+}
+
+/* Footer */
+footer {
+	margin:var(--spacing-xxl) 0;            /* 4rem (64px) top and bottom */
+    font-size:var(--scale-0);
+}
+
+/* Responsive adjustments */
+@media (max-width:34.375rem) {              /* 550px */
+  h1 {
+	font-size:2rem;
+}
+body {
+	font-size:var(--scale-0);
+}
+.container p {
+	font-size:var(--scale-0);
+}
+.avatar {
+	margin-bottom:var(--spacing-m);
+}
+footer {
+	margin:var(--spacing-xl) 0;         	/* 3rem (48px) top and bottom */
+}
+}
+
+/* Links
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  a {
+	color:#2457F5;
+	text-decoration:underline;
+}
+a:hover {
+	color:#083BDA;
+}
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button,button {
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	width:18.75rem;             	/* 300px */
+ 	min-height:3rem;                /* 48px */
+  	padding:0.75rem 1rem;         	/* 12px ; 16px */
+  	font-size:1.125rem;           	/* 18px */
+  	font-weight:700;
+	text-decoration:none;
+	white-space:normal;
+  	background-color:var(--button-background,transparent);
+	color:var(--button-text,#000000);
+	border:var(--button-border,none);
+	border-radius:0.5rem;
+	cursor:pointer;
+	box-sizing:border-box;
+	hyphens:auto;               	/* Delete this to remove automatic hyphen on line break */
+  	margin-bottom:1rem;
+	text-align:center;
+	line-height:1.3;
+}
+
+/* Icons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.icon {
+	width:1.25rem;
+	height:1.25rem;
+	margin-right:0.5rem;
+	flex-shrink:0;
+}
+
+/* Avatar Modifiers
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+   /* Modifier for no avatar rounding */
+   .avatar--none {
+	border-radius: 0%;
+  }
+
+  /* Modifier for rounded avatar */
+  .avatar--rounded {
+	border-radius: 50%;
+  }
+
+  /* Modifier for slightly rounded corners */
+  .avatar--soft {
+	border-radius: 0.5rem;   /* 8px rounded corners */
+  }
+
+/* Theme System
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Light theme is default above */
+
+/* Light theme (forced) */
+:root.theme-light {
+	color-scheme:light;
+}
+
+/* Dark theme */
+:root.theme-dark {
+	color-scheme:dark;
+}
+:root.theme-dark :focus-visible {
+	outline: 2px solid #4899F7;
+	outline-offset: 2px;
+  }
+:root.theme-dark body {
+	background-color:#121212;
+	color:#ffffff;
+}
+:root.theme-dark a:not(.button) {
+	color:#4899F7;
+}
+:root.theme-dark a:not(.button):hover {
+	color:#7AB8FF;
+}
+
+/* Auto theme */
+:root.theme-auto {
+	color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark) {
+	:root.theme-auto body {
+	background-color:#121212;
+	color:#ffffff;
+}
+:root.theme-auto :focus-visible {
+    outline: 2px solid #4899F7;
+    outline-offset: 2px;
+  }
+:root.theme-auto a:not(.button) {
+	color:#4899F7;
+}
+:root.theme-auto a:not(.button):hover {
+	color:#7AB8FF;
+}
+}
+
+/* Button Text Color Override
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+    .button:hover,button:hover {
+	color:var(--button-text,#000000);
+}
+
+/* Privacy Page Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.container-left nav {
+	margin:var(--spacing-l) 0;
+	text-align:left;
+}
+section {
+	margin:var(--spacing-xl) 0;
+	text-align:left;
+}
+h2 {
+	font-size:var(--scale-3);
+	font-weight:700;
+	margin-bottom:var(--spacing-m);
+}
+h3 {
+	font-size:var(--scale-2);
+	font-weight:600;
+	margin:var(--spacing-l) 0 var(--spacing-s) 0;
+}
+ul {
+	list-style:none;
+	padding:0;
+	margin:0 0 var(--spacing-m) 0;
+}
+ul li {
+	margin-bottom:var(--spacing-xs);
+}
+
+/* Privacy page specific responsive adjustments */
+  @media (max-width:34.375rem) {
+	h2 {
+	font-size:var(--scale-2);
+	}
+	h3 {
+	font-size:var(--scale-1);
+	}
+	section {
+	margin:var(--spacing-l) 0;
+	}
+}
+
+/* Font Face Definitions
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+@font-face {
+	font-display:swap;
+	font-family:'Open Sans';
+	font-style:normal;
+	font-weight:400;
+	src:url('../fonts/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff2') format('woff2');
+}
+@font-face {
+	font-display:swap;
+	font-family:'Open Sans';
+	font-style:normal;
+	font-weight:600;
+	src:url('../fonts/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-600.woff2') format('woff2');
+}
+@font-face {
+	font-display:swap;
+	font-family:'Open Sans';
+	font-style:normal;
+	font-weight:700;
+	src:url('../fonts/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-700.woff2') format('woff2');
+}
+@font-face {
+	font-display:swap;
+	font-family:'Open Sans';
+	font-style:normal;
+	font-weight:800;
+	src:url('../fonts/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-800.woff2') format('woff2');
+}
+
+/* ==========================================
+   NAIZU AKUMATEKI - CYBERPUNK / TECH NOIR
+   ========================================== */
+
+:root {
+    --cyber-cyan: #00e5ff;
+    --cyber-orange: #ff8a00;
+    --cyber-bg: #080d14;
+    --cyber-panel: #101b27;
+    --cyber-text: #e6f1f5;
+    --cyber-muted: #91a4b2;
+}
+
+/* Background */
+:root.theme-dark body {
+    background:
+        radial-gradient(ellipse at 50% 0%, #142b3b 0%, transparent 55%),
+        linear-gradient(145deg, #080d14, #05080d);
+    color: var(--cyber-text);
+    min-height: 100vh;
+}
+
+/* Scanlines */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.10;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 229, 255, 0.16) 4px
+    );
+}
+
+/* Digital grid */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.12;
+    background-image:
+        linear-gradient(rgba(0, 229, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.12) 1px, transparent 1px);
+    background-size: 45px 45px;
+    mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+}
+
+/* Main panel */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 42rem;
+    width: 92%;
+    margin: 6vh auto 0;
+    padding: 2.5rem clamp(1rem, 5vw, 3rem);
+    box-sizing: border-box;
+    background: rgba(16, 27, 39, 0.88);
+    border: 1px solid rgba(0, 229, 255, 0.28);
+    border-top: 2px solid var(--cyber-cyan);
+    box-shadow:
+        0 0 35px rgba(0, 229, 255, 0.08),
+        inset 0 0 30px rgba(0, 229, 255, 0.025);
+}
+
+/* Small interface label */
+.column main::before {
+    content: "NETWORK NODE // Naizu_Akumateki.404";
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--cyber-cyan);
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+}
+
+/* Avatar */
+.avatar.avatar--rounded {
+    border-radius: 12px;
+    border: 2px solid var(--cyber-cyan);
+    box-shadow:
+        0 0 12px rgba(0, 229, 255, 0.35),
+        0 0 30px rgba(0, 229, 255, 0.12);
+}
+
+/* Name */
+h1 {
+    font-family: "Noto Sans Mono CJK JP", "Noto Sans JP",
+                 "Liberation Mono", monospace;
+    font-size: clamp(1.7rem, 5vw, 3rem);
+    letter-spacing: -0.04em;
+    background: linear-gradient(
+        100deg,
+        #00e5ff 0%,
+        #e6f1f5 55%,
+        #ff8a00 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 229, 255, 0.12);
+}
+
+/* Description */
+.container p {
+    color: var(--cyber-muted);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    letter-spacing: 0.025em;
+    font-family: "Liberation Mono", monospace;
+}
+
+/* Buttons */
+.button-stack .button {
+    width: min(100%, 22rem);
+    min-height: 3.4rem;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    box-shadow: inset 0 0 12px rgba(0, 229, 255, 0.035);
+    transition: transform 180ms ease,
+                box-shadow 180ms ease,
+                filter 180ms ease;
+    letter-spacing: 0.025em;
+}
+
+/* Hover */
+.button-stack .button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.15);
+    box-shadow:
+        0 0 12px rgba(0, 229, 255, 0.2),
+        inset 0 0 12px rgba(0, 229, 255, 0.08);
+}
+
+/* Keyboard accessibility */
+.button-stack .button:focus-visible {
+    outline: 2px solid var(--cyber-orange);
+    outline-offset: 4px;
+}
+
+/* Footer */
+footer {
+    color: var(--cyber-muted);
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+    .container {
+        width: 94%;
+        margin-top: 3vh;
+        padding: 2rem 1rem;
+    }
+
+    .column main::before {
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+    }
+
+    .container p {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* ==========================================
+   NAIZU AKUMATEKI - CYBERPUNK TOXIC THEME
+   Ghost in the Shell x Edgerunners
+   ========================================== */
+
+:root {
+    --cyber-lime: #C7F000;
+    --cyber-red: #FF304F;
+    --cyber-bg: #080D14;
+    --cyber-panel: #101820;
+    --cyber-text: #E6F1F5;
+    --cyber-muted: #91A4B2;
+    --cyber-cyan: var(--cyber-lime);
+    --cyber-orange: var(--cyber-red);
+}
+
+/* BACKGROUND */
+:root.theme-dark body {
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(199, 240, 0, 0.09),
+            transparent 55%
+        ),
+        radial-gradient(
+            ellipse at 100% 100%,
+            rgba(255, 48, 79, 0.07),
+            transparent 45%
+        ),
+        var(--cyber-bg);
+    color: var(--cyber-text);
+    min-height: 100vh;
+}
+
+/* SCANLINES */
+body::before {
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(199, 240, 0, 0.13) 4px
+    );
+}
+
+/* DIGITAL GRID */
+body::after {
+    background-image:
+        linear-gradient(
+            rgba(199, 240, 0, 0.10) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(199, 240, 0, 0.10) 1px,
+            transparent 1px
+        );
+}
+
+/* MAIN PANEL */
+.container {
+    background: rgba(16, 24, 32, 0.92);
+    border: 1px solid rgba(199, 240, 0, 0.28);
+    border-top: 2px solid var(--cyber-lime);
+
+    box-shadow:
+        0 0 35px rgba(199, 240, 0, 0.08),
+        0 0 25px rgba(255, 48, 79, 0.05),
+        inset 0 0 30px rgba(199, 240, 0, 0.025);
+}
+
+/* INTERFACE LABEL */
+.column main::before {
+    color: var(--cyber-lime);
+    text-shadow: 0 0 10px rgba(199, 240, 0, 0.4);
+}
+
+/* AVATAR */
+.avatar.avatar--rounded {
+    border: 2px solid var(--cyber-lime);
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 12px rgba(199, 240, 0, 0.35),
+        0 0 25px rgba(255, 48, 79, 0.12);
+}
+
+/* NAME */
+h1 {
+    background: linear-gradient(
+        100deg,
+        var(--cyber-lime) 0%,
+        #E6F1F5 50%,
+        var(--cyber-red) 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* DESCRIPTION */
+.container p {
+    color: var(--cyber-muted);
+}
+
+/* BUTTONS */
+.button-stack .button {
+    border: 1px solid rgba(199, 240, 0, 0.35);
+    border-radius: 3px;
+
+    box-shadow:
+        inset 0 0 12px rgba(199, 240, 0, 0.04);
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+}
+
+/* BUTTON HOVER */
+.button-stack .button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.15);
+
+    box-shadow:
+        0 0 12px rgba(199, 240, 0, 0.25),
+        0 0 20px rgba(255, 48, 79, 0.15);
+}
+
+/* KEYBOARD FOCUS */
+.button-stack .button:focus-visible {
+    outline: 2px solid var(--cyber-red);
+    outline-offset: 4px;
+}
+
+/* FOOTER */
+footer {
+    color: var(--cyber-muted);
+}
+
+/* MOBILE */
+@media (max-width: 550px) {
+    .container {
+        width: 94%;
+        margin-top: 3vh;
+        padding: 2rem 1rem;
+    }
+}
+
+
+/* NAIZU - WHITE TYPOGRAPHY */
+
+h1 {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+}
+
+
+/* NAIZU - WHITE TYPOGRAPHY */
+
+h1 {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+}
+
+
+/* ==========================================
+   KNIVESDEVILISH - LINK DIRECTORY
+   ========================================== */
+
+.link-section {
+    margin: 2.5rem 0 0;
+    text-align: left;
+}
+
+.link-section-title {
+    position: relative;
+    margin: 0 0 1.2rem;
+    padding-bottom: 0.65rem;
+
+    color: var(--cyber-lime);
+    font-family: monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-align: left;
+
+    border-bottom: 1px solid rgba(199, 240, 0, 0.25);
+}
+
+.link-section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 3.5rem;
+    height: 2px;
+    background: var(--cyber-red);
+}
+
+.link-section .button-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.link-section .button-stack .button {
+    width: min(100%, 22rem);
+}
+
+/* Gaming identity cards */
+
+.gaming-identities {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.gaming-id-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    padding: 1rem;
+    background: rgba(5, 12, 18, 0.85);
+
+    border: 1px solid rgba(199, 240, 0, 0.2);
+    border-left: 3px solid var(--cyber-lime);
+}
+
+.gaming-game {
+    color: #FFFFFF;
+    font-family: monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.gaming-player {
+    color: var(--cyber-lime);
+    font-family: monospace;
+    font-size: 0.7rem;
+}
+
+@media (max-width: 400px) {
+    .gaming-identities {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================
+   KNIVESDEVILISH - CYBERPUNK DASHBOARD
+   Responsive Horizontal Layout
+   ========================================== */
+
+/* Wider dashboard */
+.container {
+    width: 94%;
+    max-width: 72rem;
+    margin: 5vh auto 0;
+}
+
+/* Desktop grid */
+@media (min-width: 760px) {
+
+    .column main {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 1.25rem;
+        row-gap: 1.25rem;
+        align-items: start;
+    }
+
+    /* Header occupies full width */
+    .column main::before,
+    .column main > .avatar,
+    .column main > h1,
+    .column main > p {
+        grid-column: 1 / -1;
+    }
+
+    /* Category panels */
+    .link-section {
+        margin: 0;
+        min-width: 0;
+        padding: 1.25rem;
+
+        background: rgba(8, 13, 20, 0.82);
+
+        border: 1px solid rgba(199, 240, 0, 0.20);
+        border-top: 2px solid var(--cyber-lime);
+
+        box-shadow:
+            0 0 18px rgba(199, 240, 0, 0.035),
+            inset 0 0 18px rgba(199, 240, 0, 0.02);
+
+        transition:
+            border-color 180ms ease,
+            box-shadow 180ms ease;
+    }
+
+    .link-section:hover {
+        border-color: rgba(199, 240, 0, 0.45);
+
+        box-shadow:
+            0 0 18px rgba(199, 240, 0, 0.08);
+    }
+
+    /* Full-width buttons inside panels */
+    .link-section .button-stack {
+        align-items: stretch;
+    }
+
+    .link-section .button-stack .button {
+        width: 100%;
+        max-width: none;
+    }
+
+    /* Section headings */
+    .link-section-title {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Gaming cards */
+    .gaming-identities {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        text-align: center;
+    }
+}
+
+/* Mobile and tablet layout */
+@media (max-width: 759px) {
+
+    .container {
+        width: 94%;
+        margin: 3vh auto 0;
+    }
+
+    .column main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .link-section {
+        width: 100%;
+        margin-top: 1.5rem;
+        padding: 1rem;
+
+        background: rgba(8, 13, 20, 0.7);
+        border: 1px solid rgba(199, 240, 0, 0.20);
+        border-top: 2px solid var(--cyber-lime);
+    }
+
+    .link-section .button-stack {
+        align-items: stretch;
+    }
+
+    .link-section .button-stack .button {
+        width: 100%;
+    }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .link-section,
+    .button-stack .button {
+        transition: none !important;
+    }
+}
+
+
+/* ==========================================
+   KNIVESDEVILISH - SYSTEM STATUS INTERFACE
+   ========================================== */
+
+.system-status {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+
+    width: 100%;
+    margin: 1.5rem 0 0.5rem;
+    padding: 1rem;
+
+    background: rgba(5, 12, 18, 0.9);
+    border: 1px solid rgba(199, 240, 0, 0.25);
+    border-left: 3px solid var(--cyber-red);
+
+    box-shadow:
+        inset 0 0 20px rgba(199, 240, 0, 0.025),
+        0 0 15px rgba(199, 240, 0, 0.04);
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+
+    min-width: 0;
+    padding: 0.4rem 0.65rem;
+
+    border-left: 1px solid rgba(199, 240, 0, 0.2);
+}
+
+.status-label {
+    color: var(--cyber-muted);
+    font-family: monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.status-value {
+    color: #FFFFFF;
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.status-value.online {
+    color: var(--cyber-lime);
+}
+
+.status-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.3rem;
+
+    background: var(--cyber-lime);
+    border-radius: 50%;
+
+    box-shadow: 0 0 8px var(--cyber-lime);
+}
+
+/* Mobile interface */
+@media (max-width: 600px) {
+    .system-status {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+    }
+
+    .status-item {
+        padding: 0.5rem 0.7rem;
+    }
+}
+
+
+/* KNIVESDEVILISH - CUSTOM FOOTER */
+
+.site-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+
+    margin-top: 2.5rem;
+    padding: 1.5rem 0;
+
+    border-top: 1px solid rgba(199, 240, 0, 0.2);
+
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--cyber-muted);
+}
+
+.footer-brand {
+    color: #FFFFFF;
+    font-weight: 800;
+}
+
+.footer-divider {
+    color: var(--cyber-red);
+}
+
+.footer-copy {
+    color: var(--cyber-lime);
+}
+
+
+/* ==========================================
+   KNIVESDEVILISH - CYBERPUNK MICRO-INTERACTIONS
+   ========================================== */
+
+/* Subtle moving scanlines */
+@keyframes cyber-scan {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 8px;
+    }
+}
+
+/* Online indicator */
+@keyframes status-pulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 5px var(--cyber-lime);
+    }
+    50% {
+        opacity: 0.55;
+        box-shadow: 0 0 14px var(--cyber-lime);
+    }
+}
+
+/* Red warning accent */
+@keyframes red-glow {
+    0%, 100% {
+        box-shadow: 0 0 3px rgba(255, 48, 79, 0.15);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 48, 79, 0.4);
+    }
+}
+
+/* Scanline animation */
+body::before {
+    animation: cyber-scan 8s linear infinite;
+}
+
+/* Online indicator animation */
+.status-dot {
+    animation: status-pulse 2.5s ease-in-out infinite;
+}
+
+/* Dashboard panel interactions */
+.link-section {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 200ms ease,
+        border-color 200ms ease,
+        box-shadow 200ms ease;
+}
+
+.link-section:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(199, 240, 0, 0.65);
+
+    box-shadow:
+        0 0 18px rgba(199, 240, 0, 0.12),
+        0 0 8px rgba(255, 48, 79, 0.06);
+}
+
+/* Subtle red corner accent */
+.link-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 24px;
+    height: 2px;
+
+    background: var(--cyber-red);
+    opacity: 0.8;
+
+    animation: red-glow 4s ease-in-out infinite;
+}
+
+/* Button interaction */
+.link-section .button {
+    transition:
+        transform 180ms ease,
+        filter 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease;
+}
+
+.link-section .button:hover {
+    transform: translateY(-3px) scale(1.015);
+
+    filter: brightness(1.12);
+
+    box-shadow:
+        0 0 14px rgba(199, 240, 0, 0.2),
+        0 0 8px rgba(255, 48, 79, 0.1);
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    .status-dot,
+    .link-section::before {
+        animation: none !important;
+    }
+
+    .link-section,
+    .link-section .button {
+        transition: none !important;
+    }
+
+    .link-section:hover,
+    .link-section .button:hover {
+        transform: none !important;
+    }
+}
+
+
+/* ==========================================
+   KNIVESDEVILISH - QUICK NAVIGATION
+   ========================================== */
+
+.quick-nav {
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+
+    width: 100%;
+    margin: 1rem 0 1.5rem;
+    padding: 1rem;
+
+    background: rgba(5, 12, 18, 0.9);
+    border: 1px solid rgba(199, 240, 0, 0.22);
+    border-left: 3px solid var(--cyber-red);
+}
+
+.quick-nav a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.65rem 0.85rem;
+
+    color: #FFFFFF !important;
+    background: rgba(16, 27, 39, 0.8);
+
+    border: 1px solid rgba(199, 240, 0, 0.25);
+
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+
+    text-decoration: none;
+
+    transition:
+        color 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.quick-nav a::before {
+    content: "+";
+    color: var(--cyber-red);
+    margin-right: 0.4rem;
+}
+
+.quick-nav a:hover {
+    color: var(--cyber-lime) !important;
+    border-color: var(--cyber-lime);
+
+    background: rgba(199, 240, 0, 0.06);
+
+    box-shadow:
+        0 0 12px rgba(199, 240, 0, 0.12);
+}
+
+.link-section[id] {
+    scroll-margin-top: 1.5rem;
+}
+
+/* Mobile navigation */
+@media (max-width: 600px) {
+    .quick-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    .quick-nav a {
+        width: 100%;
+        font-size: 0.68rem;
+        padding: 0.7rem 0.3rem;
+    }
+}
+
+/* Smooth navigation */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Accessibility */
+.quick-nav a:focus-visible {
+    outline: 2px solid var(--cyber-red);
+    outline-offset: 3px;
+}
+
