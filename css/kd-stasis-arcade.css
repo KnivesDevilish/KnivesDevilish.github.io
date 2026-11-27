@@ -1,0 +1,86 @@
+
+/* KD-404 // STASIS CITY ARCADE */
+.kd-arcade {
+    width: min(100%, 1120px);
+    margin: 34px auto 28px;
+    color: #e4e8df;
+    font-family: monospace;
+}
+.kd-arcade, .kd-arcade * { box-sizing: border-box; }
+.kd-arcade-header {
+    display: flex; justify-content: space-between; align-items: end; gap: 18px;
+    padding: 0 0 15px; margin-bottom: 18px;
+    border-bottom: 1px solid rgba(181,201,74,.35);
+}
+.kd-arcade-kicker { color: #B5C94A; font-size: .68rem; letter-spacing: .2em; }
+.kd-arcade-header h2 { margin: 7px 0 0; color: #eef0e8; font-size: clamp(1.35rem,3vw,2rem); letter-spacing: .08em; }
+.kd-arcade-header p { max-width: 430px; margin: 0; color: #8b9688; font-size: .75rem; line-height: 1.7; text-align: right; }
+.kd-arcade-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+.kd-game-card, .kd-archive-card, .kd-signal-card {
+    min-width: 0; padding: 16px;
+    border: 1px solid rgba(181,201,74,.22);
+    border-top: 2px solid rgba(181,201,74,.55);
+    background: linear-gradient(145deg,rgba(255,255,255,.035),transparent 48%),#10140f;
+    box-shadow: 0 8px 24px rgba(0,0,0,.24);
+}
+.kd-game-card.wide { grid-column: 1 / -1; }
+.kd-game-heading { display:flex; justify-content:space-between; align-items:start; gap:12px; margin-bottom:10px; }
+.kd-game-index { display:block; margin-bottom:5px; color:#B5C94A; font-size:.62rem; letter-spacing:.16em; }
+.kd-game-heading h3 { margin:0; color:#edf0e8; font-size:1rem; letter-spacing:.08em; }
+.kd-game-heading p { margin:6px 0 0; color:#879184; font-size:.72rem; line-height:1.55; }
+.kd-game-status { flex:0 0 auto; color:#a0b78c; font-size:.62rem; letter-spacing:.1em; text-align:right; }
+.kd-game-stage { position:relative; overflow:hidden; display:flex; justify-content:center; align-items:center; padding:10px; border:1px solid rgba(181,201,74,.15); background:#080b09; }
+.kd-game-stage canvas { display:block; max-width:100%; height:auto; background:#090d0b; outline:none; }
+.kd-game-stage canvas:focus-visible { outline:2px solid #B5C94A; outline-offset:-3px; }
+#kd-tetris-canvas { width:min(100%,240px); image-rendering:pixelated; }
+#kd-pinball-canvas { width:100%; aspect-ratio:16/9; }
+#kd-runner-canvas { width:100%; aspect-ratio:18/6.5; }
+.kd-game-hud { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 14px; margin:10px 0; color:#9aa394; font-size:.68rem; letter-spacing:.08em; }
+.kd-game-hud strong { color:#dce7bd; font-size:.78rem; }
+.kd-game-actions, .kd-game-pad { display:flex; flex-wrap:wrap; justify-content:center; gap:7px; }
+.kd-arcade button {
+    min-height:40px; padding:9px 12px; border:1px solid rgba(181,201,74,.36);
+    color:#cbd8a3; background:rgba(181,201,74,.07); font:600 .68rem monospace;
+    letter-spacing:.08em; cursor:pointer; touch-action:manipulation;
+}
+.kd-arcade button:hover, .kd-arcade button:focus-visible { color:#080a08; background:#B5C94A; outline:2px solid #B5C94A; outline-offset:2px; }
+.kd-arcade button:active { transform:translateY(1px); }
+.kd-game-pad { margin-top:8px; }
+.kd-game-pad button { min-width:44px; }
+.kd-game-help { margin:9px 0 0; color:#778274; font-size:.65rem; line-height:1.55; }
+.kd-arcade-lower { display:grid; grid-template-columns:1.1fr .9fr; gap:15px; margin-top:15px; }
+.kd-signal-card h3, .kd-archive-card h3 { margin:0 0 7px; color:#dfe7c4; font-size:.9rem; letter-spacing:.1em; }
+.kd-signal-card p, .kd-archive-card p { color:#879184; font-size:.72rem; line-height:1.65; }
+.kd-signal-output { min-height:55px; margin:12px 0 0; padding:10px; border-left:2px solid #B5C94A; background:rgba(0,0,0,.23); color:#c3d4a2 !important; }
+.kd-archive-lock { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
+.kd-archive-lock input {
+    flex:1 1 130px; min-width:0; min-height:40px; padding:9px 11px;
+    border:1px solid rgba(181,201,74,.3); border-radius:0;
+    color:#e6ebdd; background:#080b09; font: .75rem monospace;
+}
+.kd-archive-lock input:focus { outline:2px solid #B5C94A; outline-offset:1px; }
+.kd-archive-message { color:#e2a2a2 !important; min-height:18px; }
+.kd-dossier { display:none; margin-top:13px; padding:14px; border:1px dashed rgba(181,201,74,.35); background:rgba(0,0,0,.28); }
+.kd-dossier.is-open { display:block; animation:kd-file-open .35s ease-out; }
+.kd-dossier h4 { margin:0 0 11px; color:#B5C94A; font-size:.78rem; letter-spacing:.12em; }
+.kd-dossier dl { display:grid; grid-template-columns:minmax(105px,.65fr) 1.35fr; gap:8px 12px; margin:0; font-size:.68rem; line-height:1.5; }
+.kd-dossier dt { color:#7e8a77; }
+.kd-dossier dd { margin:0; color:#dfe5d7; overflow-wrap:anywhere; }
+.kd-dossier .kd-kurami-msg { margin:13px 0 0; padding-top:11px; border-top:1px solid rgba(181,201,74,.2); color:#d2b5b5; }
+@keyframes kd-file-open { from {opacity:0; transform:translateY(5px)} to {opacity:1; transform:translateY(0)} }
+@media (max-width:720px) {
+    .kd-arcade { margin-top:25px; }
+    .kd-arcade-header { display:block; }
+    .kd-arcade-header p { margin-top:9px; text-align:left; }
+    .kd-arcade-grid, .kd-arcade-lower { grid-template-columns:1fr; }
+    .kd-game-card.wide { grid-column:auto; }
+    #kd-runner-canvas { aspect-ratio:18/8; }
+}
+@media (max-width:420px) {
+    .kd-game-card, .kd-archive-card, .kd-signal-card { padding:12px; }
+    .kd-dossier dl { grid-template-columns:1fr; gap:3px; }
+    .kd-dossier dd { margin-bottom:7px; }
+}
+@media (prefers-reduced-motion:reduce) {
+    .kd-arcade *, .kd-arcade *::before, .kd-arcade *::after { animation:none !important; transition:none !important; }
+}
