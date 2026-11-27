@@ -397,7 +397,7 @@ body::after {
 
 /* Small interface label */
 .column main::before {
-    content: "NETWORK NODE // NAIZU-AKUMATEKI";
+    content: "NETWORK NODE // Naizu_Akumateki.404";
     display: block;
     margin-bottom: 2rem;
     color: var(--cyber-cyan);
