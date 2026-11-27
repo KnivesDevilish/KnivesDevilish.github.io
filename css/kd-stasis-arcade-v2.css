@@ -94,3 +94,15 @@
 .kd2-embed-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
 .kd2-embed-note{color:#84917a;font-size:.65rem;line-height:1.55}
 @media(max-width:560px){.kd2-embed-select{grid-template-columns:1fr}.kd2-embed-frame iframe{height:65vh;min-height:340px}.kd2-embed-bar{font-size:.52rem}}
+
+
+/* SONIC MOMENTUM SINGLE-GAME TERMINAL */
+.kd2-momentum-cabinet{overflow:hidden;border:1px solid rgba(181,201,74,.35);background:#070a07}
+.kd2-momentum-screen{min-height:205px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:20px;text-align:center;background:radial-gradient(ellipse at 50% 75%,rgba(88,125,42,.23),transparent 65%),linear-gradient(145deg,#111a10,#050705);border-bottom:1px solid rgba(181,201,74,.25)}
+.kd2-momentum-signal,.kd2-momentum-screen small{color:#a7bc7b;font:600 .58rem monospace;letter-spacing:.14em}
+.kd2-momentum-screen strong{font:900 clamp(2rem,8vw,3.7rem)/.85 monospace;letter-spacing:-.08em;color:#d8efad;text-shadow:0 0 22px rgba(181,201,74,.25)}
+.kd2-momentum-status{margin-top:5px;padding:6px 9px;border:1px solid rgba(181,201,74,.25);color:#b4c48f;font: .58rem monospace;letter-spacing:.08em}
+.kd2-momentum-details{padding:14px}
+.kd2-momentum-details>b{color:#b5c94a;font:600 .62rem monospace;letter-spacing:.1em}
+.kd2-momentum-details p{color:#9eaa91;font-size:.76rem;line-height:1.6}
+.kd2-momentum-details .kd2-secret-launch{margin-top:14px}
