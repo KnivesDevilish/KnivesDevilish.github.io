@@ -1,0 +1,52 @@
+/* KD-404 // COMPACT TETRIS + EASTER EGG PANELS */
+.kd-mini-apps{width:min(100%,1400px);margin:28px auto 30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:clamp(12px,1.5vw,20px);color:#e4e8df;font-family:monospace}
+.kd-mini-card{min-width:0;padding:clamp(13px,1.5vw,20px);border:1px solid rgba(181,201,74,.22);border-top:2px solid rgba(181,201,74,.65);background:linear-gradient(145deg,rgba(255,255,255,.025),transparent 45%),#0d110e;box-shadow:0 8px 28px rgba(0,0,0,.22)}
+.kd-mini-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:12px;margin-bottom:13px;border-bottom:1px solid rgba(181,201,74,.17)}
+.kd-mini-head small,.kd-eggs-terminal>small,.kd-eggs-transmit>small{color:#b5c94a;font-size:.6rem;letter-spacing:.13em}
+.kd-mini-head h2{margin:5px 0;color:#eef1e8;font-size:clamp(1rem,1.5vw,1.3rem);letter-spacing:.08em}
+.kd-mini-head p{margin:0;color:#a2ad99;font-size:.63rem;line-height:1.5}
+.kd-mini-status{flex:0 0 auto;color:#a8b89b;font-size:.55rem;letter-spacing:.08em}
+.kd-tetris-layout{display:grid;grid-template-columns:minmax(0,1fr) 142px;align-items:start;gap:11px}
+.kd-tetris-stage{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;padding:8px;border:1px solid rgba(181,201,74,.18);background:#070a08}
+.kd-mini-label{display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;width:100%;color:#9aa58e;font-size:.5rem;letter-spacing:.07em;line-height:1.5}
+.kd-mini-label b{color:#b5c94a}
+.kd-tetris-stage canvas{display:block;width:min(100%,240px);height:auto;border:1px solid rgba(181,201,74,.12);background:#070b08;image-rendering:pixelated;touch-action:manipulation;outline:none}
+.kd-tetris-stage canvas:focus-visible{outline:2px solid #b5c94a;outline-offset:2px}
+.kd-tetris-info{display:flex;flex-direction:column;gap:7px;min-width:0}
+.kd-mini-stat{display:grid;gap:3px;padding:7px;border:1px solid rgba(181,201,74,.15);background:rgba(0,0,0,.2)}
+.kd-mini-stat small,.kd-mini-next>small{color:#9aa58e;font-size:.5rem;letter-spacing:.1em}
+.kd-mini-stat strong{color:#e1e9ce;font-size:.85rem;overflow-wrap:anywhere}
+.kd-mini-next{display:grid;justify-items:center;gap:4px;padding:5px;border:1px solid rgba(181,201,74,.15)}
+.kd-mini-next canvas{display:block;width:100%;max-width:120px;height:auto;image-rendering:pixelated}
+.kd-mini-apps button{min-height:36px;padding:7px 8px;color:#d3dfa9;background:rgba(181,201,74,.07);border:1px solid rgba(181,201,74,.34);font:600 .58rem monospace;letter-spacing:.04em;cursor:pointer;touch-action:manipulation}
+.kd-mini-apps button:hover,.kd-mini-apps button:focus-visible{color:#090c08;background:#b5c94a;border-color:#b5c94a;outline:2px solid #b5c94a;outline-offset:2px}
+.kd-mini-primary{width:100%;color:#0a0d08!important;background:#b5c94a!important;border-color:#b5c94a!important}
+.kd-mini-primary:hover,.kd-mini-primary:focus-visible{color:#eef3dd!important;background:#556b32!important}
+.kd-tetris-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+.kd-tetris-controls button{min-width:0;padding:6px 3px}
+.kd-mini-help{margin:0;color:#a2ad99;font-size:.49rem;line-height:1.65}
+.kd-eggs-content{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:10px}
+.kd-eggs-terminal,.kd-eggs-transmit{min-width:0;padding:11px;border:1px solid rgba(181,201,74,.19);background:rgba(0,0,0,.17)}
+.kd-eggs-content h3{margin:6px 0;color:#e3e9d8;font-size:.78rem;letter-spacing:.08em}
+.kd-eggs-content p{color:#a0ab98;font-size:.61rem;line-height:1.55}
+.kd-eggs-terminal form{margin:12px 0 7px}
+.kd-eggs-terminal label{display:block;margin-bottom:5px;color:#aab79b;font-size:.52rem;letter-spacing:.1em}
+.kd-eggs-input-row{display:flex;flex-wrap:wrap;gap:6px}
+.kd-eggs-input-row input{flex:1 1 90px;min-width:0;min-height:36px;padding:7px;color:#eef1e6;background:#080b09;border:1px solid rgba(181,201,74,.38);font:.65rem monospace}
+.kd-eggs-input-row button{width:auto}
+.kd-eggs-message{min-height:18px;margin:7px 0 0;color:#e3a4aa!important;font-size:.56rem!important}
+.kd-eggs-message.is-success{color:#c9df82!important}
+.kd-eggs-file{margin-top:10px;padding:10px;border:1px dashed rgba(181,201,74,.3)}
+.kd-eggs-file[hidden]{display:none!important}
+.kd-eggs-file h4{margin:0 0 8px;color:#c9df82;font-size:.55rem;line-height:1.5}
+.kd-eggs-file dl{display:grid;grid-template-columns:minmax(76px,.65fr) 1.35fr;gap:5px 8px;margin:0;font-size:.53rem;line-height:1.4}
+.kd-eggs-file dt{color:#a0ad94}
+.kd-eggs-file dd{margin:0;color:#e4ebdc;overflow-wrap:anywhere}
+.kd-eggs-kurami{margin:9px 0 0;padding-top:8px;border-top:1px solid rgba(181,201,74,.2);color:#edb7ba!important}
+.kd-eggs-transmit{display:flex;flex-direction:column;align-items:flex-start}
+.kd-eggs-transmit .kd-mini-primary{margin:7px 0}
+.kd-eggs-output{width:100%;min-height:74px;margin:5px 0 0;padding:9px;border-left:2px solid #b5c94a;background:rgba(181,201,74,.05);color:#d9e7b4!important;overflow-wrap:anywhere}
+@media(max-width:980px){.kd-mini-apps{grid-template-columns:1fr}.kd-tetris-layout{grid-template-columns:minmax(0,1fr) 160px}.kd-eggs-content{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
+@media(max-width:560px){.kd-mini-apps{margin-top:20px}.kd-tetris-layout{grid-template-columns:minmax(0,1fr) 124px;gap:8px}.kd-eggs-content{grid-template-columns:1fr}.kd-mini-card{padding:12px}.kd-eggs-file dl{grid-template-columns:minmax(85px,.6fr) 1.4fr}}
+@media(max-width:380px){.kd-tetris-layout{grid-template-columns:1fr}.kd-tetris-stage canvas{width:min(100%,240px)}.kd-tetris-info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.kd-mini-next,.kd-mini-primary,.kd-tetris-controls,.kd-mini-help{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){.kd-mini-apps *{transition:none!important;animation:none!important}}
