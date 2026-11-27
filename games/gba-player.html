@@ -35,7 +35,7 @@ label:hover,button:hover{background:#b5c94a;color:#10150d}input[type=file]{posit
   if(!/\.gba$/i.test(file.name)){showStatus('INVALID CARTRIDGE // SELECT A .GBA FILE',true);input.value='';return;}
   if(!file.size){showStatus('EMPTY FILE // CARTRIDGE READ ERROR',true);input.value='';return;}
   picker.style.display='none';game.style.display='block';eject.style.display='inline-flex';showStatus('READING CARTRIDGE // '+file.name);
-  window.EJS_player='#game';window.EJS_core='gba';window.EJS_biosUrl='';window.EJS_gameUrl=file;window.EJS_gameName=file.name.replace(/\.gba$/i,'');
+  window.EJS_player='#game';window.EJS_core='gba';window.EJS_biosUrl='';window.EJS_gameUrl=URL.createObjectURL(file);window.EJS_gameName=file.name.replace(/\.gba$/i,'');
   window.EJS_pathtodata='https://cdn.emulatorjs.org/stable/data/';window.EJS_startOnLoaded=true;window.EJS_color='#b5c94a';
   const loader=document.createElement('script');loader.src='https://cdn.emulatorjs.org/stable/data/loader.js';loader.async=true;
   loader.onerror=()=>showStatus('EMULATOR LOAD FAILED // CHECK THE CONNECTION AND TRY AGAIN',true);
