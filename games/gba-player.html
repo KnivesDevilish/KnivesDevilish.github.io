@@ -55,7 +55,7 @@ button:hover{background:#b5c94a;color:#10150d}
  const $=id=>document.getElementById(id);
  const system=$('system'),rom=$('rom'),hint=$('file-hint'),note=$('system-note'),status=$('status'),setup=$('setup'),game=$('game'),launch=$('launch'),eject=$('eject');
  const systems={
-  gba:{name:'GAME BOY ADVANCE',core:'gba',ext:['gba'],accept:'.gba',detail:'mGBA CORE // GBA cartridge image (.gba). BIOS is optional for most titles.'},
+  gba:{name:'GAME BOY ADVANCE',core:'gba',ext:['gba'],accept:'.gba',detail:'mGBA CORE // GBA cartridge image (.gba). No separate BIOS file required.'},
   snes:{name:'SUPER NINTENDO',core:'snes',ext:['sfc','smc'],accept:'.sfc,.smc',detail:'SNES9X CORE // Super Nintendo image (.sfc, .smc).'},
   segaMD:{name:'SEGA MEGA DRIVE',core:'segaMD',ext:['md','gen','smd','bin'],accept:'.md,.gen,.smd,.bin',detail:'GENESIS PLUS GX CORE // Mega Drive / Genesis cartridge image (.md, .gen, .smd, .bin).'},
  };
@@ -78,6 +78,16 @@ button:hover{background:#b5c94a;color:#10150d}
   document.body.appendChild(loader);
  });
  eject.addEventListener('click',()=>location.reload());
+ const requestedSystem=new URLSearchParams(window.location.search).get('system');
+ if(requestedSystem && systems[requestedSystem]){
+  system.value=requestedSystem;
+  const systemField=system.closest('label');
+  if(systemField)systemField.hidden=true;
+  const heading=document.querySelector('h1');
+  const intro=document.querySelector('.intro');
+  heading.textContent=systems[requestedSystem].name+' // PLAYER';
+  intro.innerHTML='DEDICATED CONSOLE RELAY // LOAD A LOCAL GAME FILE<br>BIOS-FREE CONFIGURATION.';
+ }
  updateSystem();
 })();
 </script></body></html>
