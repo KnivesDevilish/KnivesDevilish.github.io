@@ -3,7 +3,12 @@
 'use strict';
 if (document.getElementById('kd-stasis-arcade-v2')) return;
 const old = document.getElementById('kd-stasis-arcade');
-if (!old) return;
+const shell = document.querySelector('.site-shell');
+const footer = shell && shell.querySelector('.site-footer');
+if (!shell || !footer) {
+    console.error('KD-404 ARCADE: site shell or footer not found.');
+    return;
+}
 const root = document.createElement('section');
 root.id = 'kd-stasis-arcade-v2';
 root.className = 'kd-arcade-v2';
@@ -19,7 +24,8 @@ root.innerHTML =
 '<main class="kd2-main"><header class="kd2-game-head"><div><small id="kd2-type">PUZZLE / CONTAINMENT</small><h3 id="kd2-title">BLOODLOCK</h3><p id="kd2-desc">Arrange the unstable fragments. Clear rows to stabilize the core.</p></div><span>BUILD 02.04<br>STASIS CITY LAB</span></header>'+
 '<div id="kd2-cabinet" class="kd2-cabinet"></div>'+
 '<footer class="kd2-foot"><span id="kd2-tip">ARROWS MOVE · UP ROTATE · SPACE HARD DROP</span><span>RECORDS // THIS DEVICE</span></footer></main></div>';
-old.replaceWith(root);
+if (old) old.replaceWith(root);
+else shell.insertBefore(root, footer);
 
 const $ = s => root.querySelector(s);
 const cabinet = $('#kd2-cabinet');
