@@ -22,6 +22,7 @@ root.innerHTML =
 '<button type="button" data-game="racer" aria-pressed="false"><b>05</b><span><strong>NEON TRAFFIC</strong><small>DRIVING / DODGE</small></span>›</button>'+
 '<button type="button" data-game="night" aria-pressed="false"><b>06</b><span><strong>STASIS NIGHT SHIFT</strong><small>HORROR / SURVIVAL</small></span>›</button>'+
 '<button type="button" data-game="archive" aria-pressed="false"><b>09</b><span><strong>CLASSIFIED ARCHIVE</strong><small>INTEL / UNKNOWN SIGNAL</small></span>›</button>'+
+ '<button type="button" data-game="retro" aria-pressed="false"><b>10</b><span><strong>STASIS RETRO ARCADE</strong><small>LEGACY / THREE SYSTEMS</small></span>›</button>'+
 '<div class="kd2-nav-foot">OPERATOR // KD-404<br>INPUT // KEYBOARD & TOUCH</div></nav>'+
 '<main class="kd2-main"><header class="kd2-game-head"><div><small id="kd2-type">PUZZLE / CONTAINMENT</small><h3 id="kd2-title">BLOODLOCK</h3><p id="kd2-desc">Arrange the unstable fragments. Clear rows to stabilize the core.</p></div><span>BUILD 02.05<br>STASIS CITY LAB</span></header>'+
 '<div id="kd2-cabinet" class="kd2-cabinet"></div>'+
@@ -46,6 +47,7 @@ const info = {
  racer:['DRIVING / TRAFFIC SURVIVAL','NEON TRAFFIC','Read the curves, dodge traffic and keep your run clean through the neon expressway.','A / D OR ← → STEER · HOLD DRIFT TO SLIDE'],
  night:['HORROR / NIGHT SURVIVAL','STASIS NIGHT SHIFT','Monitor the abandoned Stasis facility. Track the entities, manage power and survive until 6 AM.','CAMERAS · DOORS · LIGHTS · POWER MANAGEMENT'],
  archive:['INTEL / UNKNOWN SIGNAL','CLASSIFIED ARCHIVE','Recover a restricted file and listen to transmissions from Stasis City.','RESTRICTED ACCESS // CODE 404'],
+  retro:['LEGACY / MULTI-SYSTEM','STASIS RETRO ARCADE','Unlock the retro cabinet and play from three classic console systems.','RETRO RELAY // ACCESS PHRASE REQUIRED'],
   knives:['PLATFORMER / MOMENTUM','KNIVES ADVANCE','Build speed, ride the terrain, roll through threats and recover the signal shards across the Stasis Outskirts.','A / D OR ← → MOVE · SPACE JUMP · HOLD ↓ ROLL · X BURST']
 };
 function choose(id){
@@ -61,6 +63,7 @@ function choose(id){
  if(id==='racer') racer();
  if(id==='night') nightshift();
  if(id==='archive') archive();
+ if(id==='retro') retro();
 }
 root.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.game)));
 
@@ -253,60 +256,93 @@ function nightshift(){
 }
 
 function archive(){
- cabinet.innerHTML = `<div class="kd2-archive">
-  <article>
-   <small>RESTRICTED ARCHIVE // K-404</small>
-   <h4>SUBJECT FILE: KNIVES</h4>
-   <p>The medical record is encrypted. Enter an authorization phrase to access the report or discover the legacy game relays.</p>
-   <form id="ar-form"><label for="ar-code">AUTHORIZATION CODE / PHRASE</label><div><input id="ar-code" type="password" maxlength="20" inputmode="text" autocomplete="off" placeholder="ENTER ACCESS PHRASE"><button class="kd2-primary" type="submit">DECRYPT FILE</button></div></form>
-   <p id="ar-message" aria-live="polite">FILE LOCKED // AUTHORIZATION REQUIRED</p>
-   <section id="ar-file" hidden><h5>STASIS CITY // MEDICAL &amp; CONTAINMENT RECORD</h5><dl><dt>SUBJECT</dt><dd>KNIVES</dd><dt>SPECIES</dt><dd>HEDGEHOG / LYNX HYBRID</dd><dt>LOCATION</dt><dd>STASIS CITY</dd><dt>MEDICAL STATUS</dt><dd>TERMINAL CONDITION</dd><dt>EXPERIMENT</dt><dd>DEMONIC BLOOD INFUSION</dd><dt>INTERNAL ENTITY</dt><dd>VISCERAL DEMON // ACTIVE</dd><dt>FAMILY CONTACT</dt><dd>KURAMI // SISTER</dd><dt>CONTAINMENT</dt><dd>UNSTABLE</dd></dl><p class="kd2-kurami">INCOMING MESSAGE // KURAMI: “Knives... if you can hear this, stay with me. Do not let it take control.”</p></section>
-   <section id="ar-sonic" class="kd2-secret-portal" hidden>
-    <div class="kd2-secret-head"><small>UNREGISTERED SIGNAL // LEGACY GAME RELAY</small><h5 id="ar-retro-title">STASIS RETRO TERMINAL</h5><p id="ar-retro-note">Three independent console relays detected. Each one requires its own access phrase.</p></div>
-    <div id="ar-retro-directory" class="kd2-retro-directory" hidden>
-     <article><small>HANDHELD RELAY // 01</small><h6>GAME BOY ADVANCE</h6><p>A blue blur entered the handheld era. Look to the three Advance adventures.</p><span>ACCESS STATUS // ENCRYPTED</span></article>
-     <article><small>16-BIT RELAY // 02</small><h6>SUPER NINTENDO</h6><p>A red headband, a quarter-circle motion, and one iconic fighting-game shout.</p><span>ACCESS STATUS // ENCRYPTED</span></article>
-     <article><small>16-BIT RELAY // 03</small><h6>SEGA MEGA DRIVE</h6><p>Remember the boast about what the Genesis did that the competition did not.</p><span>ACCESS STATUS // ENCRYPTED</span></article>
-    </div>
-    <div class="kd2-gba-frame" id="ar-console-stage" hidden><iframe id="ar-console-frame" src="about:blank" title="STASIS Retro console emulator" loading="lazy" allow="fullscreen; gamepad"></iframe></div>
-    <p class="kd2-gba-note">LOCAL FILE POLICY // Load a legally obtained game file from your device. The game remains in your browser; STASIS CITY does not host game files or BIOS files.</p>
-    <button type="button" class="kd2-secret-lock" id="ar-lock">LOCK RETRO TERMINAL</button>
-   </section>
-  </article>
-  <article><small>NETWORK EVENT // INCOMING</small><h4>TRANSMIT A SIGNAL</h4><p>Send a pulse into the Stasis City network. Some replies may not be from the system.</p><button class="kd2-primary" id="ar-signal">TRANSMIT SIGNAL</button><p id="ar-output" class="kd2-output" aria-live="polite">AWAITING INPUT...</p></article>
- </div>`;
- const form=$('#ar-form'),input=$('#ar-code'),file=$('#ar-file'),portal=$('#ar-sonic'),message=$('#ar-message');
- const directory=$('#ar-retro-directory'),stage=$('#ar-console-stage'),frame=$('#ar-console-frame'),title=$('#ar-retro-title'),note=$('#ar-retro-note');
- const relays={
-  SONICADVANCE:{system:'gba',name:'GAME BOY ADVANCE',reference:'REFERENCE // SONIC ADVANCE TRILOGY. GBA RELAY AUTHENTICATED.'},
-  HADOUKEN:{system:'snes',name:'SUPER NINTENDO',reference:'REFERENCE // STREET FIGHTER II. SPECIAL MOVE SIGNAL ACCEPTED.'},
-  GENESISDOES:{system:'segaMD',name:'SEGA MEGA DRIVE',reference:'REFERENCE // GENESIS DOES WHAT NINTENDON’T. 16-BIT RELAY AUTHENTICATED.'}
- };
+ cabinet.innerHTML='<div class="kd2-archive"><article><small>RESTRICTED ARCHIVE // K-404</small><h4>SUBJECT FILE: KNIVES</h4><p>The medical record is encrypted. Enter the authorization phrase to access the report.</p><form id="ar-form"><label for="ar-code">AUTHORIZATION CODE / PHRASE</label><div><input id="ar-code" type="password" maxlength="20" inputmode="text" autocomplete="off" placeholder="ENTER ACCESS PHRASE"><button class="kd2-primary" type="submit">DECRYPT FILE</button></div></form><p id="ar-message" aria-live="polite">FILE LOCKED // AUTHORIZATION REQUIRED</p><section id="ar-file" hidden><h5>STASIS CITY // MEDICAL &amp; CONTAINMENT RECORD</h5><dl><dt>SUBJECT</dt><dd>KNIVES</dd><dt>SPECIES</dt><dd>HEDGEHOG / LYNX HYBRID</dd><dt>LOCATION</dt><dd>STASIS CITY</dd><dt>MEDICAL STATUS</dt><dd>TERMINAL CONDITION</dd><dt>EXPERIMENT</dt><dd>DEMONIC BLOOD INFUSION</dd><dt>INTERNAL ENTITY</dt><dd>VISCERAL DEMON // ACTIVE</dd><dt>FAMILY CONTACT</dt><dd>KURAMI // SISTER</dd><dt>CONTAINMENT</dt><dd>UNSTABLE</dd></dl><p class="kd2-kurami">INCOMING MESSAGE // KURAMI: “Knives... if you can hear this, stay with me. Do not let it take control.”</p></section></article><article><small>NETWORK EVENT // INCOMING</small><h4>TRANSMIT A SIGNAL</h4><p>Send a pulse into the Stasis City network. Some replies may not be from the system.</p><button class="kd2-primary" id="ar-signal">TRANSMIT SIGNAL</button><p id="ar-output" class="kd2-output" aria-live="polite">AWAITING INPUT...</p></article></div>';
+ const form=$('#ar-form'),input=$('#ar-code'),file=$('#ar-file'),message=$('#ar-message');
  form.addEventListener('submit',e=>{
   e.preventDefault();
-  const raw=input.value.trim(),code=raw.toUpperCase(),isFile=code==='404',isMaster=raw.toLowerCase()==="who'ssega?",relay=relays[code];
-  file.hidden=!isFile;
-  portal.hidden=!(isMaster||relay);
-  if(isMaster){
-   directory.hidden=false;stage.hidden=true;frame.src='about:blank';
-   title.textContent='STASIS RETRO TERMINAL // ACCESS MAP';
-   note.textContent='MASTER SIGNAL ACCEPTED. Three console relays are encrypted separately. Solve each reference to open its system.';
-  }else if(relay){
-   directory.hidden=true;stage.hidden=false;
-   title.textContent=relay.name+' // SECURE RELAY';
-   note.textContent=relay.reference;
-   frame.src='games/gba-player.html?system='+encodeURIComponent(relay.system);
-  }
-  message.textContent=isFile?'ACCESS GRANTED // FILE DECRYPTED':isMaster?'MASTER RELAY UNLOCKED // THREE SIGNALS DETECTED':relay?'ACCESS GRANTED // '+relay.name+' UNLOCKED':'ACCESS DENIED // INVALID CODE';
-  message.classList.toggle('success',isFile||isMaster||!!relay);
-  if(isMaster||relay)portal.scrollIntoView({behavior:'smooth',block:'nearest'});
- });
- $('#ar-lock').addEventListener('click',()=>{
-  portal.hidden=true;frame.src='about:blank';input.value='';
-  message.textContent='LEGACY PORTAL LOCKED';message.classList.remove('success');
+  const allowed=input.value.trim()==='404';
+  file.hidden=!allowed;
+  message.textContent=allowed?'ACCESS GRANTED // FILE DECRYPTED':'ACCESS DENIED // INVALID CODE';
+  message.classList.toggle('success',allowed);
  });
  const msgs=['STASIS CITY RELAY: signal received. Keep moving, operator.','UNKNOWN CHANNEL: something is repeating your heartbeat.','KURAMI // encrypted ping detected. Origin cannot be verified.','CONTAINMENT NOTICE: do not answer the voice inside the core.','VISCERAL ENTITY: [TRANSMISSION CORRUPTED] ...LET ME OUT...','ARCHIVE FRAGMENT: Knives was not supposed to survive the procedure.'];
  $('#ar-signal').addEventListener('click',()=>$('#ar-output').textContent='> '+msgs[Math.random()*msgs.length|0]);
+}
+
+function retro(){
+ const scoreKey='kd404-retro-playtime-v1';
+ const systems=[
+  {id:'gba',name:'GAME BOY ADVANCE',core:'mGBA',format:'.gba',detail:'The 32-bit handheld era.'},
+  {id:'snes',name:'SUPER NINTENDO',core:'SNES9x',format:'.sfc / .smc',detail:'The 16-bit home console classic.'},
+  {id:'segaMD',name:'SEGA MEGA DRIVE',core:'Genesis Plus GX',format:'.md / .gen / .smd / .bin',detail:'SEGA 16-bit cartridge system.'}
+ ];
+ const readStats=()=>{
+  try{
+   const parsed=JSON.parse(safeGet(scoreKey,'{}'));
+   return {gba:Math.max(0,Number(parsed.gba)||0),snes:Math.max(0,Number(parsed.snes)||0),segaMD:Math.max(0,Number(parsed.segaMD)||0)};
+  }catch(e){return {gba:0,snes:0,segaMD:0};}
+ };
+ let stats=readStats(),activeSystem=null;
+ const timeText=seconds=>{
+  const s=Math.max(0,Math.floor(seconds)),h=Math.floor(s/3600),m=Math.floor((s%3600)/60);
+  return h>0?h+'h '+m+'m':m+'m';
+ };
+ const totalSeconds=()=>stats.gba+stats.snes+stats.segaMD;
+ const saveStats=()=>safeSet(scoreKey,JSON.stringify(stats));
+ const codeClean=value=>value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+ const drawLibrary=()=>{
+  const unlocked=safeGet('kd404-retro-unlocked','0')==='1';
+  if(!unlocked){
+   cabinet.innerHTML='<section class="kd2-retro-gate"><div class="kd2-retro-gate-art"><small>UNREGISTERED SIGNAL // SECTOR 16-BIT</small><strong>STASIS<br>RETRO ARCADE</strong><span>THREE LEGACY SYSTEMS // ONE ACCESS PHRASE</span></div><div class="kd2-retro-gate-form"><h4>THE OLD SIGNAL IS STILL ALIVE</h4><p>A blue blur has one famous instruction. Enter the phrase to power up the retro cabinet.</p><form id="rt-unlock-form"><label for="rt-unlock-code">ARCADE ACCESS PHRASE</label><div><input id="rt-unlock-code" type="text" maxlength="32" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ENTER THE PHRASE"><button class="kd2-primary" type="submit">POWER ON</button></div></form><p id="rt-gate-status" aria-live="polite">ACCESS LOCKED // SIGNAL REQUIRED</p></div></section>';
+   $('#rt-unlock-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    if(codeClean($('#rt-unlock-code').value)==='GOTTAGOFAST'){
+     safeSet('kd404-retro-unlocked','1');
+     drawLibrary();
+    }else{
+     $('#rt-gate-status').textContent='ACCESS DENIED // SIGNAL NOT RECOGNIZED';
+    }
+   });
+   return;
+  }
+  cabinet.innerHTML='<section class="kd2-retro-hub"><div class="kd2-retro-dashboard"><div class="kd2-retro-brand"><small>STASIS CITY // LEGACY ENTERTAINMENT</small><h4>RETRO ARCADE</h4><p>INSERT YOUR OWN GAME FILE. RECORDS ARE SAVED LOCALLY ON THIS DEVICE.</p></div><div class="kd2-retro-score"><div><small>RETRO SCORE</small><strong id="rt-total-score">0</strong><span>+1 PT / 10 SEC ACTIVE PLAY</span></div><div><small>TOTAL PLAY TIME</small><strong id="rt-total-time">0m</strong><span>ALL THREE SYSTEMS</span></div></div></div><div class="kd2-retro-systems">'+systems.map(s=>'<article class="kd2-retro-card"><small>CONSOLE RELAY // '+(systems.indexOf(s)+1).toString().padStart(2,'0')+'</small><h5>'+s.name+'</h5><p>'+s.detail+'</p><div class="kd2-retro-card-meta"><span>'+s.core+'</span><span>'+s.format+'</span></div><div class="kd2-retro-card-record" data-retro-stats="'+s.id+'">0 PT // 0m</div><button type="button" data-retro-launch="'+s.id+'">INSERT CARTRIDGE</button></article>').join('')+'</div><section class="kd2-retro-player" id="rt-player" hidden><div class="kd2-retro-player-head"><div><small>ARCADE CABINET // ACTIVE SYSTEM</small><h5 id="rt-player-title">SELECTED CONSOLE</h5></div><button type="button" id="rt-back">BACK TO SYSTEM SELECT</button></div><div class="kd2-retro-frame"><iframe id="rt-frame" src="about:blank" title="STASIS Retro Arcade emulator" loading="lazy" allow="fullscreen; gamepad"></iframe></div></section><p class="kd2-retro-policy">LOCAL CARTRIDGE POLICY // ROM FILES ARE SELECTED FROM YOUR DEVICE AND ARE NOT UPLOADED. NO GAME ROMS OR BIOS FILES ARE HOSTED HERE. PLAYTIME RECORDS ARE LOCAL TO THIS BROWSER.</p></section>';
+  const frame=$('#rt-frame'),stage=$('#rt-player');
+  const syncStats=()=>{
+   const total=totalSeconds();
+   $('#rt-total-score').textContent=fmt(Math.floor(total/10));
+   $('#rt-total-time').textContent=timeText(total);
+   systems.forEach(s=>{
+    const node=cabinet.querySelector('[data-retro-stats="'+s.id+'"]');
+    if(node)node.textContent=fmt(Math.floor(stats[s.id]/10))+' PT // '+timeText(stats[s.id]);
+   });
+  };
+  syncStats();
+  cabinet.querySelectorAll('[data-retro-launch]').forEach(button=>button.addEventListener('click',()=>{
+   const id=button.dataset.retroLaunch,system=systems.find(s=>s.id===id);
+   if(!system)return;
+   activeSystem=id;
+   $('#rt-player-title').textContent=system.name;
+   stage.hidden=false;
+   frame.src='games/gba-player.html?system='+encodeURIComponent(id)+'&arcade=1';
+   stage.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }));
+  $('#rt-back').addEventListener('click',()=>{
+   activeSystem=null;frame.src='about:blank';stage.hidden=true;
+  });
+  const onPlaytime=e=>{
+   if(e.origin!==location.origin||e.source!==frame.contentWindow||!e.data||e.data.type!=='kd-stasis-retro-playtime')return;
+   const id=e.data.system,seconds=Math.min(10,Math.max(0,Math.floor(Number(e.data.seconds)||0)));
+   if(!activeSystem||id!==activeSystem||!Object.prototype.hasOwnProperty.call(stats,id)||seconds===0)return;
+   stats[id]+=seconds;saveStats();syncStats();
+  };
+  window.addEventListener('message',onPlaytime);
+  stop=()=>{
+   window.removeEventListener('message',onPlaytime);
+   activeSystem=null;
+   frame.src='about:blank';
+  };
+ };
+ drawLibrary();
 }
 
 /* V2.1 PATCH // GAMEPLAY REWORKS */
