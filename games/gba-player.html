@@ -30,56 +30,47 @@ button:hover{background:#b5c94a;color:#10150d}
 @media(max-width:600px){body{padding:10px}.slot{padding:11px}.form-grid{grid-template-columns:1fr}#game{min-height:500px;height:65vh}.actions{align-items:stretch;flex-direction:column}.actions button{width:100%}}
 </style></head>
 <body><main class="shell">
-<header><span class="kicker">KD-404 // UNREGISTERED HARDWARE</span><h1>STASIS RETRO TERMINAL</h1><p class="intro">MULTI-SYSTEM EMULATION // SEVEN LEGACY PLATFORMS<br>SELECT A SYSTEM, INSERT A LOCAL CARTRIDGE, INITIALIZE.</p></header>
+<header><span class="kicker">KD-404 // UNREGISTERED HARDWARE</span><h1>STASIS RETRO TERMINAL</h1><p class="intro">MULTI-SYSTEM EMULATION // THREE LEGACY PLATFORMS<br>SELECT A SYSTEM, INSERT A LOCAL CARTRIDGE, INITIALIZE.</p></header>
 <section class="slot">
 <div id="setup">
  <div class="form-grid">
   <label class="field"><span>01 // SELECT SYSTEM</span><select id="system">
    <option value="gba">Nintendo Game Boy Advance</option>
-   <option value="nds">Nintendo DS</option>
    <option value="snes">Super Nintendo / SNES</option>
-   <option value="n64">Nintendo 64</option>
-   <option value="psx">Sony PlayStation</option>
    <option value="segaMD">SEGA Mega Drive / Genesis</option>
-   <option value="arcade">Arcade / FBNeo</option>
   </select></label>
   <label class="field"><span>02 // SELECT GAME FILE</span><input id="rom" type="file" accept=".gba"><small class="hint" id="file-hint">Compatible format: .gba</small></label>
  </div>
  <div class="system-note" id="system-note" aria-live="polite">mGBA CORE // GBA cartridge image (.gba).</div>
- <label class="field" id="bios-field"><span>OPTIONAL // PLAYSTATION BIOS</span><input id="bios" type="file" accept=".bin,.rom"><small class="hint">Only select a BIOS file you are legally entitled to use. Some PS1 games may need one for compatibility.</small></label>
- <div class="actions"><button id="launch" type="button">INITIALIZE SYSTEM</button><span class="hint">The selected game stays local to your browser. It is not uploaded to this website.</span></div>
+  <div class="actions"><button id="launch" type="button">INITIALIZE SYSTEM</button><span class="hint">The selected game stays local to your browser. It is not uploaded to this website.</span></div>
 </div>
 <p class="status" id="status" role="status" aria-live="polite">SYSTEM STANDBY // AWAITING CARTRIDGE</p>
 <div id="game"></div>
 <div class="actions"><button id="eject" type="button">EJECT & SELECT ANOTHER SYSTEM</button></div>
-<p class="warning">CONTROLS: ARROWS + Z / X / ENTER / SHIFT, OR USE THE EMULATOR'S ON-SCREEN GAMEPAD. N64, DS AND PS1 PERFORMANCE DEPENDS ON YOUR DEVICE. ARCADE TITLES require compatible FBNeo ROM ZIP sets; some titles need additional system files. No game ROMs or BIOS files are hosted by STASIS CITY.</p>
+<p class="warning">CONTROLS: ARROWS + Z / X / ENTER / SHIFT, OR USE THE EMULATOR'S ON-SCREEN GAMEPAD.  No game ROMs or BIOS files are hosted by STASIS CITY.</p>
 </section></main>
 <script>
 (() => {
  'use strict';
  const $=id=>document.getElementById(id);
- const system=$('system'),rom=$('rom'),bios=$('bios'),biosField=$('bios-field'),hint=$('file-hint'),note=$('system-note'),status=$('status'),setup=$('setup'),game=$('game'),launch=$('launch'),eject=$('eject');
+ const system=$('system'),rom=$('rom'),hint=$('file-hint'),note=$('system-note'),status=$('status'),setup=$('setup'),game=$('game'),launch=$('launch'),eject=$('eject');
  const systems={
   gba:{name:'GAME BOY ADVANCE',core:'gba',ext:['gba'],accept:'.gba',detail:'mGBA CORE // GBA cartridge image (.gba). BIOS is optional for most titles.'},
-  nds:{name:'NINTENDO DS',core:'nds',ext:['nds'],accept:'.nds',detail:'MELONDS CORE // Nintendo DS game image (.nds). Dual-screen layout and touch input vary by title and device.'},
   snes:{name:'SUPER NINTENDO',core:'snes',ext:['sfc','smc'],accept:'.sfc,.smc',detail:'SNES9X CORE // Super Nintendo image (.sfc, .smc).'},
-  n64:{name:'NINTENDO 64',core:'n64',ext:['z64','n64','v64'],accept:'.z64,.n64,.v64',detail:'MUPEN64PLUS NEXT CORE // N64 image (.z64, .n64, .v64). 3D performance depends heavily on device hardware.'},
-  psx:{name:'PLAYSTATION',core:'psx',ext:['chd','pbp','iso','bin','img'],accept:'.chd,.pbp,.iso,.bin,.img',detail:'PCSX-REARMED CORE // Prefer single-file .chd, .pbp or .iso images. Multi-file .cue sets are not supported by this single-file picker.'},
   segaMD:{name:'SEGA MEGA DRIVE',core:'segaMD',ext:['md','gen','smd','bin'],accept:'.md,.gen,.smd,.bin',detail:'GENESIS PLUS GX CORE // Mega Drive / Genesis cartridge image (.md, .gen, .smd, .bin).'},
-  arcade:{name:'ARCADE',core:'arcade',ext:['zip'],accept:'.zip',detail:'FBNEO CORE // Choose a compatible arcade ROM set as a .zip file. Keep each game in its original supported set; some games require a matching BIOS ZIP.'}
  };
  function showStatus(message,error=false){status.textContent=message;status.style.color=error?'#df8c96':'#b5c94a';}
- function updateSystem(){const cfg=systems[system.value];rom.value='';rom.accept=cfg.accept;hint.textContent='Compatible format: '+cfg.ext.map(x=>'.'+x).join(', ');note.textContent=cfg.detail;biosField.style.display=system.value==='psx'?'grid':'none';}
+ function updateSystem(){const cfg=systems[system.value];rom.value='';rom.accept=cfg.accept;hint.textContent='Compatible format: '+cfg.ext.map(x=>'.'+x).join(', ');note.textContent=cfg.detail;}
  system.addEventListener('change',updateSystem);
  launch.addEventListener('click',()=>{
-  const cfg=systems[system.value],file=rom.files&&rom.files[0],biosFile=bios.files&&bios.files[0];
+  const cfg=systems[system.value],file=rom.files&&rom.files[0];
   if(!file){showStatus('NO GAME FILE SELECTED // INSERT A CARTRIDGE',true);return;}
   const ext=file.name.split('.').pop().toLowerCase();
   if(!cfg.ext.includes(ext)){showStatus('FORMAT MISMATCH // '+cfg.ext.map(x=>'.'+x).join(' / '),true);return;}
   if(!file.size){showStatus('EMPTY FILE // CARTRIDGE READ ERROR',true);return;}
   setup.style.display='none';game.style.display='block';eject.style.display='inline-flex';launch.disabled=true;
   showStatus('INITIALIZING '+cfg.name+' // '+file.name);
-  window.EJS_player='#game';window.EJS_core=cfg.core;window.EJS_biosUrl=biosFile?URL.createObjectURL(biosFile):'';window.EJS_gameUrl=file;window.EJS_gameName=file.name.replace(/\.[^.]+$/,'');
+  window.EJS_player='#game';window.EJS_core=cfg.core;window.EJS_gameUrl=file;window.EJS_gameName=file.name.replace(/\.[^.]+$/,'');
   window.EJS_pathtodata='https://cdn.emulatorjs.org/stable/data/';window.EJS_startOnLoaded=true;window.EJS_color='#b5c94a';window.EJS_threads=false;
   window.EJS_ready=()=>showStatus('CORE READY // '+cfg.name+' // '+file.name);
   const loader=document.createElement('script');loader.src='https://cdn.emulatorjs.org/stable/data/loader.js';loader.async=true;
