@@ -951,3 +951,397 @@ a:focus-visible {
         transform: none;
     }
 }
+
+/* ==========================================
+   KNIVESDEVILISH - DARK NETRUNNER THEME
+   Graphite / Steel / Lime / Red
+   ========================================== */
+
+:root {
+    --bg: #08090C;
+    --panel: #11141A;
+    --panel-hover: #1A1D24;
+
+    --acid: #B5C94A;
+    --acid-soft: #87964A;
+
+    --red: #FF405B;
+
+    --white: #E8E9ED;
+    --muted: #9197A2;
+
+    --line: rgba(190, 198, 180, 0.16);
+}
+
+/* MAIN BACKGROUND */
+
+body {
+    background:
+        radial-gradient(
+            ellipse at 15% 10%,
+            rgba(130, 140, 155, 0.09),
+            transparent 38%
+        ),
+        radial-gradient(
+            ellipse at 90% 85%,
+            rgba(255, 64, 91, 0.035),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #08090C,
+            #11141A 48%,
+            #08090C
+        );
+}
+
+/* BACKGROUND GRID */
+
+body::before {
+    background-image:
+        linear-gradient(
+            rgba(180, 188, 200, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(180, 188, 200, 0.035) 1px,
+            transparent 1px
+        );
+}
+
+/* SCANLINES */
+
+body::after {
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        rgba(180, 188, 200, 0.025) 4px
+    );
+}
+
+/* TOPBAR */
+
+.topbar {
+    border-bottom-color: rgba(180, 188, 200, 0.18);
+}
+
+/* HERO PANEL */
+
+.hero-panel {
+    background:
+        linear-gradient(
+            120deg,
+            rgba(180, 188, 200, 0.055),
+            transparent 45%
+        ),
+        linear-gradient(
+            300deg,
+            rgba(255, 64, 91, 0.025),
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            #181B22,
+            #0D0F14
+        );
+
+    border-color: rgba(180, 188, 200, 0.22);
+    border-top-color: rgba(181, 201, 74, 0.65);
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.45),
+        inset 0 0 45px rgba(255, 255, 255, 0.012);
+}
+
+.hero-panel::before {
+    color: rgba(180, 188, 200, 0.035);
+}
+
+/* AVATAR */
+
+.avatar-frame {
+    background: rgba(255, 255, 255, 0.025);
+    border-color: rgba(181, 201, 74, 0.7);
+
+    box-shadow:
+        0 0 24px rgba(181, 201, 74, 0.07);
+}
+
+.avatar-scan {
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 5px,
+        rgba(181, 201, 74, 0.09) 6px
+    );
+}
+
+/* NETWORK */
+
+.network-label {
+    color: var(--acid);
+}
+
+.hero-divider {
+    background: linear-gradient(
+        90deg,
+        rgba(181, 201, 74, 0.65),
+        rgba(180, 188, 200, 0.15),
+        transparent
+    );
+}
+
+/* SYSTEM CELLS */
+
+.system-cell {
+    background: rgba(255, 255, 255, 0.025);
+    border-left-color: rgba(181, 201, 74, 0.35);
+}
+
+.hero-aside {
+    border-left-color: rgba(180, 188, 200, 0.18);
+}
+
+.hero-kanji {
+    color: var(--acid);
+    text-shadow: 0 0 18px rgba(181, 201, 74, 0.12);
+}
+
+/* HERO FOOTER */
+
+.hero-bottom {
+    border-top-color: rgba(180, 188, 200, 0.18);
+}
+
+/* DASHBOARD */
+
+.dashboard-panel {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.035),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            #181B22,
+            #0E1015
+        );
+
+    border-color: rgba(180, 188, 200, 0.18);
+    border-top-color: rgba(181, 201, 74, 0.45);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.dashboard-panel:hover {
+    border-color: rgba(181, 201, 74, 0.35);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45),
+        0 0 15px rgba(181, 201, 74, 0.035);
+}
+
+/* PANEL HEADERS */
+
+.panel-head {
+    border-bottom-color: rgba(180, 188, 200, 0.16);
+}
+
+.panel-index {
+    color: var(--red);
+}
+
+.panel-kanji {
+    color: #B4BAA0;
+    opacity: 0.65;
+}
+
+/* LINKS */
+
+.access-link {
+    background: rgba(0, 0, 0, 0.22);
+
+    border-color: rgba(180, 188, 200, 0.13);
+    border-left-color: rgba(181, 201, 74, 0.35);
+}
+
+.access-link:hover {
+    background: rgba(255, 255, 255, 0.055);
+
+    border-color: rgba(180, 188, 200, 0.3);
+    border-left-color: var(--acid);
+}
+
+.link-icon {
+    background: rgba(255, 255, 255, 0.035);
+    border-color: rgba(180, 188, 200, 0.18);
+}
+
+.link-arrow {
+    color: var(--acid);
+}
+
+/* GAMING CARDS */
+
+.player-card {
+    background: rgba(255, 255, 255, 0.025);
+
+    border-color: rgba(180, 188, 200, 0.15);
+    border-left-color: rgba(181, 201, 74, 0.55);
+}
+
+/* FOOTER */
+
+.site-footer {
+    border-top-color: rgba(180, 188, 200, 0.18);
+}
+
+/* RED DETAILS */
+
+.corner {
+    border-color: var(--red);
+}
+
+.signal-dot,
+.status-dot {
+    background: var(--acid);
+}
+
+/* ACCESSIBILITY */
+
+.access-link:focus-visible {
+    outline: 2px solid var(--acid);
+    outline-offset: 3px;
+}
+
+
+/* ==========================================
+   KNIVESDEVILISH // SIDE HUD INTERFACE
+   ========================================== */
+
+.screen-rail {
+    position: fixed;
+    top: 50%;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    color: var(--muted);
+    opacity: 0.65;
+}
+
+.screen-rail-left {
+    left: 13px;
+}
+
+.screen-rail-right {
+    right: 13px;
+}
+
+.rail-kanji {
+    writing-mode: vertical-rl;
+
+    color: var(--acid);
+    font-family: "Noto Sans CJK JP", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+
+    text-shadow: 0 0 12px rgba(181, 201, 74, 0.2);
+}
+
+.screen-rail-right .rail-kanji {
+    color: var(--red);
+}
+
+.rail-line {
+    width: 1px;
+    height: 125px;
+
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--acid),
+        transparent
+    );
+}
+
+.screen-rail-right .rail-line {
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--red),
+        transparent
+    );
+}
+
+.rail-label {
+    writing-mode: vertical-rl;
+
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+}
+
+/* Hide side HUD on smaller displays */
+
+@media (max-width: 1300px) {
+    .screen-rail {
+        display: none;
+    }
+}
+
+/* ==========================================
+   AVATAR SCANNING EFFECT
+   ========================================== */
+
+.avatar-scan {
+    overflow: hidden;
+}
+
+.avatar-scan::after {
+    content: "";
+
+    position: absolute;
+    top: -40%;
+    left: 0;
+
+    width: 100%;
+    height: 25%;
+
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(181, 201, 74, 0.28),
+        rgba(255, 255, 255, 0.12),
+        transparent
+    );
+
+    animation: avatar-sweep 5s linear infinite;
+}
+
+@keyframes avatar-sweep {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(560%);
+    }
+}
+
+/* Reduced motion support */
+
+@media (prefers-reduced-motion: reduce) {
+    .avatar-scan::after {
+        animation: none;
+    }
+}
+
