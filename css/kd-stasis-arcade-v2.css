@@ -63,3 +63,19 @@
  .kd2-fighter-stage canvas{aspect-ratio:16/9}
  .kd2-breach-stage canvas{aspect-ratio:3/2}
 }
+
+
+/* SECRET SONIC LEGACY PORTAL */
+.kd2-secret-portal{margin-top:18px;padding:16px;border:1px solid rgba(181,201,74,.38);background:linear-gradient(145deg,rgba(181,201,74,.07),rgba(8,13,9,.92));}
+.kd2-secret-head{border-bottom:1px solid rgba(181,201,74,.2);padding-bottom:12px;margin-bottom:13px}
+.kd2-secret-head small,.kd2-secret-grid article>small{color:#b5c94a;font:600 .58rem monospace;letter-spacing:.13em}
+.kd2-secret-head h5{font-size:1.1rem;letter-spacing:.14em;margin:8px 0;color:#e1edc8}
+.kd2-secret-head p,.kd2-secret-grid p{color:#9eaa91;font-size:.78rem;line-height:1.6}
+.kd2-secret-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.kd2-secret-grid article{min-width:0;padding:13px;border:1px solid rgba(181,201,74,.2);background:rgba(0,0,0,.2)}
+.kd2-secret-grid h6{font-size:.9rem;letter-spacing:.07em;color:#dce9bd;margin:9px 0}
+.kd2-secret-launch{display:block;padding:10px 9px;margin-top:12px;text-align:center;border:1px solid #879d50;color:#d7e8a8;text-decoration:none;font:700 .65rem monospace;letter-spacing:.06em}
+.kd2-secret-launch:hover{background:#b5c94a;color:#10150d}
+.kd2-secret-credit{display:block;margin-top:9px;color:#77856d;font: .54rem monospace;letter-spacing:.06em}
+.kd2-secret-lock{margin-top:13px;padding:8px 12px;background:transparent;border:1px solid rgba(181,201,74,.25);color:#9ba98a;font: .62rem monospace;cursor:pointer}
+@media(max-width:600px){.kd2-secret-grid{grid-template-columns:1fr}.kd2-secret-portal{padding:11px}}
