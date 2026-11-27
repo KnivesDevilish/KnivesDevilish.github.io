@@ -65,7 +65,7 @@
 
     const audio = new Audio();
     audio.loop = true;
-    audio.preload = 'auto';
+    audio.preload = 'none';
     audio.playbackRate = 1;
     audio.defaultPlaybackRate = 1;
 
@@ -181,15 +181,14 @@
         currentTrack = (index + tracks.length) % tracks.length;
 
         audio.pause();
-        audio.playbackRate = 1;
-        audio.defaultPlaybackRate = 1;
-        audio.src = tracks[currentTrack].file;
+        audio.removeAttribute('src');
         audio.load();
 
         updateTrackInfo();
         updateStatus();
 
         if (wasPlaying) {
+            audio.src = tracks[currentTrack].file;
             try {
                 await audio.play();
             } catch {
@@ -201,6 +200,9 @@
     playButton.addEventListener('click', async () => {
         if (audio.paused) {
             try {
+                if (!audio.getAttribute('src')) {
+                    audio.src = tracks[currentTrack].file;
+                }
                 await audio.play();
             } catch {
                 status.textContent = 'PLAYBACK BLOCKED';
@@ -248,7 +250,5 @@
     updateVolume();
     updateStatus();
 
-    // Carga la pista inicial sin iniciar la reproducción automáticamente.
-    audio.src = tracks[currentTrack].file;
-    audio.load();
+    // Load audio only after an explicit user action.
 })();
