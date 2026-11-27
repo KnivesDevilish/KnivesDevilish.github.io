@@ -121,7 +121,7 @@ function pinball(){
   x.fillStyle='#d8e6ac';x.beginPath();x.arc(ball.x,ball.y,R,0,7);x.fill();
   if(!launched){x.fillStyle='rgba(3,7,5,.8)';x.fillRect(65,325,290,64);x.textAlign='center';x.fillStyle='#e2eac8';x.font='bold 14px monospace';x.fillText(ended?'TABLE SHUTDOWN':'BALL IN STASIS',210,352);x.fillStyle='#9aa68f';x.font='10px monospace';x.fillText('PRESS START / SPACE TO LAUNCH',210,372);x.textAlign='left';}
  }
- function begin(){cancelAnimationFrame(raf);points=0;lives=3;life.textContent='3';score.textContent='0';active=true;ended=false;ld=rd=false;fl.forEach(f=>f.a=f.rest);resetBall();state.textContent='BALL READY';start.textContent='LAUNCH BALL';last=0;acc=0;draw();}
+ function begin(){cancelAnimationFrame(raf);points=0;lives=3;life.textContent='3';score.textContent='0';active=true;ended=false;ld=rd=false;fl.forEach(f=>f.a=f.rest);resetBall();state.textContent='BALL READY';start.textContent='LAUNCH BALL';last=0;acc=0;draw();c.focus();}
  function launch(){if(!active||ended)begin();if(!launched){launched=true;ball.vx=-110;ball.vy=-690;state.textContent='BALL IN PLAY';start.textContent='BALL ACTIVE';}}
  function frame(t){if(!active)return;if(!last)last=t;acc+=Math.min(.05,(t-last)/1000);last=t;let count=0;while(acc>=1/120&&count<8&&active){step(1/120);acc-=1/120;count++;}draw();if(active)raf=requestAnimationFrame(frame);}
  start.addEventListener('click',()=>{launch();if(active&&!raf){last=0;raf=requestAnimationFrame(frame);}});
