@@ -45,3 +45,21 @@
 @media(max-width:650px){.kd-arcade-v2{margin-top:25px}.kd2-head{align-items:flex-start;flex-direction:column;gap:8px}.kd2-main{padding:11px}.kd2-game-grid{grid-template-columns:1fr}.kd2-info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.kd2-stat{min-height:60px}.kd2-primary,.kd2-secondary,.kd2-help,.kd2-controls,.kd2-next{grid-column:1/-1}.kd2-pin-stage canvas{width:min(100%,320px)}.kd2-archive{grid-template-columns:1fr}}
 @media(max-width:390px){.kd2-nav{grid-template-columns:1fr}.kd2-nav>small,.kd2-nav-foot{grid-column:auto}.kd2-main{padding:8px}.kd2-game-head{flex-direction:column}.kd2-game-head>span{text-align:left}.kd2-info{gap:6px}.kd2-stat{padding:7px}.kd2-stat strong{font-size:.85rem}.kd2-archive dl{grid-template-columns:1fr;gap:2px}.kd2-archive dd{margin-bottom:5px}}
 @media(prefers-reduced-motion:reduce){.kd-arcade-v2 *{transition:none!important;animation:none!important}}
+
+/* KD-404 ARCADE 2.1 // added modes and clearer controls */
+.kd2-door-map{display:grid;gap:5px;padding:9px;border:1px solid rgba(181,201,74,.2);background:rgba(181,201,74,.045);color:#b5c49a;font:600 .57rem monospace;letter-spacing:.06em}
+.kd2-nav button[data-game="duel"],.kd2-nav button[data-game="breach"]{border-left-color:rgba(181,201,74,.25)}
+.kd2-nav button[data-game="duel"].is-active,.kd2-nav button[data-game="breach"].is-active{border-left-color:#b5c94a}
+.kd2-fight-pad{grid-template-columns:repeat(3,minmax(0,1fr))}
+.kd2-fight-pad button{min-width:0}
+.kd2-breach-pad{grid-template-columns:repeat(2,minmax(0,1fr))}
+.kd2-stage canvas{max-width:100%;touch-action:none}
+.kd2-pin-stage canvas{width:min(100%,350px);aspect-ratio:3/5}
+.kd2-fighter-stage canvas,.kd2-breach-stage canvas{width:100%;image-rendering:auto}
+.kd2-controls button.is-held{color:#080a08;background:#b5c94a;border-color:#b5c94a}
+@media(max-width:650px){
+ .kd2-door-map{grid-column:1/-1}
+ .kd2-fight-pad,.kd2-breach-pad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .kd2-fighter-stage canvas{aspect-ratio:16/9}
+ .kd2-breach-stage canvas{aspect-ratio:3/2}
+}
