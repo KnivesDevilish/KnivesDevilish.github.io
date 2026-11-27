@@ -963,3 +963,37 @@ h1 {
     }
 }
 
+
+/* KNIVESDEVILISH - CUSTOM FOOTER */
+
+.site-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+
+    margin-top: 2.5rem;
+    padding: 1.5rem 0;
+
+    border-top: 1px solid rgba(199, 240, 0, 0.2);
+
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--cyber-muted);
+}
+
+.footer-brand {
+    color: #FFFFFF;
+    font-weight: 800;
+}
+
+.footer-divider {
+    color: var(--cyber-red);
+}
+
+.footer-copy {
+    color: var(--cyber-lime);
+}
+
