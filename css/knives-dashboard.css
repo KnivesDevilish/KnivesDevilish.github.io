@@ -1634,3 +1634,246 @@ body::after {
     filter: none !important;
 }
 
+
+/* ==========================================
+   MOBILE OPTIMIZATION // KD-404
+   ========================================== */
+
+html,
+body {
+    overflow-x: clip;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* TABLETS AND MOBILE */
+@media (max-width: 720px) {
+    .site-shell {
+        width: calc(100% - 20px);
+        gap: 16px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        gap: 10px;
+        line-height: 1.5;
+    }
+
+    .topbar-brand {
+        flex-wrap: wrap;
+        row-gap: 4px;
+    }
+
+    .topbar-meta {
+        flex-wrap: wrap;
+        gap: 7px 10px;
+        justify-content: flex-end;
+    }
+
+    .hero-grid {
+        grid-template-columns: 104px minmax(0, 1fr);
+        align-items: center;
+        gap: 16px;
+        padding: 18px;
+    }
+
+    .avatar-frame {
+        width: 104px;
+    }
+
+    .avatar-caption {
+        font-size: 0.52rem;
+        text-align: center;
+    }
+
+    .network-name {
+        font-size: clamp(1.1rem, 4vw, 1.7rem);
+        overflow-wrap: anywhere;
+    }
+
+    .system-grid {
+        gap: 7px;
+    }
+
+    .system-cell {
+        padding: 9px;
+        min-width: 0;
+    }
+
+    .hero-message {
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+    }
+
+    .hero-bottom {
+        gap: 8px;
+        line-height: 1.6;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .dashboard-panel {
+        min-width: 0;
+        min-height: 0;
+        padding: 16px;
+    }
+
+    .panel-head {
+        margin-bottom: 14px;
+    }
+
+    .access-link {
+        min-height: 62px;
+        grid-template-columns: 34px minmax(0, 1fr) 14px;
+    }
+
+    .link-copy {
+        min-width: 0;
+    }
+
+    .link-copy strong,
+    .link-copy small {
+        overflow-wrap: anywhere;
+    }
+
+    .site-footer {
+        text-align: center;
+        line-height: 1.7;
+    }
+}
+
+/* SMALL PHONES */
+@media (max-width: 520px) {
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topbar-meta {
+        justify-content: flex-start;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 18px;
+    }
+
+    .avatar-column {
+        width: 100%;
+        align-items: center;
+    }
+
+    .avatar-frame {
+        width: 130px;
+    }
+
+    .hero-info {
+        width: 100%;
+    }
+
+    .network-name {
+        font-size: 1.3rem;
+    }
+
+    .system-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .system-cell {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .system-cell strong {
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+
+    .directory-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .directory-description {
+        text-align: left;
+    }
+
+    .panel-links-grid,
+    .player-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-panel {
+        padding: 15px;
+    }
+
+    .site-footer {
+        gap: 7px;
+        padding-top: 16px;
+    }
+}
+
+/* VERY SMALL PHONES */
+@media (max-width: 360px) {
+    .site-shell {
+        width: calc(100% - 16px);
+    }
+
+    .hero-grid {
+        padding: 14px;
+    }
+
+    .network-name {
+        font-size: 1.15rem;
+    }
+
+    .dashboard-panel {
+        padding: 12px;
+    }
+
+    .access-link {
+        gap: 7px;
+        padding: 8px;
+    }
+}
+
+/* TOUCHSCREEN INTERACTIONS */
+@media (hover: none) and (pointer: coarse) {
+    .dashboard-panel:hover,
+    .access-link:hover {
+        transform: none;
+    }
+
+    .access-link:active {
+        background: rgba(181, 201, 74, 0.1);
+        border-color: rgba(181, 201, 74, 0.5);
+    }
+
+    .access-link:active .link-icon img {
+        filter: none !important;
+    }
+}
+
+/* Correct dashboard card selector */
+@media (hover: hover) and (pointer: fine) {
+    .dashboard-panel {
+        transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .dashboard-panel:hover {
+        transform: translateY(-3px);
+    }
+}
+
