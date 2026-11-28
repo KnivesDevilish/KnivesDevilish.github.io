@@ -190,6 +190,71 @@
   filter:blur(.35px)!important;
 }
 
+
+/* Floating Japanese mood sigils in the banner's dark negative space. */
+.cover-runes{
+  position:absolute;z-index:2;inset:0 43% 0 0;overflow:hidden;
+  pointer-events:none;user-select:none;contain:layout paint;
+}
+.cover-rune{
+  position:absolute;display:flex;flex-direction:column;align-items:center;gap:2px;
+  color:var(--rune-color,#FF405B);opacity:.2;
+  font-family:"Noto Sans CJK JP","Yu Gothic",sans-serif;
+  text-align:center;white-space:nowrap;
+  text-shadow:0 0 7px currentColor,0 0 18px color-mix(in srgb,currentColor 38%,transparent);
+  will-change:transform,opacity;
+}
+.cover-rune b{font-size:clamp(1rem,2.2vw,1.8rem);font-weight:800;line-height:1.1;letter-spacing:.06em}
+.cover-rune small{font:600 .42rem/1.2 "Liberation Mono","Noto Sans Mono",monospace;letter-spacing:.16em;opacity:.72}
+.rune-majin{--rune-color:#FF405B;left:8%;top:14%;animation:rune-drift-a 19s ease-in-out -7s infinite}
+.rune-memory{--rune-color:#B5C94A;left:31%;top:12%;animation:rune-drift-b 24s ease-in-out -16s infinite}
+.rune-savage{--rune-color:#B5C94A;left:15%;top:61%;animation:rune-drift-c 21s ease-in-out -11s infinite}
+.rune-madness{--rune-color:#FF405B;left:47%;top:58%;animation:rune-drift-d 23s ease-in-out -5s infinite}
+.rune-edge{--rune-color:#FF405B;left:34%;top:76%;animation:rune-drift-e 26s ease-in-out -19s infinite}
+.rune-demon{--rune-color:#B5C94A;left:5%;top:42%;animation:rune-drift-f 22s ease-in-out -13s infinite}
+.rune-visceral{--rune-color:#B5C94A;left:48%;top:20%;animation:rune-drift-c 25s ease-in-out -21s infinite}
+.rune-memory b,.rune-visceral b{font-size:clamp(.72rem,1.6vw,1.18rem)}
+.rune-edge b{font-size:clamp(.8rem,1.7vw,1.25rem)}
+@keyframes rune-drift-a{
+  0%,100%{opacity:.12;transform:translate3d(0,0,0) rotate(-8deg) scale(.94)}
+  28%{opacity:.34;transform:translate3d(13px,-7px,0) rotate(-1deg) scale(1)}
+  63%{opacity:.2;transform:translate3d(26px,6px,0) rotate(6deg) scale(.97)}
+}
+@keyframes rune-drift-b{
+  0%,100%{opacity:.1;transform:translate3d(0,0,0) rotate(5deg)}
+  35%{opacity:.3;transform:translate3d(-11px,10px,0) rotate(-2deg)}
+  72%{opacity:.16;transform:translate3d(8px,18px,0) rotate(4deg)}
+}
+@keyframes rune-drift-c{
+  0%,100%{opacity:.13;transform:translate3d(0,0,0) rotate(4deg) scale(.96)}
+  42%{opacity:.36;transform:translate3d(17px,-9px,0) rotate(-5deg) scale(1.03)}
+  78%{opacity:.18;transform:translate3d(8px,10px,0) rotate(2deg) scale(.98)}
+}
+@keyframes rune-drift-d{
+  0%,100%{opacity:.1;transform:translate3d(0,0,0) rotate(-5deg)}
+  31%{opacity:.33;transform:translate3d(-15px,-8px,0) rotate(3deg)}
+  69%{opacity:.17;transform:translate3d(12px,12px,0) rotate(8deg)}
+}
+@keyframes rune-drift-e{
+  0%,100%{opacity:.12;transform:translate3d(0,0,0) rotate(3deg) scale(.95)}
+  38%{opacity:.32;transform:translate3d(10px,-12px,0) rotate(-4deg) scale(1)}
+  74%{opacity:.16;transform:translate3d(-9px,-3px,0) rotate(5deg) scale(.97)}
+}
+@keyframes rune-drift-f{
+  0%,100%{opacity:.11;transform:translate3d(0,0,0) rotate(-6deg)}
+  45%{opacity:.3;transform:translate3d(14px,9px,0) rotate(2deg)}
+  76%{opacity:.17;transform:translate3d(-7px,-9px,0) rotate(7deg)}
+}
+@media(max-width:600px){
+  .cover-runes{inset:0 38% 0 0}
+  .cover-rune b{font-size:clamp(.78rem,3vw,1.15rem)}
+  .cover-rune small{font-size:.34rem}
+  .rune-memory b,.rune-visceral b,.rune-edge b{font-size:clamp(.62rem,2.4vw,.9rem)}
+}
+@media(prefers-reduced-motion:reduce){
+  .cover-rune{animation:none!important;opacity:.17!important;will-change:auto!important;transform:none!important}
+}
+
 </style>
 </head>
 
@@ -229,7 +294,7 @@
 
     <!-- PROFILE / HUD -->
     <header class="hero-panel">
-<div class="cover-banner"><img class="cover-banner-image" src="images/profile-banner-900.webp" srcset="images/profile-banner-720.webp 720w, images/profile-banner-900.webp 900w" sizes="(max-width: 720px) 100vw, 900px" width="900" height="300" alt="KnivesDevilish profile cover" loading="eager" fetchpriority="high" decoding="sync"><span class="cover-glitch" aria-hidden="true"><i class="cover-glitch-scan"></i></span></div>
+<div class="cover-banner"><img class="cover-banner-image" src="images/profile-banner-900.webp" srcset="images/profile-banner-720.webp 720w, images/profile-banner-900.webp 900w" sizes="(max-width: 720px) 100vw, 900px" width="900" height="300" alt="KnivesDevilish profile cover" loading="eager" fetchpriority="high" decoding="sync"><span class="cover-runes" aria-hidden="true"><span class="cover-rune rune-majin"><b>魔人</b><small>MAJIN</small></span><span class="cover-rune rune-memory"><b>記憶喪失</b><small>MEMORY LOSS</small></span><span class="cover-rune rune-savage"><b>獰猛</b><small>SAVAGE</small></span><span class="cover-rune rune-madness"><b>狂気</b><small>MADNESS</small></span><span class="cover-rune rune-edge"><b>狂気の淵</b><small>EDGE OF MADNESS</small></span><span class="cover-rune rune-demon"><b>悪魔</b><small>DEMON</small></span><span class="cover-rune rune-visceral"><b>生々しい</b><small>RAW / VISCERAL</small></span></span><span class="cover-glitch" aria-hidden="true"><i class="cover-glitch-scan"></i></span></div>
 
         <div class="hero-grid">
 
