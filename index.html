@@ -101,6 +101,12 @@
 @keyframes cover-glitch-cyan{0%,81%,85%,100%{opacity:0;transform:translate3d(0,0,0)}81.2%{opacity:.9;transform:translate3d(3px,0,0)}81.8%{opacity:.25;transform:translate3d(-2px,0,0)}82.4%{opacity:.75;transform:translate3d(1px,0,0)}83.1%{opacity:0;transform:translate3d(0,0,0)}84%{opacity:.45;transform:translate3d(-1px,0,0)}85%{opacity:0;transform:translate3d(0,0,0)}}
 @keyframes cover-glitch-red{0%,81.5%,100%{opacity:0;transform:translate3d(0,0,0)}81.8%{opacity:.8;transform:translate3d(-4px,0,0)}82.5%{opacity:.15;transform:translate3d(2px,0,0)}83.2%{opacity:.65;transform:translate3d(-1px,0,0)}84%{opacity:0;transform:translate3d(0,0,0)}}
 @media(prefers-reduced-motion:reduce){.cover-glitch,.cover-glitch::before,.cover-glitch::after{animation:none!important;opacity:0!important}}
+
+/* Preserve Cara's black tile and white C; bypass the global white-icon filter. */
+.access-link .link-icon img.cara-icon,
+.access-link:hover .link-icon img.cara-icon,
+.access-link:focus-visible .link-icon img.cara-icon,
+.access-link:active .link-icon img.cara-icon{filter:none!important}
 </style>
 </head>
 
@@ -328,7 +334,7 @@
 
                 <a class="access-link" href="https://cara.app/knivesdevilish" target="_blank" rel="noopener noreferrer">
                     <span class="link-icon">
-                        <img src="images/icons/cara.svg" alt="">
+                        <img class="cara-icon" src="images/icons/cara.svg?v=2" alt="">
                     </span>
                     <span class="link-copy">
                         <strong>CARA</strong>
