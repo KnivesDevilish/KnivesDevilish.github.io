@@ -28,8 +28,8 @@
     let lastFrame = 0;
     let animationTimer = 0;
 
-    // Keep the effect visually present while limiting canvas work.
-    const frameInterval = 1000 / 12; // 12 FPS
+    // A timer avoids running a requestAnimationFrame callback 60 times per second.
+    const frameInterval = 125; // 8 FPS
 
     const randomGlyph = () =>
         glyphs[Math.floor(Math.random() * glyphs.length)];
@@ -41,7 +41,7 @@
         height = window.innerHeight;
 
         fontSize = width < 600 ? 14 : 16;
-        gap = width < 600 ? 21 : 24; // restore denser Japanese character streams
+        gap = width < 600 ? 32 : 40; // fewer columns and less canvas text rendering
 
         canvas.width = Math.round(width * dpr);
         canvas.height = Math.round(height * dpr);
@@ -51,7 +51,7 @@
 
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         // Set text state only on resize, not on every animation frame.
-        ctx.font = `${fontSize}px \"Noto Sans Mono\", \"Noto Sans JP\", monospace`;
+        ctx.font = `${fontSize}px monospace`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.clearRect(0, 0, width, height);
@@ -59,9 +59,9 @@
         const columns = Math.ceil(width / gap);
 
         drops = Array.from({ length: columns }, () => ({
-            y: Math.random() * height,
+            y: Math.random() * height - height,
             speed: 1.6 + Math.random() * 2.0,
-            alpha: 0.16 + Math.random() * 0.14,
+            alpha: 0.10 + Math.random() * 0.12,
             color: ['#B5C94A', '#86A88F', '#627D70'][Math.floor(Math.random() * 3)],
             char: randomGlyph()
         }));
@@ -96,7 +96,7 @@
             if (drop.y > height + 30) {
                 drop.y = -Math.random() * height * 0.35;
                 drop.speed = 1.6 + Math.random() * 2.0;
-                drop.alpha = 0.16 + Math.random() * 0.14;
+                drop.alpha = 0.10 + Math.random() * 0.12;
                 drop.color = ['#B5C94A', '#86A88F', '#627D70'][Math.floor(Math.random() * 3)];
             }
         });
