@@ -370,6 +370,31 @@
   .cover-crt::after{animation:none!important;opacity:0!important}
 }
 
+
+/* Final visual pass: pure white scanner beam and a static CRT finish. */
+.cover-glitch-scan::before{
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.82) 18%,#fff 50%,rgba(255,255,255,.82) 82%,transparent 100%)!important;
+  box-shadow:0 0 5px rgba(255,255,255,.88),0 0 13px rgba(255,255,255,.55),0 0 24px rgba(255,255,255,.22)!important;
+  filter:blur(.3px)!important;
+}
+.cover-glitch-scan::after{
+  background:linear-gradient(
+    to top,
+    rgba(255,255,255,.30) 0%,
+    rgba(255,255,255,.20) 24%,
+    rgba(255,255,255,.11) 58%,
+    rgba(255,255,255,.035) 80%,
+    transparent 100%
+  )!important;
+  filter:blur(8px)!important;
+}
+/* Keep CRT scanlines and vignette static; remove all phosphor flash animation. */
+.cover-crt::after{
+  content:none!important;
+  display:none!important;
+  animation:none!important;
+}
+
 </style>
 </head>
 
