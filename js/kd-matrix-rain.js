@@ -59,9 +59,9 @@
         const columns = Math.ceil(width / gap);
 
         drops = Array.from({ length: columns }, () => ({
-            y: Math.random() * height - height,
+            y: Math.random() * height,
             speed: 1.6 + Math.random() * 2.0,
-            alpha: 0.10 + Math.random() * 0.12,
+            alpha: 0.16 + Math.random() * 0.14,
             color: ['#B5C94A', '#86A88F', '#627D70'][Math.floor(Math.random() * 3)],
             char: randomGlyph()
         }));
@@ -96,7 +96,7 @@
             if (drop.y > height + 30) {
                 drop.y = -Math.random() * height * 0.35;
                 drop.speed = 1.6 + Math.random() * 2.0;
-                drop.alpha = 0.10 + Math.random() * 0.12;
+                drop.alpha = 0.16 + Math.random() * 0.14;
                 drop.color = ['#B5C94A', '#86A88F', '#627D70'][Math.floor(Math.random() * 3)];
             }
         });
