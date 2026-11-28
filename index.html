@@ -338,6 +338,38 @@
   .cover-rune,.cover-rune b{animation:none!important;opacity:.14!important;will-change:auto!important;transform:none!important;filter:none!important}
 }
 
+
+/* Subtle white CRT phosphor lines and edge vignette, confined to the banner. */
+.cover-banner::before{
+  background:
+    linear-gradient(90deg,rgba(8,9,12,.62),rgba(8,9,12,.12) 50%,rgba(8,9,12,.48)),
+    linear-gradient(to bottom,rgba(8,9,12,.08),rgba(8,9,12,.45)),
+    repeating-linear-gradient(to bottom,rgba(255,255,255,.085) 0 1px,transparent 1px 4px)!important;
+}
+.cover-crt{
+  position:absolute;inset:0;z-index:4;overflow:hidden;
+  pointer-events:none;user-select:none;
+  opacity:.46;mix-blend-mode:screen;
+  background:
+    radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,.38) 100%);
+  box-shadow:inset 0 0 34px rgba(0,0,0,.38);
+}
+.cover-crt::after{
+  content:"";position:absolute;inset:0;
+  background:rgba(255,255,255,.055);
+  opacity:0;
+  animation:crt-phosphor-flicker 7.4s steps(1,end) infinite;
+}
+.cover-banner::after{z-index:5}
+@keyframes crt-phosphor-flicker{
+  0%,17%,18%,49%,50%,81%,82%,100%{opacity:0}
+  17.2%,49.2%,81.2%{opacity:.28}
+  17.6%,49.6%,81.6%{opacity:.04}
+}
+@media(prefers-reduced-motion:reduce){
+  .cover-crt::after{animation:none!important;opacity:0!important}
+}
+
 </style>
 </head>
 
@@ -377,7 +409,7 @@
 
     <!-- PROFILE / HUD -->
     <header class="hero-panel">
-<div class="cover-banner"><img class="cover-banner-image" src="images/profile-banner-900.webp" srcset="images/profile-banner-720.webp 720w, images/profile-banner-900.webp 900w" sizes="(max-width: 720px) 100vw, 900px" width="900" height="300" alt="KnivesDevilish profile cover" loading="eager" fetchpriority="high" decoding="sync"><span class="cover-runes" aria-hidden="true"><span class="cover-rune rune-majin"><b>魔人</b><small>MAJIN</small></span><span class="cover-rune rune-memory"><b>記憶喪失</b><small>MEMORY LOSS</small></span><span class="cover-rune rune-savage"><b>獰猛</b><small>SAVAGE</small></span><span class="cover-rune rune-madness"><b>狂気</b><small>MADNESS</small></span><span class="cover-rune rune-edge"><b>狂気の淵</b><small>EDGE OF MADNESS</small></span><span class="cover-rune rune-demon"><b>悪魔</b><small>DEMON</small></span><span class="cover-rune rune-visceral"><b>生々しい</b><small>RAW / VISCERAL</small></span></span><span class="cover-glitch" aria-hidden="true"><i class="cover-glitch-scan"></i></span></div>
+<div class="cover-banner"><img class="cover-banner-image" src="images/profile-banner-900.webp" srcset="images/profile-banner-720.webp 720w, images/profile-banner-900.webp 900w" sizes="(max-width: 720px) 100vw, 900px" width="900" height="300" alt="KnivesDevilish profile cover" loading="eager" fetchpriority="high" decoding="sync"><span class="cover-runes" aria-hidden="true"><span class="cover-rune rune-majin"><b>魔人</b><small>MAJIN</small></span><span class="cover-rune rune-memory"><b>記憶喪失</b><small>MEMORY LOSS</small></span><span class="cover-rune rune-savage"><b>獰猛</b><small>SAVAGE</small></span><span class="cover-rune rune-madness"><b>狂気</b><small>MADNESS</small></span><span class="cover-rune rune-edge"><b>狂気の淵</b><small>EDGE OF MADNESS</small></span><span class="cover-rune rune-demon"><b>悪魔</b><small>DEMON</small></span><span class="cover-rune rune-visceral"><b>生々しい</b><small>RAW / VISCERAL</small></span></span><span class="cover-glitch" aria-hidden="true"><i class="cover-glitch-scan"></i></span><span class="cover-crt" aria-hidden="true"></span></div>
 
         <div class="hero-grid">
 
