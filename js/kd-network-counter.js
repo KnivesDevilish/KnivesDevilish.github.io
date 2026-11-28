@@ -31,9 +31,13 @@
 
   const countNode = root.querySelector('#kd-network-count');
   const statusNode = root.querySelector('#kd-network-status');
-  const endpoint = 'https://knivesdevilish.goatcounter.com/counter/TOTAL.json';
+  const endpoint = 'https://knivesdevilish.goatcounter.com/counter//.json';
+
+  let countRequestRunning = false;
 
   const loadPublicCount = async () => {
+    if (countRequestRunning) return;
+    countRequestRunning = true;
     try {
       const response = await fetch(endpoint, { mode: 'cors', cache: 'no-store' });
       if (!response.ok) throw new Error('Public counter unavailable');
@@ -50,6 +54,8 @@
       countNode.textContent = '—';
       statusNode.textContent = '● PUBLIC COUNT OFF';
       root.dataset.state = 'unavailable';
+    } finally {
+      countRequestRunning = false;
     }
   };
 
@@ -66,4 +72,14 @@
     loadPublicCount();
   });
   document.head.appendChild(tracker);
+
+  // GoatCounter caches public counters; periodically refresh so the card
+  // picks up the new value after that cache expires, without a page reload.
+  window.setInterval(() => {
+    if (!document.hidden) loadPublicCount();
+  }, 15 * 60 * 1000);
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) loadPublicCount();
+  });
 })();
