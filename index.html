@@ -113,9 +113,9 @@
 
 /* Refined banner scan: one continuous danger-red sweep, no RGB flicker blocks. */
 .cover-glitch::before,.cover-glitch::after{display:none!important;animation:none!important;opacity:0!important}
-.cover-glitch-scan{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:1;transform:translate3d(0,-100%,0);animation:cover-scan-down 1.15s linear infinite;will-change:transform;background:none}
-.cover-glitch-scan::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#FF405B;box-shadow:0 0 5px rgba(255,64,91,.95),0 0 14px rgba(255,64,91,.58),0 0 28px rgba(255,64,91,.24)}
-.cover-glitch-scan::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:34px;background:linear-gradient(to top,rgba(255,64,91,.16),rgba(255,64,91,.055) 38%,transparent);box-shadow:none}
+.cover-glitch-scan{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:1;transform:translate3d(0,-100%,0);animation:cover-scan-down 4.8s linear infinite;will-change:transform;background:none}
+.cover-glitch-scan::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,#FF405B 0%,#B5C94A 48%,#FF405B 100%);box-shadow:0 0 5px rgba(255,64,91,.88),0 0 14px rgba(181,201,74,.62),0 0 28px rgba(255,64,91,.24)}
+.cover-glitch-scan::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:34px;background:linear-gradient(to top,rgba(255,64,91,.14),rgba(181,201,74,.12) 38%,transparent);box-shadow:none}
 @keyframes cover-scan-down{from{transform:translate3d(0,-100%,0)}to{transform:translate3d(0,100%,0)}}
 @media(prefers-reduced-motion:reduce){.cover-glitch,.cover-glitch-scan,.cover-glitch-scan::before,.cover-glitch-scan::after{animation:none!important;opacity:0!important;will-change:auto}}
 
