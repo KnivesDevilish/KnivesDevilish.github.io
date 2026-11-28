@@ -255,6 +255,27 @@
   .cover-rune{animation:none!important;opacity:.17!important;will-change:auto!important;transform:none!important}
 }
 
+
+/* Keep the glow directly attached to the moving scan line.
+   Reset the legacy top:50% positioning so the trail shares the line's anchor. */
+.cover-glitch-scan::after{
+  top:auto!important;
+  bottom:2px!important;
+  height:64px!important;
+  transform:none!important;
+  background:linear-gradient(
+    to top,
+    rgba(255,64,91,.30) 0%,
+    rgba(214,106,83,.22) 22%,
+    rgba(181,201,74,.15) 54%,
+    rgba(181,201,74,.055) 78%,
+    transparent 100%
+  )!important;
+  filter:blur(8px)!important;
+  opacity:.92!important;
+  box-shadow:none!important;
+}
+
 </style>
 </head>
 
