@@ -28,8 +28,8 @@
     let lastFrame = 0;
     let animationTimer = 0;
 
-    // A timer avoids running a requestAnimationFrame callback 60 times per second.
-    const frameInterval = 125; // 8 FPS
+    // Keep the effect visually present while limiting canvas work.
+    const frameInterval = 1000 / 12; // 12 FPS
 
     const randomGlyph = () =>
         glyphs[Math.floor(Math.random() * glyphs.length)];
@@ -41,7 +41,7 @@
         height = window.innerHeight;
 
         fontSize = width < 600 ? 14 : 16;
-        gap = width < 600 ? 32 : 40; // fewer columns and less canvas text rendering
+        gap = width < 600 ? 21 : 24; // restore denser Japanese character streams
 
         canvas.width = Math.round(width * dpr);
         canvas.height = Math.round(height * dpr);
@@ -51,7 +51,7 @@
 
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         // Set text state only on resize, not on every animation frame.
-        ctx.font = `${fontSize}px monospace`;
+        ctx.font = `${fontSize}px \"Noto Sans Mono\", \"Noto Sans JP\", monospace`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.clearRect(0, 0, width, height);
