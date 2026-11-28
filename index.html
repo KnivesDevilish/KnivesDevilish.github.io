@@ -138,6 +138,32 @@
 }
 @media(prefers-reduced-motion:reduce){.cover-glitch,.cover-glitch-scan,.cover-glitch-scan::before,.cover-glitch-scan::after{animation:none!important;opacity:0!important;will-change:auto}}
 
+
+/* Unified facial scanner: one blended red/olive beam, smoother movement. */
+.cover-glitch-scan{
+  animation:cover-scan-unified 24s linear infinite!important;
+}
+.cover-glitch-scan::before{
+  height:3px!important;
+  background:linear-gradient(90deg,#FF405B 0%,#D66A53 25%,#B5C94A 50%,#D66A53 75%,#FF405B 100%)!important;
+  box-shadow:0 0 7px rgba(255,64,91,.48),0 0 16px rgba(181,201,74,.42),0 0 26px rgba(255,64,91,.16)!important;
+}
+.cover-glitch-scan::after{
+  left:0!important;right:0!important;bottom:0!important;height:3px!important;
+  background:transparent!important;box-shadow:none!important;
+}
+@keyframes cover-scan-unified{
+  0%{opacity:1;transform:translate3d(0,-100%,0);animation-timing-function:cubic-bezier(.45,0,.55,1)}
+  24%{opacity:1;transform:translate3d(0,100%,0)}
+  24.1%,31.9%{opacity:0;transform:translate3d(0,100%,0)}
+  32%{opacity:1;transform:translate3d(0,-100%,0);animation-timing-function:cubic-bezier(.45,0,.55,1)}
+  56%{opacity:1;transform:translate3d(0,100%,0)}
+  56.1%,71.9%{opacity:0;transform:translate3d(0,100%,0)}
+  72%{opacity:1;transform:translate3d(0,-100%,0);animation-timing-function:cubic-bezier(.45,0,.55,1)}
+  96%{opacity:1;transform:translate3d(0,100%,0)}
+  96.1%,100%{opacity:0;transform:translate3d(0,100%,0)}
+}
+
 </style>
 </head>
 
